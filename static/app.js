@@ -305,7 +305,7 @@ var IssueList = function (_React$Component3) {
         React.createElement(
           "h1",
           null,
-          "Issue Tracker"
+          "Fitness Tracker"
         ),
         React.createElement(IssueFilter, null),
         React.createElement("hr", null),

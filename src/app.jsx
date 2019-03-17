@@ -174,7 +174,7 @@ const issues = [
     render() {
       return (
         <div>
-          <h1>Issue Tracker</h1>
+          <h1>Fitness Tracker</h1>
           <IssueFilter />
           <hr />
           <IssueTable issues={this.state.issues} />
