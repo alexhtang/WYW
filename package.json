@@ -1,19 +1,30 @@
 {
   "name": "wyw",
   "version": "1.0.0",
-  "description": "Fitness Tracker",
-  "main": "index.js",
+  "description": "Basic Fitness Tracker",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jbroomer/WYW.git"
   },
-  "author": "Alexander Tang, Brian Cianciola, Eddy Reynoso, Jack Broomer",
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/jbroomer/WYW/issues"
   },
-  "homepage": "https://github.com/jbroomer/WYW#readme"
+  "homepage": "https://github.com/jbroomer/WYW#readme",
+  "dependencies": {
+    "babel-register": "^6.26.0",
+    "express": "^4.16.4",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react": "^6.24.1"
+  }
 }
