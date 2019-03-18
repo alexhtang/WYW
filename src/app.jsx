@@ -9,11 +9,15 @@ class BodyStats extends React.Component {
               <tr>
                 <th style={borderedStyle}>Height</th>
                 <th style={borderedStyle}>Weight</th>
+                <th style={borderedStyle}>Age</th>
+                <th style={borderedStyle}>Biological Gender</th>
               </tr>
             </thead>
             <tbody>
-              <BodyRow body_weight="9999"
-              body_height = "6'4" />
+              <BodyRow body_weight=" "
+              body_height = " " 
+              body_age = " "
+              body_gender = " "/>
             </tbody>
           </table>
         )
@@ -27,6 +31,8 @@ class BodyRow extends React.Component {
         <tr>
             <td style={borderedStyle}>{this.props.body_height}</td>
             <td style={borderedStyle}>{this.props.body_weight}</td>
+            <td style={borderedStyle}>{this.props.body_age}</td>
+            <td style={borderedStyle}>{this.props.body_gender}</td>
         </tr>
       )
     }
@@ -70,7 +76,7 @@ class AddBodyInfo extends React.Component {
       }
 }
 
-class IssueList extends React.Component {
+class FitnessTracker extends React.Component {
   render() {
     return (
       <div>
@@ -85,4 +91,4 @@ class IssueList extends React.Component {
   }
 }
 
-ReactDOM.render(<IssueList />, contentNode);  // Render the component inside the content Node
+ReactDOM.render(<FitnessTracker />, contentNode);  // Render the component inside the content Node

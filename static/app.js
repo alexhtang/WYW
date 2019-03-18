@@ -41,14 +41,26 @@ var BodyStats = function (_React$Component) {
               "th",
               { style: borderedStyle },
               "Weight"
+            ),
+            React.createElement(
+              "th",
+              { style: borderedStyle },
+              "Age"
+            ),
+            React.createElement(
+              "th",
+              { style: borderedStyle },
+              "Biological Gender"
             )
           )
         ),
         React.createElement(
           "tbody",
           null,
-          React.createElement(BodyRow, { body_weight: "9999",
-            body_height: "6'4" })
+          React.createElement(BodyRow, { body_weight: " ",
+            body_height: " ",
+            body_age: " ",
+            body_gender: " " })
         )
       );
     }
@@ -82,6 +94,16 @@ var BodyRow = function (_React$Component2) {
           "td",
           { style: borderedStyle },
           this.props.body_weight
+        ),
+        React.createElement(
+          "td",
+          { style: borderedStyle },
+          this.props.body_age
+        ),
+        React.createElement(
+          "td",
+          { style: borderedStyle },
+          this.props.body_gender
         )
       );
     }
@@ -161,16 +183,16 @@ var AddBodyInfo = function (_React$Component4) {
   return AddBodyInfo;
 }(React.Component);
 
-var IssueList = function (_React$Component5) {
-  _inherits(IssueList, _React$Component5);
+var FitnessTracker = function (_React$Component5) {
+  _inherits(FitnessTracker, _React$Component5);
 
-  function IssueList() {
-    _classCallCheck(this, IssueList);
+  function FitnessTracker() {
+    _classCallCheck(this, FitnessTracker);
 
-    return _possibleConstructorReturn(this, (IssueList.__proto__ || Object.getPrototypeOf(IssueList)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (FitnessTracker.__proto__ || Object.getPrototypeOf(FitnessTracker)).apply(this, arguments));
   }
 
-  _createClass(IssueList, [{
+  _createClass(FitnessTracker, [{
     key: "render",
     value: function render() {
       return React.createElement(
@@ -190,7 +212,7 @@ var IssueList = function (_React$Component5) {
     }
   }]);
 
-  return IssueList;
+  return FitnessTracker;
 }(React.Component);
 
-ReactDOM.render(React.createElement(IssueList, null), contentNode); // Render the component inside the content Node
+ReactDOM.render(React.createElement(FitnessTracker, null), contentNode); // Render the component inside the content Node
