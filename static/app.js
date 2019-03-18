@@ -47,10 +47,8 @@ var BodyStats = function (_React$Component) {
         React.createElement(
           "tbody",
           null,
-          React.createElement(BodyRow, { body_weight: "Error in console when clicking Add",
-            body_height: "6'4" }),
-          React.createElement(BodyRow, { body_weight: "10000",
-            body_height: "Missing bottom border on panel" })
+          React.createElement(BodyRow, { body_weight: "9999",
+            body_height: "6'4" })
         )
       );
     }
@@ -160,9 +158,9 @@ var IssueList = function (_React$Component5) {
         ),
         React.createElement(BodyStats, null),
         React.createElement("hr", null),
-        React.createElement(NutritionStats, null),
+        React.createElement(AddBodyInfo, null),
         React.createElement("hr", null),
-        React.createElement(AddBodyInfo, null)
+        React.createElement(NutritionStats, null)
       );
     }
   }]);

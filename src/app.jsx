@@ -12,10 +12,8 @@ class BodyStats extends React.Component {
               </tr>
             </thead>
             <tbody>
-              <BodyRow body_weight="Error in console when clicking Add"
+              <BodyRow body_weight="9999"
               body_height = "6'4" />
-              <BodyRow body_weight = "10000"
-               body_height="Missing bottom border on panel" />
             </tbody>
           </table>
         )
@@ -57,9 +55,9 @@ class IssueList extends React.Component {
         <h1>Fitness Tracker</h1>
         <BodyStats />
         <hr />
-        <NutritionStats />
-        <hr />
         <AddBodyInfo />
+        <hr />
+        <NutritionStats />
       </div>
     );
   }
