@@ -119,16 +119,41 @@ var AddBodyInfo = function (_React$Component4) {
   function AddBodyInfo() {
     _classCallCheck(this, AddBodyInfo);
 
-    return _possibleConstructorReturn(this, (AddBodyInfo.__proto__ || Object.getPrototypeOf(AddBodyInfo)).apply(this, arguments));
+    var _this4 = _possibleConstructorReturn(this, (AddBodyInfo.__proto__ || Object.getPrototypeOf(AddBodyInfo)).call(this));
+
+    _this4.handleSubmit = _this4.handleSubmit.bind(_this4);
+    return _this4;
   }
 
   _createClass(AddBodyInfo, [{
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      var form = document.forms.updateBodyStat;
+      this.props.createIssue({
+        height: form.height.value,
+        weight: form.weight.value
+      });
+      // clear the form for the next input
+      form.height.value = "";form.weight.value = "";
+    }
+  }, {
     key: "render",
     value: function render() {
       return React.createElement(
         "div",
         null,
-        "This is a placeholder for adding body stats."
+        React.createElement(
+          "form",
+          { name: "updateBodyStat", onSubmit: this.handleSubmit },
+          React.createElement("input", { type: "text", name: "height", placeholder: "Height" }),
+          React.createElement("input", { type: "text", name: "weight", placeholder: "Weight" }),
+          React.createElement(
+            "button",
+            null,
+            "Update"
+          )
+        )
       );
     }
   }]);

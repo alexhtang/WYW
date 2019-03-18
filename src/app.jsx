@@ -41,11 +41,33 @@ class NutritionStats extends React.Component {
 }
 
 class AddBodyInfo extends React.Component {
-  render() {
-    return (
-      <div>This is a placeholder for adding body stats.</div>
-    )
-  }
+    constructor() {
+        super();
+        this.handleSubmit = this.handleSubmit.bind(this);
+      }
+    
+      handleSubmit(e) {
+        e.preventDefault();
+        var form = document.forms.updateBodyStat;
+        this.props.createIssue({
+          height: form.height.value,
+          weight: form.weight.value,
+        });
+        // clear the form for the next input
+        form.height.value = ""; form.weight.value = "";
+      }
+    
+      render() {
+        return (
+          <div>
+            <form name="updateBodyStat" onSubmit={this.handleSubmit}>
+              <input type="text" name="height" placeholder="Height" />
+              <input type="text" name="weight" placeholder="Weight" />
+              <button>Update</button>
+            </form>
+          </div>
+        )
+      }
 }
 
 class IssueList extends React.Component {
