@@ -35,12 +35,12 @@ var BodyStats = function (_React$Component) {
             React.createElement(
               "th",
               { style: borderedStyle },
-              "Weight"
+              "Height"
             ),
             React.createElement(
               "th",
               { style: borderedStyle },
-              "Height"
+              "Weight"
             )
           )
         ),
@@ -76,12 +76,12 @@ var BodyRow = function (_React$Component2) {
         React.createElement(
           "td",
           { style: borderedStyle },
-          this.props.body_weight
+          this.props.body_height
         ),
         React.createElement(
           "td",
           { style: borderedStyle },
-          this.props.body_height
+          this.props.body_weight
         )
       );
     }

@@ -7,8 +7,8 @@ class BodyStats extends React.Component {
           <table style={{borderCollapse: "collapse"}}>
             <thead>
               <tr>
-                <th style={borderedStyle}>Weight</th>
                 <th style={borderedStyle}>Height</th>
+                <th style={borderedStyle}>Weight</th>
               </tr>
             </thead>
             <tbody>
@@ -25,8 +25,8 @@ class BodyRow extends React.Component {
       const borderedStyle = {border: "1px solid black", padding: 4};
       return (
         <tr>
-          <td style={borderedStyle}>{this.props.body_weight}</td>
-          <td style={borderedStyle}>{this.props.body_height}</td>
+            <td style={borderedStyle}>{this.props.body_height}</td>
+            <td style={borderedStyle}>{this.props.body_weight}</td>
         </tr>
       )
     }
