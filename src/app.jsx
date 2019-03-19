@@ -1,8 +1,19 @@
 const contentNode = document.getElementById('contents');
 
+const bodystats = [
+  {
+    height: "",
+    weight: "",
+    age: "",
+    gender: ""
+  }
+];
+
+
 class BodyStats extends React.Component {
     render() {
         const borderedStyle = {border: "1px solid black", padding: 6};
+        const bodyData = this.props.bodystats.map(userData => <BodyRow key={userData.height} userData={userData} />)
         return (
           <table style={{borderCollapse: "collapse"}}>
             <thead>
@@ -13,12 +24,7 @@ class BodyStats extends React.Component {
                 <th style={borderedStyle}>Biological Gender</th>
               </tr>
             </thead>
-            <tbody>
-              <BodyRow body_weight=" "
-              body_height = " " 
-              body_age = " "
-              body_gender = " "/>
-            </tbody>
+            <tbody>{bodyData}</tbody>
           </table>
         )
       }
@@ -27,12 +33,13 @@ class BodyStats extends React.Component {
 class BodyRow extends React.Component {
     render() {
       const borderedStyle = {border: "1px solid black", padding: 4};
+      const userData = this.props.userData;
       return (
         <tr>
-            <td style={borderedStyle}>{this.props.body_height}</td>
-            <td style={borderedStyle}>{this.props.body_weight}</td>
-            <td style={borderedStyle}>{this.props.body_age}</td>
-            <td style={borderedStyle}>{this.props.body_gender}</td>
+            <td style={borderedStyle}>{userData.height}</td>
+            <td style={borderedStyle}>{userData.weight}</td>
+            <td style={borderedStyle}>{userData.age}</td>
+            <td style={borderedStyle}>{userData.gender}</td>
         </tr>
       )
     }
@@ -55,12 +62,14 @@ class AddBodyInfo extends React.Component {
       handleSubmit(e) {
         e.preventDefault();
         var form = document.forms.updateBodyStat;
-        this.props.createIssue({
+        this.props.update({
           height: form.height.value,
           weight: form.weight.value,
+          age: form.age.value,
+          gender: form.gender.value
         });
         // clear the form for the next input
-        form.height.value = ""; form.weight.value = "";
+        form.height.value = ""; form.weight.value = ""; form.age.value = ""; form.gender.value = "";
       }
     
       render() {
@@ -69,6 +78,8 @@ class AddBodyInfo extends React.Component {
             <form name="updateBodyStat" onSubmit={this.handleSubmit}>
               <input type="text" name="height" placeholder="Height" />
               <input type="text" name="weight" placeholder="Weight" />
+              <input type="text" name="age" placeholder="Age" />
+              <input type="text" name="gender" placeholder="Biological Gender" />
               <button>Update</button>
             </form>
           </div>
@@ -77,13 +88,26 @@ class AddBodyInfo extends React.Component {
 }
 
 class FitnessTracker extends React.Component {
+  constructor() {
+    super();
+    this.state = { bodystats: bodystats };
+
+    this.update = this.update.bind(this);
+  }
+
+  update(userInput) {
+    
+    bodystats[0] = (userInput);
+    this.setState({ bodystats: bodystats });
+  }
+  
   render() {
     return (
       <div>
         <h1>Fitness Tracker</h1>
-        <BodyStats />
+        <BodyStats bodystats = {this.state.bodystats} />
         <hr />
-        <AddBodyInfo />
+        <AddBodyInfo update = {this.update} />
         <hr />
         <NutritionStats />
       </div>

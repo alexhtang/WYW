@@ -10,6 +10,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var contentNode = document.getElementById('contents');
 
+var bodystats = [{
+  height: "",
+  weight: "",
+  age: "",
+  gender: ""
+}];
+
 var BodyStats = function (_React$Component) {
   _inherits(BodyStats, _React$Component);
 
@@ -23,6 +30,9 @@ var BodyStats = function (_React$Component) {
     key: "render",
     value: function render() {
       var borderedStyle = { border: "1px solid black", padding: 6 };
+      var bodyData = this.props.bodystats.map(function (userData) {
+        return React.createElement(BodyRow, { key: userData.height, userData: userData });
+      });
       return React.createElement(
         "table",
         { style: { borderCollapse: "collapse" } },
@@ -57,10 +67,7 @@ var BodyStats = function (_React$Component) {
         React.createElement(
           "tbody",
           null,
-          React.createElement(BodyRow, { body_weight: " ",
-            body_height: " ",
-            body_age: " ",
-            body_gender: " " })
+          bodyData
         )
       );
     }
@@ -82,28 +89,29 @@ var BodyRow = function (_React$Component2) {
     key: "render",
     value: function render() {
       var borderedStyle = { border: "1px solid black", padding: 4 };
+      var userData = this.props.userData;
       return React.createElement(
         "tr",
         null,
         React.createElement(
           "td",
           { style: borderedStyle },
-          this.props.body_height
+          userData.height
         ),
         React.createElement(
           "td",
           { style: borderedStyle },
-          this.props.body_weight
+          userData.weight
         ),
         React.createElement(
           "td",
           { style: borderedStyle },
-          this.props.body_age
+          userData.age
         ),
         React.createElement(
           "td",
           { style: borderedStyle },
-          this.props.body_gender
+          userData.gender
         )
       );
     }
@@ -152,12 +160,14 @@ var AddBodyInfo = function (_React$Component4) {
     value: function handleSubmit(e) {
       e.preventDefault();
       var form = document.forms.updateBodyStat;
-      this.props.createIssue({
+      this.props.update({
         height: form.height.value,
-        weight: form.weight.value
+        weight: form.weight.value,
+        age: form.age.value,
+        gender: form.gender.value
       });
       // clear the form for the next input
-      form.height.value = "";form.weight.value = "";
+      form.height.value = "";form.weight.value = "";form.age.value = "";form.gender.value = "";
     }
   }, {
     key: "render",
@@ -170,6 +180,8 @@ var AddBodyInfo = function (_React$Component4) {
           { name: "updateBodyStat", onSubmit: this.handleSubmit },
           React.createElement("input", { type: "text", name: "height", placeholder: "Height" }),
           React.createElement("input", { type: "text", name: "weight", placeholder: "Weight" }),
+          React.createElement("input", { type: "text", name: "age", placeholder: "Age" }),
+          React.createElement("input", { type: "text", name: "gender", placeholder: "Biological Gender" }),
           React.createElement(
             "button",
             null,
@@ -189,10 +201,22 @@ var FitnessTracker = function (_React$Component5) {
   function FitnessTracker() {
     _classCallCheck(this, FitnessTracker);
 
-    return _possibleConstructorReturn(this, (FitnessTracker.__proto__ || Object.getPrototypeOf(FitnessTracker)).apply(this, arguments));
+    var _this5 = _possibleConstructorReturn(this, (FitnessTracker.__proto__ || Object.getPrototypeOf(FitnessTracker)).call(this));
+
+    _this5.state = { bodystats: bodystats };
+
+    _this5.update = _this5.update.bind(_this5);
+    return _this5;
   }
 
   _createClass(FitnessTracker, [{
+    key: "update",
+    value: function update(userInput) {
+
+      bodystats[0] = userInput;
+      this.setState({ bodystats: bodystats });
+    }
+  }, {
     key: "render",
     value: function render() {
       return React.createElement(
@@ -203,9 +227,9 @@ var FitnessTracker = function (_React$Component5) {
           null,
           "Fitness Tracker"
         ),
-        React.createElement(BodyStats, null),
+        React.createElement(BodyStats, { bodystats: this.state.bodystats }),
         React.createElement("hr", null),
-        React.createElement(AddBodyInfo, null),
+        React.createElement(AddBodyInfo, { update: this.update }),
         React.createElement("hr", null),
         React.createElement(NutritionStats, null)
       );
