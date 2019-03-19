@@ -2,10 +2,10 @@ const contentNode = document.getElementById('contents');
 
 const bodystats = [
   {
-    height: "",
-    weight: "",
-    age: "",
-    gender: ""
+    height: "0",
+    weight: "0",
+    age: "0",
+    gender: "N/A"
   }
 ];
 

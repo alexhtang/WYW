@@ -11,10 +11,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var contentNode = document.getElementById('contents');
 
 var bodystats = [{
-  height: "",
-  weight: "",
-  age: "",
-  gender: ""
+  height: "0",
+  weight: "0",
+  age: "0",
+  gender: "N/A"
 }];
 
 var BodyStats = function (_React$Component) {
