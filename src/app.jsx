@@ -61,7 +61,7 @@ class AddBodyInfo extends React.Component {
     
       handleSubmit(e) {
         e.preventDefault();
-        var form = document.forms.updateBodyStat;
+        const form = document.forms.updateBodyStat;
         this.props.update({
           height: form.height.value,
           weight: form.weight.value,
@@ -74,12 +74,16 @@ class AddBodyInfo extends React.Component {
     
       render() {
         return (
-          <div>
+          <div className = "form-group">
             <form name="updateBodyStat" onSubmit={this.handleSubmit}>
-              <input type="text" name="height" placeholder="Height" />
-              <input type="text" name="weight" placeholder="Weight" />
-              <input type="text" name="age" placeholder="Age" />
-              <input type="text" name="gender" placeholder="Biological Gender" />
+              <input type="text" name="height" placeholder="Height (ft'inches)" />
+              <input type="text" name="weight" placeholder="Weight (lbs)" />
+              <input type="text" name="age" placeholder="Age" /><hr></hr>
+              <label for="gender">Biological Gender:</label>
+              <select class="form-control" name = "gender">
+                <option>Male</option>
+                <option>Female</option>
+              </select>
               <button>Update</button>
             </form>
           </div>

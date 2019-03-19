@@ -174,14 +174,33 @@ var AddBodyInfo = function (_React$Component4) {
     value: function render() {
       return React.createElement(
         "div",
-        null,
+        { className: "form-group" },
         React.createElement(
           "form",
           { name: "updateBodyStat", onSubmit: this.handleSubmit },
-          React.createElement("input", { type: "text", name: "height", placeholder: "Height" }),
-          React.createElement("input", { type: "text", name: "weight", placeholder: "Weight" }),
+          React.createElement("input", { type: "text", name: "height", placeholder: "Height (ft'inches)" }),
+          React.createElement("input", { type: "text", name: "weight", placeholder: "Weight (lbs)" }),
           React.createElement("input", { type: "text", name: "age", placeholder: "Age" }),
-          React.createElement("input", { type: "text", name: "gender", placeholder: "Biological Gender" }),
+          React.createElement("hr", null),
+          React.createElement(
+            "label",
+            { "for": "gender" },
+            "Biological Gender:"
+          ),
+          React.createElement(
+            "select",
+            { "class": "form-control", name: "gender" },
+            React.createElement(
+              "option",
+              null,
+              "Male"
+            ),
+            React.createElement(
+              "option",
+              null,
+              "Female"
+            )
+          ),
           React.createElement(
             "button",
             null,
