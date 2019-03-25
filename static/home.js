@@ -58,7 +58,7 @@ var Description = function (_React$Component2) {
     value: function render() {
       return React.createElement(
         "div",
-        null,
+        { style: { textAlign: "center" } },
         "This is a placeholder for a description of the webapp."
       );
     }
@@ -96,7 +96,7 @@ var AddLogIn = function (_React$Component3) {
     value: function render() {
       return React.createElement(
         "div",
-        null,
+        { style: { textAlign: "center" } },
         React.createElement(
           "form",
           { name: "updateLogin", onSubmit: this.handleSubmit },
@@ -154,8 +154,7 @@ var ButtonTable = function (_React$Component5) {
       var borderedStyle = { padding: 6 };
       return React.createElement(
         "div",
-        null,
-        ' ',
+        { style: { textAlign: "center" } },
         React.createElement(
           "button",
           null,

@@ -27,7 +27,7 @@ class BodyStats extends React.Component {
 class Description extends React.Component {
   render() {
     return (
-      <div>This is a placeholder for a description of the webapp.</div>
+      <div style={{textAlign: "center"}}>This is a placeholder for a description of the webapp.</div>
     )
   }
 }
@@ -51,7 +51,7 @@ class AddLogIn extends React.Component {
     
       render() {
         return (
-          <div>
+          <div style={{textAlign: "center"}}>
             <form name="updateLogin" onSubmit={this.handleSubmit}>
               <input type="text" name="username" placeholder="Username" />
               <input type="text" name="password" placeholder="Password" />
@@ -75,8 +75,7 @@ class ButtonTable extends React.Component {
     render() {
         const borderedStyle = {padding: 6};
         return (
-          <div>
-                {' '}
+          <div style={{textAlign: "center"}}>
                 <button>Meals</button>
                 {' '}
                 <button>Nutrition Tracker</button>
