@@ -23,86 +23,29 @@ var BodyStats = function (_React$Component) {
     key: "render",
     value: function render() {
       var borderedStyle = { border: "1px solid black", padding: 6 };
-      return React.createElement(
-        "div",
-        { "class": "row" },
-        React.createElement(
-          "div",
-          { "class": "col-2" },
-          " ",
-          React.createElement(
-            "button",
-            { type: "button", "class": "btn btn-primary" },
-            "Back"
-          )
-        ),
-        React.createElement(
-          "div",
-          { "class": "col-8" },
-          "Timothy Richards"
-        ),
-        React.createElement(
-          "div",
-          { "class": "col-2" },
-          " ",
-          React.createElement(
-            "button",
-            { type: "button", "class": "btn btn-primary" },
-            "More Options"
-          )
-        )
-      );
+      return React.createElement("div", { "class": "row" });
     }
   }]);
 
   return BodyStats;
 }(React.Component);
 
-var BodyRow = function (_React$Component2) {
-  _inherits(BodyRow, _React$Component2);
+// class BodyRow extends React.Component {
+//     render() {
+//       const borderedStyle = {border: "1px solid black", padding: 4};
+//       return (
+//         <tr>
+//             <td style={borderedStyle}>{this.props.body_height}</td>
+//             <td style={borderedStyle}>{this.props.body_weight}</td>
+//             <td style={borderedStyle}>{this.props.body_age}</td>
+//             <td style={borderedStyle}>{this.props.body_gender}</td>
+//         </tr>
+//       )
+//     }
+//   }
 
-  function BodyRow() {
-    _classCallCheck(this, BodyRow);
-
-    return _possibleConstructorReturn(this, (BodyRow.__proto__ || Object.getPrototypeOf(BodyRow)).apply(this, arguments));
-  }
-
-  _createClass(BodyRow, [{
-    key: "render",
-    value: function render() {
-      var borderedStyle = { border: "1px solid black", padding: 4 };
-      return React.createElement(
-        "tr",
-        null,
-        React.createElement(
-          "td",
-          { style: borderedStyle },
-          this.props.body_height
-        ),
-        React.createElement(
-          "td",
-          { style: borderedStyle },
-          this.props.body_weight
-        ),
-        React.createElement(
-          "td",
-          { style: borderedStyle },
-          this.props.body_age
-        ),
-        React.createElement(
-          "td",
-          { style: borderedStyle },
-          this.props.body_gender
-        )
-      );
-    }
-  }]);
-
-  return BodyRow;
-}(React.Component);
-
-var Description = function (_React$Component3) {
-  _inherits(Description, _React$Component3);
+var Description = function (_React$Component2) {
+  _inherits(Description, _React$Component2);
 
   function Description() {
     _classCallCheck(this, Description);
@@ -124,29 +67,29 @@ var Description = function (_React$Component3) {
   return Description;
 }(React.Component);
 
-var AddLogIn = function (_React$Component4) {
-  _inherits(AddLogIn, _React$Component4);
+var AddLogIn = function (_React$Component3) {
+  _inherits(AddLogIn, _React$Component3);
 
   function AddLogIn() {
     _classCallCheck(this, AddLogIn);
 
-    var _this4 = _possibleConstructorReturn(this, (AddLogIn.__proto__ || Object.getPrototypeOf(AddLogIn)).call(this));
+    var _this3 = _possibleConstructorReturn(this, (AddLogIn.__proto__ || Object.getPrototypeOf(AddLogIn)).call(this));
 
-    _this4.handleSubmit = _this4.handleSubmit.bind(_this4);
-    return _this4;
+    _this3.handleSubmit = _this3.handleSubmit.bind(_this3);
+    return _this3;
   }
 
   _createClass(AddLogIn, [{
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      var form = document.forms.updateBodyStat;
+      var form = document.forms.updateLogIn;
       this.props.createIssue({
-        height: form.height.value,
-        weight: form.weight.value
+        username: form.username.value,
+        password: form.password.value
       });
       // clear the form for the next input
-      form.height.value = "";form.weight.value = "";
+      form.username.value = "";form.password.value = "";
     }
   }, {
     key: "render",
@@ -156,7 +99,7 @@ var AddLogIn = function (_React$Component4) {
         null,
         React.createElement(
           "form",
-          { name: "updateBodyStat", onSubmit: this.handleSubmit },
+          { name: "updateLogin", onSubmit: this.handleSubmit },
           React.createElement("input", { type: "text", name: "username", placeholder: "Username" }),
           React.createElement("input", { type: "text", name: "password", placeholder: "Password" }),
           React.createElement(
@@ -172,8 +115,8 @@ var AddLogIn = function (_React$Component4) {
   return AddLogIn;
 }(React.Component);
 
-var TitleTest = function (_React$Component5) {
-  _inherits(TitleTest, _React$Component5);
+var TitleTest = function (_React$Component4) {
+  _inherits(TitleTest, _React$Component4);
 
   function TitleTest() {
     _classCallCheck(this, TitleTest);
@@ -196,8 +139,8 @@ var TitleTest = function (_React$Component5) {
   return TitleTest;
 }(React.Component);
 
-var ButtonTable = function (_React$Component6) {
-  _inherits(ButtonTable, _React$Component6);
+var ButtonTable = function (_React$Component5) {
+  _inherits(ButtonTable, _React$Component5);
 
   function ButtonTable() {
     _classCallCheck(this, ButtonTable);
@@ -243,8 +186,8 @@ var ButtonTable = function (_React$Component6) {
   return ButtonTable;
 }(React.Component);
 
-var FitnessTracker = function (_React$Component7) {
-  _inherits(FitnessTracker, _React$Component7);
+var FitnessTracker = function (_React$Component6) {
+  _inherits(FitnessTracker, _React$Component6);
 
   function FitnessTracker() {
     _classCallCheck(this, FitnessTracker);

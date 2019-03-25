@@ -5,27 +5,24 @@ class BodyStats extends React.Component {
         const borderedStyle = {border: "1px solid black", padding: 6};
         return (
           <div class = "row">
-            <div class = "col-2"> <button type="button" class="btn btn-primary">Back</button></div>
-            <div class = "col-8">Timothy Richards</div>
-            <div class = "col-2"> <button type="button" class="btn btn-primary">More Options</button></div>
           </div>
         )
       }
 }
 
-class BodyRow extends React.Component {
-    render() {
-      const borderedStyle = {border: "1px solid black", padding: 4};
-      return (
-        <tr>
-            <td style={borderedStyle}>{this.props.body_height}</td>
-            <td style={borderedStyle}>{this.props.body_weight}</td>
-            <td style={borderedStyle}>{this.props.body_age}</td>
-            <td style={borderedStyle}>{this.props.body_gender}</td>
-        </tr>
-      )
-    }
-  }
+// class BodyRow extends React.Component {
+//     render() {
+//       const borderedStyle = {border: "1px solid black", padding: 4};
+//       return (
+//         <tr>
+//             <td style={borderedStyle}>{this.props.body_height}</td>
+//             <td style={borderedStyle}>{this.props.body_weight}</td>
+//             <td style={borderedStyle}>{this.props.body_age}</td>
+//             <td style={borderedStyle}>{this.props.body_gender}</td>
+//         </tr>
+//       )
+//     }
+//   }
 
 class Description extends React.Component {
   render() {
@@ -43,19 +40,19 @@ class AddLogIn extends React.Component {
     
       handleSubmit(e) {
         e.preventDefault();
-        var form = document.forms.updateBodyStat;
+        var form = document.forms.updateLogIn;
         this.props.createIssue({
-          height: form.height.value,
-          weight: form.weight.value,
+          username: form.username.value,
+          password: form.password.value,
         });
         // clear the form for the next input
-        form.height.value = ""; form.weight.value = "";
+        form.username.value = ""; form.password.value = "";
       }
     
       render() {
         return (
           <div>
-            <form name="updateBodyStat" onSubmit={this.handleSubmit}>
+            <form name="updateLogin" onSubmit={this.handleSubmit}>
               <input type="text" name="username" placeholder="Username" />
               <input type="text" name="password" placeholder="Password" />
               <button>Log In</button>
