@@ -67,56 +67,60 @@ var Description = function (_React$Component2) {
   return Description;
 }(React.Component);
 
-var AddLogIn = function (_React$Component3) {
-  _inherits(AddLogIn, _React$Component3);
+// class AddLogIn extends React.Component {
+//   constructor() {
+//     super();
+//     this.handleSubmit = this.handleSubmit.bind(this);
+//   }
 
-  function AddLogIn() {
-    _classCallCheck(this, AddLogIn);
+//       handleSubmit(e) {
+//         e.preventDefault();
+//         var form = document.forms.updateLogIn;
+//         this.props.update();
+//         this.props.createIssue({
+//           username: form.username.value,
+//           password: form.password.value,
+//         });
+//         // clear the form for the next input
+//         form.username.value = ""; form.password.value = "";
+//       }
 
-    var _this3 = _possibleConstructorReturn(this, (AddLogIn.__proto__ || Object.getPrototypeOf(AddLogIn)).call(this));
+//       render() {
+//         return (
 
-    _this3.handleSubmit = _this3.handleSubmit.bind(_this3);
-    return _this3;
-  }
+//           <div style={{textAlign: "center"}}>
+//             <form name="updateLogin" onSubmit={this.handleSubmit}>
+//               <input type="text" name="username" placeholder="Username" />
+//               <input type="text" name="password" placeholder="Password" />
+//               <button>Log In</button>
+//             </form>
+//           </div>
+//         )
+//       }
+// }
 
-  _createClass(AddLogIn, [{
-    key: "handleSubmit",
-    value: function handleSubmit(e) {
-      e.preventDefault();
-      var form = document.forms.updateLogIn;
-      this.props.createIssue({
-        username: form.username.value,
-        password: form.password.value
-      });
-      // clear the form for the next input
-      form.username.value = "";form.password.value = "";
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return React.createElement(
-        "div",
-        { style: { textAlign: "center" } },
-        React.createElement(
-          "form",
-          { name: "updateLogin", onSubmit: this.handleSubmit },
-          React.createElement("input", { type: "text", name: "username", placeholder: "Username" }),
-          React.createElement("input", { type: "text", name: "password", placeholder: "Password" }),
-          React.createElement(
-            "button",
-            null,
-            "Log In"
-          )
-        )
-      );
-    }
-  }]);
+// class LoggedIn extends React.Component {
+//   constructor() {
+//     super();
+//     this.handleClick = this.handleClick.bind(this);
+//   }
 
-  return AddLogIn;
-}(React.Component);
+//   handleClick(){
+//     this.props.update();
+//   }
 
-var TitleTest = function (_React$Component4) {
-  _inherits(TitleTest, _React$Component4);
+//   render(){
+//     return(
+//       <div style={{textAlign: "center"}}>
+//         <p>You are logged in!</p>
+//         <input type="button" value="Log Out" onClick={this.handleClick}></input>
+//       </div>
+//     )
+//   }
+// }
+
+var TitleTest = function (_React$Component3) {
+  _inherits(TitleTest, _React$Component3);
 
   function TitleTest() {
     _classCallCheck(this, TitleTest);
@@ -139,8 +143,8 @@ var TitleTest = function (_React$Component4) {
   return TitleTest;
 }(React.Component);
 
-var ButtonTable = function (_React$Component5) {
-  _inherits(ButtonTable, _React$Component5);
+var ButtonTable = function (_React$Component4) {
+  _inherits(ButtonTable, _React$Component4);
 
   function ButtonTable() {
     _classCallCheck(this, ButtonTable);
@@ -185,24 +189,68 @@ var ButtonTable = function (_React$Component5) {
   return ButtonTable;
 }(React.Component);
 
-var FitnessTracker = function (_React$Component6) {
-  _inherits(FitnessTracker, _React$Component6);
+var HomePage = function (_React$Component5) {
+  _inherits(HomePage, _React$Component5);
 
-  function FitnessTracker() {
-    _classCallCheck(this, FitnessTracker);
+  function HomePage(props) {
+    _classCallCheck(this, HomePage);
 
-    return _possibleConstructorReturn(this, (FitnessTracker.__proto__ || Object.getPrototypeOf(FitnessTracker)).apply(this, arguments));
+    var _this5 = _possibleConstructorReturn(this, (HomePage.__proto__ || Object.getPrototypeOf(HomePage)).call(this, props));
+
+    _this5.state = {
+      isLoggedIn: false
+    };
+
+    _this5.update = _this5.update.bind(_this5);
+    return _this5;
   }
 
-  _createClass(FitnessTracker, [{
+  _createClass(HomePage, [{
+    key: "update",
+    value: function update() {
+      this.setState({ isLoggedIn: !this.state.isLoggedIn });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var isLoggedIn = this.state.isLoggedIn;
+      var logIn = void 0;
+
+      if (isLoggedIn) {
+        logIn = React.createElement(
+          "div",
+          { style: { textAlign: "center" } },
+          React.createElement(
+            "p",
+            null,
+            "You are logged in!"
+          ),
+          React.createElement("input", { type: "button", value: "Log Out", onClick: this.update })
+        );
+      } else {
+        logIn = React.createElement(
+          "div",
+          { style: { textAlign: "center" } },
+          React.createElement(
+            "form",
+            { name: "updateLogin", onSubmit: this.update },
+            React.createElement("input", { type: "text", name: "username", placeholder: "Username" }),
+            React.createElement("input", { type: "text", name: "password", placeholder: "Password" }),
+            React.createElement(
+              "button",
+              null,
+              "Log In"
+            )
+          )
+        );
+      }
+
       return React.createElement(
         "div",
         null,
         React.createElement(TitleTest, null),
         React.createElement("hr", null),
-        React.createElement(AddLogIn, null),
+        logIn,
         React.createElement("hr", null),
         React.createElement(Description, null),
         React.createElement("hr", null),
@@ -211,7 +259,7 @@ var FitnessTracker = function (_React$Component6) {
     }
   }]);
 
-  return FitnessTracker;
+  return HomePage;
 }(React.Component);
 
-ReactDOM.render(React.createElement(FitnessTracker, null), contentNode); // Render the component inside the content Node
+ReactDOM.render(React.createElement(HomePage, null), contentNode); // Render the component inside the content Node

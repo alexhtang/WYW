@@ -32,35 +32,57 @@ class Description extends React.Component {
   }
 }
 
-class AddLogIn extends React.Component {
-    constructor() {
-        super();
-        this.handleSubmit = this.handleSubmit.bind(this);
-      }
+// class AddLogIn extends React.Component {
+//   constructor() {
+//     super();
+//     this.handleSubmit = this.handleSubmit.bind(this);
+//   }
     
-      handleSubmit(e) {
-        e.preventDefault();
-        var form = document.forms.updateLogIn;
-        this.props.createIssue({
-          username: form.username.value,
-          password: form.password.value,
-        });
-        // clear the form for the next input
-        form.username.value = ""; form.password.value = "";
-      }
+//       handleSubmit(e) {
+//         e.preventDefault();
+//         var form = document.forms.updateLogIn;
+//         this.props.update();
+//         this.props.createIssue({
+//           username: form.username.value,
+//           password: form.password.value,
+//         });
+//         // clear the form for the next input
+//         form.username.value = ""; form.password.value = "";
+//       }
     
-      render() {
-        return (
-          <div style={{textAlign: "center"}}>
-            <form name="updateLogin" onSubmit={this.handleSubmit}>
-              <input type="text" name="username" placeholder="Username" />
-              <input type="text" name="password" placeholder="Password" />
-              <button>Log In</button>
-            </form>
-          </div>
-        )
-      }
-}
+//       render() {
+//         return (
+          
+//           <div style={{textAlign: "center"}}>
+//             <form name="updateLogin" onSubmit={this.handleSubmit}>
+//               <input type="text" name="username" placeholder="Username" />
+//               <input type="text" name="password" placeholder="Password" />
+//               <button>Log In</button>
+//             </form>
+//           </div>
+//         )
+//       }
+// }
+
+// class LoggedIn extends React.Component {
+//   constructor() {
+//     super();
+//     this.handleClick = this.handleClick.bind(this);
+//   }
+
+//   handleClick(){
+//     this.props.update();
+//   }
+
+//   render(){
+//     return(
+//       <div style={{textAlign: "center"}}>
+//         <p>You are logged in!</p>
+//         <input type="button" value="Log Out" onClick={this.handleClick}></input>
+//       </div>
+//     )
+//   }
+// }
 
 class TitleTest extends React.Component {
     render() {
@@ -88,14 +110,45 @@ class ButtonTable extends React.Component {
       }
 }
 
-class FitnessTracker extends React.Component {
+class HomePage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false
+    };
+
+    this.update = this.update.bind(this);
+  }
+
+  update() {
+    this.setState({isLoggedIn: !this.state.isLoggedIn});
+  }
+
   render() {
+    const isLoggedIn = this.state.isLoggedIn;
+    let logIn;
+
+    if(isLoggedIn){
+      logIn = <div style={{textAlign: "center"}}>
+               <p>You are logged in!</p>
+               <input type="button" value="Log Out" onClick={this.update}></input>
+             </div>
+    }
+    else{
+      logIn = <div style={{textAlign: "center"}}>
+            <form name="updateLogin" onSubmit={this.update}>
+              <input type="text" name="username" placeholder="Username" />
+              <input type="text" name="password" placeholder="Password" />
+              <button>Log In</button>
+            </form>
+      </div>
+    }
+
     return (
       <div>
         <TitleTest />
-        {/* <BodyStats /> */}
         <hr />
-        <AddLogIn />
+        {logIn}
         <hr />
         <Description />
         <hr/>
@@ -105,4 +158,4 @@ class FitnessTracker extends React.Component {
   }
 }
 
-ReactDOM.render(<FitnessTracker />, contentNode);  // Render the component inside the content Node
+ReactDOM.render(<HomePage />, contentNode);  // Render the component inside the content Node
