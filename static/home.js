@@ -235,7 +235,7 @@ var HomePage = function (_React$Component5) {
             "form",
             { name: "updateLogin", onSubmit: this.update },
             React.createElement("input", { type: "text", name: "username", placeholder: "Username" }),
-            React.createElement("input", { type: "text", name: "password", placeholder: "Password" }),
+            React.createElement("input", { type: "password", name: "password", placeholder: "Password" }),
             React.createElement(
               "button",
               null,

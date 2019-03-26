@@ -138,7 +138,7 @@ class HomePage extends React.Component {
       logIn = <div style={{textAlign: "center"}}>
             <form name="updateLogin" onSubmit={this.update}>
               <input type="text" name="username" placeholder="Username" />
-              <input type="text" name="password" placeholder="Password" />
+              <input type="password" name="password" placeholder="Password" />
               <button>Log In</button>
             </form>
       </div>
