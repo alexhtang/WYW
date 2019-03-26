@@ -8,7 +8,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var issues = [{
+var foods = [{
   id: 1,
   foodName: "Omelette",
   mealType: "Breakfast",
@@ -28,119 +28,84 @@ var issues = [{
 
 var contentNode = document.getElementById("mealcontent");
 
-var IssueFilter = function (_React$Component) {
-  _inherits(IssueFilter, _React$Component);
+var MealSummary = function (_React$Component) {
+  _inherits(MealSummary, _React$Component);
 
-  function IssueFilter() {
-    _classCallCheck(this, IssueFilter);
+  function MealSummary() {
+    _classCallCheck(this, MealSummary);
 
-    return _possibleConstructorReturn(this, (IssueFilter.__proto__ || Object.getPrototypeOf(IssueFilter)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (MealSummary.__proto__ || Object.getPrototypeOf(MealSummary)).apply(this, arguments));
   }
 
-  _createClass(IssueFilter, [{
+  _createClass(MealSummary, [{
     key: "render",
     value: function render() {
       return React.createElement(
         "div",
         null,
-        "Enter food name and information"
+        React.createElement(
+          "h4",
+          null,
+          "Enter food name and information"
+        ),
+        React.createElement(
+          "h4",
+          null,
+          "Total Calories: ",
+          this.props.totalCalories
+        )
       );
     }
   }]);
 
-  return IssueFilter;
+  return MealSummary;
 }(React.Component);
 
-// NEW: changed the IssueRow class to a "stateless component".
-// class IssueRow extends React.Component {
-//   render() {
-//     const issue = this.props.issue;
-//     return (
-//       <tr>
-//         <td>{issue.id}</td>
-//         <td>{issue.status}</td>
-//         <td>{issue.owner}</td>
-//         <td>{issue.created.toDateString()}</td>
-//         <td>{issue.effort}</td>
-//         <td>
-//           {issue.completionDate ? issue.completionDate.toDateString() : ""}
-//         </td>
-//         <td>{issue.title}</td>
-//       </tr>
-//     );
-//   }
-// }
-
-
-var IssueRow = function IssueRow(props) {
+var FoodTableRow = function FoodTableRow(props) {
   return React.createElement(
     "tr",
     null,
     React.createElement(
       "td",
       null,
-      props.issue.id
+      props.food.id
     ),
     React.createElement(
       "td",
       null,
-      props.issue.foodName
+      props.food.foodName
     ),
     React.createElement(
       "td",
       null,
-      props.issue.mealType
+      props.food.numberOfServings
     ),
     React.createElement(
       "td",
       null,
-      props.issue.numberOfServings
+      props.food.mealType
     ),
     React.createElement(
       "td",
       null,
-      props.issue.calories
+      props.food.calories
     ),
     React.createElement(
       "td",
       null,
-      props.issue.fat
+      props.food.fat
     ),
     React.createElement(
       "td",
       null,
-      props.issue.carbohydrates
+      props.food.carbohydrates
     )
   );
 };
 
-// NEW: changed IssueTable from a class to a "stateless component".
-// class IssueTable extends React.Component {
-//   render() {
-//     const issueRows = this.props.issues.map(issue => (
-//       <IssueRow key={issue.id} issue={issue} />
-//     ));
-//     return (
-//       <table className="bordered-table">
-//         <thead>
-//           <tr>
-//             <th>Id</th>
-//             <th>Status</th>
-//             <th>Owner</th>
-//             <th>Created</th>
-//             <th>Effort</th>
-//             <th>Completion Date</th>
-//             <th>Title</th>
-//           </tr>
-//         </thead>
-//         <tbody>{issueRows}</tbody>
-//       </table>
-//     );
-//   }
-// }
-function IssueTable(props) {
-  var issueRows = props.issues.map(function (issue) {
-    return React.createElement(IssueRow, { key: issue.id, issue: issue });
+function MealTable(props) {
+  var FoodTableRows = props.foods.map(function (food) {
+    return React.createElement(FoodTableRow, { key: food.id, food: food });
   });
   return React.createElement(
     "table",
@@ -191,18 +156,18 @@ function IssueTable(props) {
     React.createElement(
       "tbody",
       null,
-      issueRows
+      FoodTableRows
     )
   );
 }
 
-var IssueAdd = function (_React$Component2) {
-  _inherits(IssueAdd, _React$Component2);
+var AddMeal = function (_React$Component2) {
+  _inherits(AddMeal, _React$Component2);
 
-  function IssueAdd() {
-    _classCallCheck(this, IssueAdd);
+  function AddMeal() {
+    _classCallCheck(this, AddMeal);
 
-    var _this2 = _possibleConstructorReturn(this, (IssueAdd.__proto__ || Object.getPrototypeOf(IssueAdd)).call(this));
+    var _this2 = _possibleConstructorReturn(this, (AddMeal.__proto__ || Object.getPrototypeOf(AddMeal)).call(this));
 
     _this2.state = {
       mealType: 'Breakfast'
@@ -212,12 +177,12 @@ var IssueAdd = function (_React$Component2) {
     return _this2;
   }
 
-  _createClass(IssueAdd, [{
+  _createClass(AddMeal, [{
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      var form = document.forms.issueAdd;
-      this.props.createIssue({
+      var form = document.forms.addMeal;
+      this.props.createFood({
         foodName: form.foodName.value,
         calories: form.calories.value,
         mealType: this.state.mealType,
@@ -241,7 +206,7 @@ var IssueAdd = function (_React$Component2) {
         null,
         React.createElement(
           "form",
-          { name: "issueAdd", onSubmit: this.handleSubmit },
+          { name: "addMeal", onSubmit: this.handleSubmit },
           React.createElement("input", { type: "text", name: "foodName", placeholder: "Food Name" }),
           React.createElement("input", { type: "text", name: "calories", placeholder: "Calories" }),
           React.createElement(
@@ -282,24 +247,26 @@ var IssueAdd = function (_React$Component2) {
     }
   }]);
 
-  return IssueAdd;
+  return AddMeal;
 }(React.Component);
 
-var IssueList = function (_React$Component3) {
-  _inherits(IssueList, _React$Component3);
+var MealList = function (_React$Component3) {
+  _inherits(MealList, _React$Component3);
 
-  function IssueList() {
-    _classCallCheck(this, IssueList);
+  function MealList() {
+    _classCallCheck(this, MealList);
 
-    var _this3 = _possibleConstructorReturn(this, (IssueList.__proto__ || Object.getPrototypeOf(IssueList)).call(this));
+    var _this3 = _possibleConstructorReturn(this, (MealList.__proto__ || Object.getPrototypeOf(MealList)).call(this));
 
-    _this3.state = { issues: [] };
+    _this3.state = { foods: [],
+      totalCalories: 0 };
 
-    _this3.createIssue = _this3.createIssue.bind(_this3);
+    _this3.addMeal = _this3.addMeal.bind(_this3);
+    _this3.calculateCalories = _this3.calculateCalories.bind(_this3);
     return _this3;
   }
 
-  _createClass(IssueList, [{
+  _createClass(MealList, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       this.loadData();
@@ -307,21 +274,29 @@ var IssueList = function (_React$Component3) {
   }, {
     key: "loadData",
     value: function loadData() {
-      var _this4 = this;
 
-      setTimeout(function () {
-        _this4.setState({
-          issues: issues
-        });
-      }, 500);
+      this.setState({
+        foods: foods
+      });
+      this.calculateCalories();
     }
   }, {
-    key: "createIssue",
-    value: function createIssue(newIssue) {
-      var newIssues = this.state.issues.slice();
-      newIssue.id = this.state.issues.length + 1;
-      newIssues.push(newIssue);
-      this.setState({ issues: newIssues });
+    key: "calculateCalories",
+    value: function calculateCalories() {
+      var cal = foods.reduce(function (total, amount) {
+        return total.calories + amount.calories;
+      });
+      this.setState({ totalCalories: cal });
+    }
+  }, {
+    key: "addMeal",
+    value: function addMeal(newMeal) {
+      var newMeals = this.state.foods.slice();
+      newMeal.id = this.state.foods.length + 1;
+      newMeals.push(newMeal);
+      this.setState({ foods: newMeals,
+        totalCalories: Number(this.state.totalCalories) + Number(newMeal.calories)
+      });
     }
   }, {
     key: "render",
@@ -334,19 +309,19 @@ var IssueList = function (_React$Component3) {
           null,
           "Meal Tracker"
         ),
-        React.createElement(IssueFilter, null),
+        React.createElement(MealSummary, { totalCalories: this.state.totalCalories }),
         React.createElement("hr", null),
-        React.createElement(IssueTable, { issues: this.state.issues }),
+        React.createElement(MealTable, { foods: this.state.foods }),
         React.createElement("hr", null),
-        React.createElement(IssueAdd, { createIssue: this.createIssue })
+        React.createElement(AddMeal, { createFood: this.addMeal })
       );
     }
   }]);
 
-  return IssueList;
+  return MealList;
 }(React.Component);
 
 // This renders the JSX component inside the content node:
 
 
-ReactDOM.render(React.createElement(IssueList, null), contentNode);
+ReactDOM.render(React.createElement(MealList, null), contentNode);

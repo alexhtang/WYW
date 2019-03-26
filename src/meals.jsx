@@ -1,4 +1,4 @@
-const issues = [
+const foods = [
     {
       id: 1,
       foodName: "Omelette",
@@ -21,70 +21,34 @@ const issues = [
   
   var contentNode = document.getElementById("mealcontent");
   
-  class IssueFilter extends React.Component {
+  class MealSummary extends React.Component {
     render() {
-      return <div>Enter food name and information</div>;
+      return (<div>
+        <h4>Enter food name and information</h4>
+        <h4>Total Calories: {this.props.totalCalories}</h4>
+        </div>
+
+      );
     }
   }
   
-  // NEW: changed the IssueRow class to a "stateless component".
-  // class IssueRow extends React.Component {
-  //   render() {
-  //     const issue = this.props.issue;
-  //     return (
-  //       <tr>
-  //         <td>{issue.id}</td>
-  //         <td>{issue.status}</td>
-  //         <td>{issue.owner}</td>
-  //         <td>{issue.created.toDateString()}</td>
-  //         <td>{issue.effort}</td>
-  //         <td>
-  //           {issue.completionDate ? issue.completionDate.toDateString() : ""}
-  //         </td>
-  //         <td>{issue.title}</td>
-  //       </tr>
-  //     );
-  //   }
-  // }
-  const IssueRow = (props) => (
+  
+  const FoodTableRow = (props) => (
     <tr>
-      <td>{props.issue.id}</td>
-      <td>{props.issue.foodName}</td>
-      <td>{props.issue.mealType}</td>
-      <td>{props.issue.numberOfServings}</td>
-      <td>{props.issue.calories}</td>
-      <td>{props.issue.fat}</td>
-      <td>{props.issue.carbohydrates}</td>
+      <td>{props.food.id}</td>
+      <td>{props.food.foodName}</td>
+      <td>{props.food.numberOfServings}</td>
+      <td>{props.food.mealType}</td>
+      <td>{props.food.calories}</td>
+      <td>{props.food.fat}</td>
+      <td>{props.food.carbohydrates}</td>
     </tr>
   );
   
-  // NEW: changed IssueTable from a class to a "stateless component".
-  // class IssueTable extends React.Component {
-  //   render() {
-  //     const issueRows = this.props.issues.map(issue => (
-  //       <IssueRow key={issue.id} issue={issue} />
-  //     ));
-  //     return (
-  //       <table className="bordered-table">
-  //         <thead>
-  //           <tr>
-  //             <th>Id</th>
-  //             <th>Status</th>
-  //             <th>Owner</th>
-  //             <th>Created</th>
-  //             <th>Effort</th>
-  //             <th>Completion Date</th>
-  //             <th>Title</th>
-  //           </tr>
-  //         </thead>
-  //         <tbody>{issueRows}</tbody>
-  //       </table>
-  //     );
-  //   }
-  // }
-  function IssueTable(props) {
-    const issueRows = props.issues.map(issue => (
-      <IssueRow key={issue.id} issue={issue} />
+  
+  function MealTable(props) {
+    const FoodTableRows = props.foods.map(food => (
+      <FoodTableRow key={food.id} food={food} />
     ));
     return (
       <table className="bordered-table">
@@ -99,12 +63,12 @@ const issues = [
             <th>Carbohydrates</th>
           </tr>
         </thead>
-        <tbody>{issueRows}</tbody>
+        <tbody>{FoodTableRows}</tbody>
       </table>
     );
   }
   
-  class IssueAdd extends React.Component {
+  class AddMeal extends React.Component {
     constructor() {
       super();
       this.state = {
@@ -116,8 +80,8 @@ const issues = [
   
     handleSubmit(e) {
       e.preventDefault();
-      let form = document.forms.issueAdd;
-      this.props.createIssue({
+      let form = document.forms.addMeal;
+      this.props.createFood({
         foodName: form.foodName.value,
         calories: form.calories.value,
         mealType: this.state.mealType,
@@ -136,7 +100,7 @@ const issues = [
     render() {
       return (
         <div>
-          <form name="issueAdd" onSubmit={this.handleSubmit}>
+          <form name="addMeal" onSubmit={this.handleSubmit}>
             <input type="text" name="foodName" placeholder="Food Name" />
             <input type="text" name="calories" placeholder="Calories" />
             <select 
@@ -156,12 +120,14 @@ const issues = [
     }
   }
   
-  class IssueList extends React.Component {
+  class MealList extends React.Component {
     constructor() {
       super();
-      this.state = { issues: [] };
-  
-      this.createIssue = this.createIssue.bind(this);
+      this.state = { foods: [],
+      totalCalories: 0 };
+    
+      this.addMeal = this.addMeal.bind(this);
+      this.calculateCalories = this.calculateCalories.bind(this);
     }
   
     componentDidMount() {
@@ -169,33 +135,39 @@ const issues = [
     }
   
     loadData() {
-      setTimeout(() => {
-        this.setState({
-          issues: issues
-        });
-      }, 500);
-    }
   
-    createIssue(newIssue) {
-      const newIssues = this.state.issues.slice();
-      newIssue.id = this.state.issues.length + 1;
-      newIssues.push(newIssue);
-      this.setState({ issues: newIssues });
-    }
+        this.setState({
+          foods: foods,
+        });
+        this.calculateCalories();
+}
+  calculateCalories(){
+    const cal = foods.reduce((total, amount) => total.calories + amount.calories); 
+    this.setState({totalCalories: cal});
+  } 
+  
+    addMeal(newMeal) {
+      const newMeals = this.state.foods.slice();
+      newMeal.id = this.state.foods.length + 1;
+      newMeals.push(newMeal);
+      this.setState({ foods: newMeals,
+        totalCalories: Number(this.state.totalCalories) + Number(newMeal.calories)
+    });
+  }
   
     render() {
       return (
         <div>
           <h1>Meal Tracker</h1>
-          <IssueFilter />
+          <MealSummary totalCalories = {this.state.totalCalories} />
           <hr />
-          <IssueTable issues={this.state.issues} />
+          <MealTable foods={this.state.foods} />
           <hr />
-          <IssueAdd createIssue={this.createIssue} />
+          <AddMeal createFood={this.addMeal} />
         </div>
       );
     }
   }
   
   // This renders the JSX component inside the content node:
-  ReactDOM.render(<IssueList />, contentNode);
+  ReactDOM.render(<MealList />, contentNode);
