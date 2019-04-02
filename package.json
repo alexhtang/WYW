@@ -23,15 +23,8 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "mongodb": "^3.2.2",
-<<<<<<< HEAD
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "uniqid": "^5.0.3",
-    "uniqueid": "^1.0.0"
-=======
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
->>>>>>> 90dd82a88c21879f5f276f76138b9f3beb144892
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
