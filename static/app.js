@@ -10,118 +10,113 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var contentNode = document.getElementById('contents');
 
-var bodystats = [{
-  height: "0",
-  weight: "0",
-  age: "0",
-  gender: "N/A"
-}];
+var BodyRow = function BodyRow(props) {
+  return React.createElement(
+    "tr",
+    null,
+    React.createElement(
+      "td",
+      null,
+      props.userData.height
+    ),
+    React.createElement(
+      "td",
+      null,
+      props.userData.weight
+    ),
+    React.createElement(
+      "td",
+      null,
+      props.userData.age
+    ),
+    React.createElement(
+      "td",
+      null,
+      props.userData.gender
+    )
+  );
+};
 
-var BodyStats = function (_React$Component) {
-  _inherits(BodyStats, _React$Component);
-
-  function BodyStats() {
-    _classCallCheck(this, BodyStats);
-
-    return _possibleConstructorReturn(this, (BodyStats.__proto__ || Object.getPrototypeOf(BodyStats)).apply(this, arguments));
-  }
-
-  _createClass(BodyStats, [{
-    key: "render",
-    value: function render() {
-      var borderedStyle = { border: "1px solid black", padding: 6 };
-      var bodyData = this.props.bodystats.map(function (userData) {
-        return React.createElement(BodyRow, { key: userData.height, userData: userData });
-      });
-      return React.createElement(
-        "table",
-        { style: { borderCollapse: "collapse" } },
-        React.createElement(
-          "thead",
-          null,
-          React.createElement(
-            "tr",
-            null,
-            React.createElement(
-              "th",
-              { style: borderedStyle },
-              "Height"
-            ),
-            React.createElement(
-              "th",
-              { style: borderedStyle },
-              "Weight"
-            ),
-            React.createElement(
-              "th",
-              { style: borderedStyle },
-              "Age"
-            ),
-            React.createElement(
-              "th",
-              { style: borderedStyle },
-              "Biological Gender"
-            )
-          )
-        ),
-        React.createElement(
-          "tbody",
-          null,
-          bodyData
-        )
-      );
-    }
-  }]);
-
-  return BodyStats;
-}(React.Component);
-
-var BodyRow = function (_React$Component2) {
-  _inherits(BodyRow, _React$Component2);
-
-  function BodyRow() {
-    _classCallCheck(this, BodyRow);
-
-    return _possibleConstructorReturn(this, (BodyRow.__proto__ || Object.getPrototypeOf(BodyRow)).apply(this, arguments));
-  }
-
-  _createClass(BodyRow, [{
-    key: "render",
-    value: function render() {
-      var borderedStyle = { border: "1px solid black", padding: 4 };
-      var userData = this.props.userData;
-      return React.createElement(
+function BodyStats(props) {
+  var bodyData = props.bodystats.map(function (userData, index) {
+    return React.createElement(BodyRow, { key: index, userData: userData });
+  });
+  return React.createElement(
+    "table",
+    { className: "bordered-table" },
+    React.createElement(
+      "thead",
+      null,
+      React.createElement(
         "tr",
         null,
         React.createElement(
-          "td",
-          { style: borderedStyle },
-          userData.height
+          "th",
+          null,
+          "Height"
         ),
         React.createElement(
-          "td",
-          { style: borderedStyle },
-          userData.weight
+          "th",
+          null,
+          "Weight"
         ),
         React.createElement(
-          "td",
-          { style: borderedStyle },
-          userData.age
+          "th",
+          null,
+          "Age"
         ),
         React.createElement(
-          "td",
-          { style: borderedStyle },
-          userData.gender
+          "th",
+          null,
+          "Gender"
         )
-      );
-    }
-  }]);
+      )
+    ),
+    React.createElement(
+      "tbody",
+      null,
+      bodyData
+    )
+  );
+}
 
-  return BodyRow;
-}(React.Component);
+// class BodyStats extends React.Component {
+//     render() {
+//         const borderedStyle = {border: "1px solid black", padding: 6};
+//         const bodyData = this.props.bodystats.map(userData => (<BodyRow key={userData.id} userData={userData} />));
+//         return (
+//           <table style={{borderCollapse: "collapse"}}>
+//             <thead>
+//               <tr>
+//                 <th style={borderedStyle}>Height</th>
+//                 <th style={borderedStyle}>Weight</th>
+//                 <th style={borderedStyle}>Age</th>
+//                 <th style={borderedStyle}>Biological Gender</th>
+//               </tr>
+//             </thead>
+//             <tbody>{bodyData}</tbody>
+//           </table>
+//         )
+//       }
+// }
 
-var NutritionStats = function (_React$Component3) {
-  _inherits(NutritionStats, _React$Component3);
+// class BodyRow extends React.Component {
+//     render() {
+//       const borderedStyle = {border: "1px solid black", padding: 4};
+//       const userData = this.props.userData;
+//       return (
+//         <tr>
+//             <td style={borderedStyle}>{userData.height}</td>
+//             <td style={borderedStyle}>{userData.weight}</td>
+//             <td style={borderedStyle}>{userData.age}</td>
+//             <td style={borderedStyle}>{userData.gender}</td>
+//         </tr>
+//       )
+//     }
+//   }
+
+var NutritionStats = function (_React$Component) {
+  _inherits(NutritionStats, _React$Component);
 
   function NutritionStats() {
     _classCallCheck(this, NutritionStats);
@@ -143,16 +138,16 @@ var NutritionStats = function (_React$Component3) {
   return NutritionStats;
 }(React.Component);
 
-var AddBodyInfo = function (_React$Component4) {
-  _inherits(AddBodyInfo, _React$Component4);
+var AddBodyInfo = function (_React$Component2) {
+  _inherits(AddBodyInfo, _React$Component2);
 
   function AddBodyInfo() {
     _classCallCheck(this, AddBodyInfo);
 
-    var _this4 = _possibleConstructorReturn(this, (AddBodyInfo.__proto__ || Object.getPrototypeOf(AddBodyInfo)).call(this));
+    var _this2 = _possibleConstructorReturn(this, (AddBodyInfo.__proto__ || Object.getPrototypeOf(AddBodyInfo)).call(this));
 
-    _this4.handleSubmit = _this4.handleSubmit.bind(_this4);
-    return _this4;
+    _this2.handleSubmit = _this2.handleSubmit.bind(_this2);
+    return _this2;
   }
 
   _createClass(AddBodyInfo, [{
@@ -214,27 +209,75 @@ var AddBodyInfo = function (_React$Component4) {
   return AddBodyInfo;
 }(React.Component);
 
-var FitnessTracker = function (_React$Component5) {
-  _inherits(FitnessTracker, _React$Component5);
+var FitnessTracker = function (_React$Component3) {
+  _inherits(FitnessTracker, _React$Component3);
 
   function FitnessTracker() {
     _classCallCheck(this, FitnessTracker);
 
-    var _this5 = _possibleConstructorReturn(this, (FitnessTracker.__proto__ || Object.getPrototypeOf(FitnessTracker)).call(this));
+    var _this3 = _possibleConstructorReturn(this, (FitnessTracker.__proto__ || Object.getPrototypeOf(FitnessTracker)).call(this));
 
-    _this5.state = { bodystats: bodystats };
+    _this3.state = { bodystats: [] };
 
-    _this5.update = _this5.update.bind(_this5);
-    return _this5;
+    _this3.update = _this3.update.bind(_this3);
+    return _this3;
   }
 
   _createClass(FitnessTracker, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.loadData();
+    }
+  }, {
+    key: "loadData",
+    value: function loadData() {
+      var _this4 = this;
+
+      fetch('/api/data').then(function (response) {
+        if (response.ok) {
+          response.json().then(function (data) {
+            console.log("Hi");
+
+            _this4.setState({ bodystats: data.records });
+          });
+        } else {
+          response.json().then(function (error) {
+            alert("Failed to fetch bodyStat:" + error.message);
+          });
+        }
+      }).catch(function (err) {
+        alert("Error in fetching data from server:", err);
+      });
+    }
+  }, {
     key: "update",
     value: function update(userInput) {
+      var _this5 = this;
 
-      bodystats[0] = userInput;
-      this.setState({ bodystats: bodystats });
+      fetch('/api/data', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userInput)
+      }).then(function (res) {
+        if (res.ok) {
+          res.json().then(function (updatedStat) {
+            _this5.state.bodystats[0] = updatedStat;
+            _this5.setState({ bodystats: _this5.state.bodystats });
+          });
+        } else {
+          res.json().then(function (error) {
+            alert('Failed to add update: ' + error.message);
+          });
+        }
+      });
     }
+
+    // update(userInput) {
+
+    //   bodystats[0] = (userInput);
+    //   this.setState({ bodystats: bodystats });
+    // }
+
   }, {
     key: "render",
     value: function render() {
