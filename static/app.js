@@ -80,41 +80,6 @@ function BodyStats(props) {
   );
 }
 
-// class BodyStats extends React.Component {
-//     render() {
-//         const borderedStyle = {border: "1px solid black", padding: 6};
-//         const bodyData = this.props.bodystats.map(userData => (<BodyRow key={userData.id} userData={userData} />));
-//         return (
-//           <table style={{borderCollapse: "collapse"}}>
-//             <thead>
-//               <tr>
-//                 <th style={borderedStyle}>Height</th>
-//                 <th style={borderedStyle}>Weight</th>
-//                 <th style={borderedStyle}>Age</th>
-//                 <th style={borderedStyle}>Biological Gender</th>
-//               </tr>
-//             </thead>
-//             <tbody>{bodyData}</tbody>
-//           </table>
-//         )
-//       }
-// }
-
-// class BodyRow extends React.Component {
-//     render() {
-//       const borderedStyle = {border: "1px solid black", padding: 4};
-//       const userData = this.props.userData;
-//       return (
-//         <tr>
-//             <td style={borderedStyle}>{userData.height}</td>
-//             <td style={borderedStyle}>{userData.weight}</td>
-//             <td style={borderedStyle}>{userData.age}</td>
-//             <td style={borderedStyle}>{userData.gender}</td>
-//         </tr>
-//       )
-//     }
-//   }
-
 var NutritionStats = function (_React$Component) {
   _inherits(NutritionStats, _React$Component);
 
@@ -228,6 +193,9 @@ var FitnessTracker = function (_React$Component3) {
     value: function componentDidMount() {
       this.loadData();
     }
+
+    //Grabs data from server
+
   }, {
     key: "loadData",
     value: function loadData() {
@@ -235,13 +203,14 @@ var FitnessTracker = function (_React$Component3) {
 
       fetch('/api/data').then(function (response) {
         if (response.ok) {
+          //Returns whether there was a successful response
           response.json().then(function (data) {
-            console.log("Hi");
-
-            _this4.setState({ bodystats: data.records });
+            //Parses the body of the response as a JSON
+            _this4.setState({ bodystats: data.records }); //Adds the saved data to the state on the load
           });
         } else {
           response.json().then(function (error) {
+            //If the response failed, returns an error
             alert("Failed to fetch bodyStat:" + error.message);
           });
         }
@@ -249,6 +218,9 @@ var FitnessTracker = function (_React$Component3) {
         alert("Error in fetching data from server:", err);
       });
     }
+
+    //Updates User Body Stats
+
   }, {
     key: "update",
     value: function update(userInput) {
@@ -272,8 +244,8 @@ var FitnessTracker = function (_React$Component3) {
       });
     }
 
+    //No longer necessary after fetch
     // update(userInput) {
-
     //   bodystats[0] = (userInput);
     //   this.setState({ bodystats: bodystats });
     // }
