@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "babel src --presets react,es2015 --out-dir static --watch",
-    "start": "nodemon -w server.js server.js"
+    "start": "nodemon -w server.js server.js",
+    "init-db": "mongo scripts/init.mongo.js"
   },
   "repository": {
     "type": "git",
