@@ -1,23 +1,4 @@
-const foods = [
-    {
-      id: 1,
-      foodName: "Omelette",
-      mealType: "Breakfast",
-      numberOfServings: 1,
-      calories: 350,
-      fat: 35,
-      carbohydrates: 12
-    },
-    {
-        id: 2,
-        foodName: "Grilled Chicken",
-        mealType: "Lunch",
-        numberOfServings: 2,
-        calories: 160,
-        fat: 5,
-        carbohydrates: 0
-      }
-  ];
+
   
   var contentNode = document.getElementById("mealcontent");
   
@@ -136,24 +117,72 @@ const foods = [
   
     loadData() {
   
-        this.setState({
+      fetch('/api/meals').then(response => {
+        if (response.ok) {
+          response.json().then(data => {
+            data.records.forEach(meal => {
+              meal.created = new Date(meal.created);
+              if (meal.completionDate)
+                meal.completionDate = new Date(meal.completionDate);
+            });
+            this.setState({ foods: data.records });
+          });
+        } else {
+          response.json().then(error => {
+            alert("Failed to fetch issues:" + error.message)
+          });
+        }
+      }).catch(err => {
+        alert("Error in fetching data from server:", err);
+      });
+   
+}
+
+/*
+     this.setState({
           foods: foods,
         });
         this.calculateCalories();
-}
+*/
   calculateCalories(){
     const cal = foods.reduce((total, amount) => total.calories + amount.calories); 
     this.setState({totalCalories: cal});
   } 
   
     addMeal(newMeal) {
-      const newMeals = this.state.foods.slice();
+      fetch('/api/meals', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newMeal),
+      })
+        .then(res => {
+          if (res.ok) {
+            res.json()
+              .then(updatedMeal => {
+                const newMeals = this.state.foods.concat(updatedMeal);
+                this.setState({ foods: newMeals });
+                this.setState({ totalCalories: Number(this.state.totalCalories) + Number(newMeal.calories)});
+              });
+          }
+          else {
+            res.json()
+              .then(error => {
+                alert('Failed to add issue: ' + error.message);
+              });
+          }
+        });
+      
+      
+  }
+
+  /*
+const newMeals = this.state.foods.slice();
       newMeal.id = this.state.foods.length + 1;
       newMeals.push(newMeal);
       this.setState({ foods: newMeals,
         totalCalories: Number(this.state.totalCalories) + Number(newMeal.calories)
     });
-  }
+  */
   
     render() {
       return (

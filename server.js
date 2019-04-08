@@ -8,7 +8,44 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.static('static'));
 
+app.get('/api/meals', (req, res) => {
+  db.collection('meals').find().toArray().then(meals => {
+    const metadata = { total_count: meals.length };
+    res.json({ records: meals })
+  }).catch(error => {
+    console.log(error);
+    res.status(500).json({ message: `Internal Server Error: ${error}` });
+  });
+});
 
+
+app.post('/api/meals', (req, res) => {
+  const newMeal = req.body;
+
+  db.collection('meals').insertOne(newMeal).then(result =>
+    // This may be a little obscure, but we need to lookup the newly created
+    // issue to get the issue. The "result", is simply the return value from
+    // MongoDB that gives us the ID of the data that was inserted.
+    db.collection('meals').find({ _id: result.insertedId }).limit(1).next()
+  ).then(newMeal => {
+    res.json(newMeal);
+  }).catch(error => {
+    console.log(error);
+    res.status(500).json({ message: `Internal Server Error: ${error}` });
+  });
+});
+/*app.post('/api/meals', (req, res) => {
+  const newMeal = req.body;
+  
+  db.collection('meals').insertOne(newMeal).then(result =>
+    db.collection('meals').find({ _id: result.insertedId }).limit(1).next()
+  ).then(newMeal => {
+    res.json(newMeal);
+  }).catch(error => {
+    console.log(error);
+    res.status(500).json({ message: `Internal Server Error: ${error}` });
+  });
+});*/
   
 
   app.get('/api/data', (req, res) => {

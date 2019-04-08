@@ -8,24 +8,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var foods = [{
-  id: 1,
-  foodName: "Omelette",
-  mealType: "Breakfast",
-  numberOfServings: 1,
-  calories: 350,
-  fat: 35,
-  carbohydrates: 12
-}, {
-  id: 2,
-  foodName: "Grilled Chicken",
-  mealType: "Lunch",
-  numberOfServings: 2,
-  calories: 160,
-  fat: 5,
-  carbohydrates: 0
-}];
-
 var contentNode = document.getElementById("mealcontent");
 
 var MealSummary = function (_React$Component) {
@@ -274,12 +256,34 @@ var MealList = function (_React$Component3) {
   }, {
     key: "loadData",
     value: function loadData() {
+      var _this4 = this;
 
-      this.setState({
-        foods: foods
+      fetch('/api/meals').then(function (response) {
+        if (response.ok) {
+          response.json().then(function (data) {
+            data.records.forEach(function (meal) {
+              meal.created = new Date(meal.created);
+              if (meal.completionDate) meal.completionDate = new Date(meal.completionDate);
+            });
+            _this4.setState({ foods: data.records });
+          });
+        } else {
+          response.json().then(function (error) {
+            alert("Failed to fetch issues:" + error.message);
+          });
+        }
+      }).catch(function (err) {
+        alert("Error in fetching data from server:", err);
       });
-      this.calculateCalories();
     }
+
+    /*
+         this.setState({
+              foods: foods,
+            });
+            this.calculateCalories();
+    */
+
   }, {
     key: "calculateCalories",
     value: function calculateCalories() {
@@ -291,13 +295,36 @@ var MealList = function (_React$Component3) {
   }, {
     key: "addMeal",
     value: function addMeal(newMeal) {
-      var newMeals = this.state.foods.slice();
-      newMeal.id = this.state.foods.length + 1;
-      newMeals.push(newMeal);
-      this.setState({ foods: newMeals,
-        totalCalories: Number(this.state.totalCalories) + Number(newMeal.calories)
+      var _this5 = this;
+
+      fetch('/api/meals', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newMeal)
+      }).then(function (res) {
+        if (res.ok) {
+          res.json().then(function (updatedMeal) {
+            var newMeals = _this5.state.foods.concat(updatedMeal);
+            _this5.setState({ foods: newMeals });
+            _this5.setState({ totalCalories: Number(_this5.state.totalCalories) + Number(newMeal.calories) });
+          });
+        } else {
+          res.json().then(function (error) {
+            alert('Failed to add issue: ' + error.message);
+          });
+        }
       });
     }
+
+    /*
+    const newMeals = this.state.foods.slice();
+        newMeal.id = this.state.foods.length + 1;
+        newMeals.push(newMeal);
+        this.setState({ foods: newMeals,
+          totalCalories: Number(this.state.totalCalories) + Number(newMeal.calories)
+      });
+    */
+
   }, {
     key: "render",
     value: function render() {
