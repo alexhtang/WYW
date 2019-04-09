@@ -32,6 +32,11 @@ var BodyRow = function BodyRow(props) {
     React.createElement(
       'td',
       null,
+      props.userData.activity
+    ),
+    React.createElement(
+      'td',
+      null,
       props.userData.gender
     )
   );
@@ -68,6 +73,11 @@ function BodyStats(props) {
         React.createElement(
           'th',
           null,
+          'Activity'
+        ),
+        React.createElement(
+          'th',
+          null,
           'Gender'
         )
       )
@@ -94,8 +104,17 @@ var NutritionStats = function (_React$Component) {
     value: function render() {
       return React.createElement(
         'div',
-        null,
-        'This is a placeholder for ingested calories and meals.'
+        { style: { fontFamily: 'courier', fontStyle: 'bold', fontSize: '25px', textAlign: 'center' } },
+        React.createElement(
+          'h1',
+          null,
+          'Suggested Caloric Intake: '
+        ),
+        React.createElement(
+          'h1',
+          { style: { color: 'red' } },
+          this.props.calories
+        )
       );
     }
   }]);
@@ -124,10 +143,11 @@ var AddBodyInfo = function (_React$Component2) {
         height: form.height.value,
         weight: form.weight.value,
         age: form.age.value,
+        activity: form.activity.value,
         gender: form.gender.value
       });
       // clear the form for the next input
-      form.height.value = "";form.weight.value = "";form.age.value = "";form.gender.value = "";
+      form.height.value = "";form.weight.value = "";form.age.value = "";form.activity.value = "";form.gender.value = "";
     }
   }, {
     key: 'render',
@@ -138,10 +158,34 @@ var AddBodyInfo = function (_React$Component2) {
         React.createElement(
           'form',
           { style: { fontFamily: 'courier' }, name: 'updateBodyStat', onSubmit: this.handleSubmit },
-          React.createElement('input', { type: 'text', name: 'height', placeholder: 'Height (ft\'inches)' }),
-          React.createElement('input', { type: 'text', name: 'weight', placeholder: 'Weight (lbs)' }),
-          React.createElement('input', { type: 'text', name: 'age', placeholder: 'Age' }),
+          React.createElement('input', { type: 'text', name: 'height', maxLength: '4', placeholder: 'Height (ft\'inches)' }),
+          React.createElement('input', { type: 'text', name: 'weight', maxLength: '3', placeholder: 'Weight (lbs)' }),
+          React.createElement('input', { type: 'text', name: 'age', maxLength: '2', placeholder: 'Age' }),
           React.createElement('hr', null),
+          React.createElement(
+            'label',
+            { name: 'activity' },
+            'Activity Level:'
+          ),
+          React.createElement(
+            'select',
+            { style: { marginRight: '20px' }, name: 'activity' },
+            React.createElement(
+              'option',
+              null,
+              'Light'
+            ),
+            React.createElement(
+              'option',
+              null,
+              'Moderate'
+            ),
+            React.createElement(
+              'option',
+              null,
+              'Vigorous'
+            )
+          ),
           React.createElement(
             'label',
             { name: 'gender' },
@@ -174,6 +218,38 @@ var AddBodyInfo = function (_React$Component2) {
   return AddBodyInfo;
 }(React.Component);
 
+function calculate(h, w, age, g, activity) {
+  var suggested = 0;
+  w = parseInt(w);
+  age = parseInt(age);
+  var inches = parseInt(h.charAt(0)) * 12 + parseInt(h.substring(2, h.length));
+  if (g === 'Male') {
+    suggested = 66 + 6.2 * w + 12.7 * inches - 6.76 * age;
+    if (activity === 'Light') {
+      suggested = suggested * 1.53;
+    }
+    if (activity === 'Moderate') {
+      suggested = suggested * 1.76;
+    }
+    if (activity === 'Vigorous') {
+      suggested = suggested * 2.25;
+    }
+  } else {
+    suggested = 655.1 + 4.35 * w + 4.7 * inches - 4.7 * age;
+    if (activity === 'Light') {
+      suggested = suggested * 1.53;
+    }
+    if (activity === 'Moderate') {
+      suggested = suggested * 1.76;
+    }
+    if (activity === 'Vigorous') {
+      suggested = suggested * 2.25;
+    }
+  }
+
+  return Math.round(suggested);
+}
+
 var FitnessTracker = function (_React$Component3) {
   _inherits(FitnessTracker, _React$Component3);
 
@@ -182,9 +258,10 @@ var FitnessTracker = function (_React$Component3) {
 
     var _this3 = _possibleConstructorReturn(this, (FitnessTracker.__proto__ || Object.getPrototypeOf(FitnessTracker)).call(this));
 
-    _this3.state = { bodystats: [] };
+    _this3.state = { bodystats: [], calories: 0 };
 
     _this3.update = _this3.update.bind(_this3);
+    //this.calculate = this.calculate.bind(this);
     return _this3;
   }
 
@@ -207,6 +284,8 @@ var FitnessTracker = function (_React$Component3) {
           response.json().then(function (data) {
             //Parses the body of the response as a JSON
             _this4.setState({ bodystats: data.records }); //Adds the saved data to the state on the load
+            _this4.state.calories = calculate(_this4.state.bodystats[0].height, _this4.state.bodystats[0].weight, _this4.state.bodystats[0].age, _this4.state.bodystats[0].activity);
+            _this4.setState({ calories: _this4.state.calories });
           });
         } else {
           response.json().then(function (error) {
@@ -235,6 +314,8 @@ var FitnessTracker = function (_React$Component3) {
           res.json().then(function (updatedStat) {
             _this5.state.bodystats[0] = updatedStat;
             _this5.setState({ bodystats: _this5.state.bodystats });
+            _this5.state.calories = calculate(_this5.state.bodystats[0].height, _this5.state.bodystats[0].weight, _this5.state.bodystats[0].age, _this5.state.bodystats[0].gender, _this5.state.bodystats[0].activity);
+            _this5.setState({ calories: _this5.state.calories });
           });
         } else {
           res.json().then(function (error) {
@@ -259,7 +340,7 @@ var FitnessTracker = function (_React$Component3) {
         React.createElement('hr', null),
         React.createElement(AddBodyInfo, { update: this.update }),
         React.createElement('hr', null),
-        React.createElement(NutritionStats, null)
+        React.createElement(NutritionStats, { calories: this.state.calories })
       );
     }
   }]);

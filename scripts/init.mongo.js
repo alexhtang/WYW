@@ -5,8 +5,9 @@ db.userBodyStats.remove({});
 db.userBodyStats.insert([
     {
       height: "0",
-      weight: "0",
-      age: "0",
+      weight: 0,
+      age: 0,
+      activity: "N/A",
       gender: "N/A",
     },]);
 

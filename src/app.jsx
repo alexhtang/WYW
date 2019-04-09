@@ -5,6 +5,7 @@ const BodyRow = (props) => (
     <td>{props.userData.height}</td>
     <td>{props.userData.weight}</td>
     <td>{props.userData.age}</td>
+    <td>{props.userData.activity}</td>
     <td>{props.userData.gender}</td>
   </tr>
 );
@@ -20,6 +21,7 @@ function BodyStats(props) {
           <th>Height</th>
           <th>Weight</th>
           <th>Age</th>
+          <th>Activity</th>
           <th>Gender</th>
         </tr>
       </thead>
@@ -29,10 +31,14 @@ function BodyStats(props) {
 }
 
 class NutritionStats extends React.Component {
+
   render() {
     return (
-      <div>This is a placeholder for ingested calories and meals.</div>
-    )
+      <div style = {{fontFamily: 'courier', fontStyle: 'bold', fontSize: '25px', textAlign: 'center'}}>
+        <h1 >Suggested Caloric Intake: </h1>
+        <h1 style= {{color: 'red'}}>{this.props.calories}</h1>
+      </div>
+      )
   }
 }
 
@@ -46,22 +52,29 @@ class AddBodyInfo extends React.Component {
         e.preventDefault();
         const form = document.forms.updateBodyStat;
         this.props.update({
-          height: form.height.value,
+          height: (form.height.value),
           weight: form.weight.value,
           age: form.age.value,
+          activity: form.activity.value,
           gender: form.gender.value
         });
         // clear the form for the next input
-        form.height.value = ""; form.weight.value = ""; form.age.value = ""; form.gender.value = "";
+        form.height.value = ""; form.weight.value = ""; form.age.value = ""; form.activity.value= ""; form.gender.value = "";
       }
     
       render() {
         return (
           <div>
             <form style={{fontFamily: 'courier'}} name="updateBodyStat" onSubmit={this.handleSubmit}>
-              <input type="text" name="height" placeholder="Height (ft'inches)" />
-              <input type="text" name="weight" placeholder="Weight (lbs)" />
-              <input type="text" name="age" placeholder="Age" /><hr></hr>
+              <input type="text" name="height" maxLength = "4" placeholder="Height (ft'inches)" />
+              <input type="text" name="weight" maxLength = "3" placeholder="Weight (lbs)" />
+              <input type="text" name="age" maxLength = "2" placeholder="Age" /><hr></hr>
+              <label name="activity">Activity Level:</label>
+              <select style={{marginRight:'20px'}} name = "activity">
+                <option>Light</option>
+                <option>Moderate</option>
+                <option>Vigorous</option>
+              </select>
               <label name="gender">Biological Gender:</label>
               <select name = "gender">
                 <option>Male</option>
@@ -74,12 +87,46 @@ class AddBodyInfo extends React.Component {
       }
 }
 
+function calculate(h, w, age, g, activity){
+  let suggested = 0;
+  w = parseInt(w);
+  age = parseInt(age);
+  const inches = parseInt(h.charAt(0)) * 12 + parseInt(h.substring(2, h.length));
+  if(g === 'Male'){
+    suggested = 66 + ( 6.2 * w ) + ( 12.7 * inches) - ( 6.76 * age);
+    if(activity === 'Light'){
+      suggested = suggested*1.53;
+    }
+    if(activity === 'Moderate'){
+      suggested = suggested*1.76;
+    }
+    if(activity === 'Vigorous'){
+      suggested = suggested*2.25;
+    }
+  }
+  else{
+    suggested = 655.1 + ( 4.35 * w) + ( 4.7 * inches) - ( 4.7 * age);
+    if(activity === 'Light'){
+      suggested = suggested*1.53;
+    }
+    if(activity === 'Moderate'){
+      suggested = suggested*1.76;
+    }
+    if(activity === 'Vigorous'){
+      suggested = suggested*2.25;
+    }
+  }
+  
+  return Math.round(suggested);
+}
+
 class FitnessTracker extends React.Component {
   constructor() {
     super();
-    this.state = { bodystats: [] };
+    this.state = { bodystats: [], calories: 0 };
 
     this.update = this.update.bind(this);
+    //this.calculate = this.calculate.bind(this);
   }
 
   componentDidMount() {
@@ -92,6 +139,8 @@ class FitnessTracker extends React.Component {
       if (response.ok) {                        //Returns whether there was a successful response
         response.json().then(data => {          //Parses the body of the response as a JSON
           this.setState({ bodystats: data.records });     //Adds the saved data to the state on the load
+          this.state.calories = calculate(this.state.bodystats[0].height, this.state.bodystats[0].weight, this.state.bodystats[0].age, this.state.bodystats[0].activity);
+          this.setState({calories: this.state.calories});
         });
       } else {
         response.json().then(error => {         //If the response failed, returns an error
@@ -102,6 +151,8 @@ class FitnessTracker extends React.Component {
       alert("Error in fetching data from server:", err);
     });
   }
+  
+  
 
   //Updates User Body Stats
   update(userInput) {
@@ -116,6 +167,8 @@ class FitnessTracker extends React.Component {
             .then(updatedStat => {
               this.state.bodystats[0] = updatedStat
               this.setState({ bodystats: this.state.bodystats });
+              this.state.calories = calculate(this.state.bodystats[0].height, this.state.bodystats[0].weight, this.state.bodystats[0].age, this.state.bodystats[0].gender, this.state.bodystats[0].activity);
+              this.setState({calories: this.state.calories});
             });
         }
         else {
@@ -127,6 +180,7 @@ class FitnessTracker extends React.Component {
       });
   }
   
+
   render() {
     
     return (
@@ -136,7 +190,7 @@ class FitnessTracker extends React.Component {
         <hr />
         <AddBodyInfo update = {this.update} />
         <hr />
-        <NutritionStats />
+        <NutritionStats calories = {this.state.calories}/>
       </div>
     );
   }

@@ -138,7 +138,8 @@ var ReviewAdd = function (_React$Component2) {
           { name: "issueAdd", onSubmit: this.handleSubmit },
           React.createElement("input", { type: "text", name: "name", placeholder: "Name" }),
           React.createElement("input", { type: "text", name: "rating", placeholder: "Rating" }),
-          React.createElement("input", { type: "text", name: "comment", placeholder: "Comment" }),
+          React.createElement("hr", null),
+          React.createElement("textarea", { rows: 5, cols: 50, name: "comment", "margin-bottom": "0", placeholder: "Comment" }),
           React.createElement(
             "button",
             null,
