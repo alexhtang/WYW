@@ -1,55 +1,39 @@
-const issues = [
-  {
-    id: 1,
-    name: "Brian",
-    rating: "5",
-    comment: "Amazing!"
-  },
-  {
-    id: 2,
-    name: "Alex",
-    rating: "5",
-    comment: "Finally I can get my six-pack!"
-    }
-];
 
 var contentNode = document.getElementById("reviewcontent");
 
-class IssueFilter extends React.Component {
+class ReviewMessage extends React.Component {
   render() {
     return <div>Let us know how you feel about Watch Your Weight!</div>;
   }
 }
 
-const IssueRow = (props) => (
+const ReviewRow = (props) => (
   <tr>
-    <td>{props.issue.id}</td>
     <td>{props.issue.name}</td>
     <td>{props.issue.rating}</td>
     <td>{props.issue.comment}</td>
   </tr>
 );
 
-function IssueTable(props) {
-  const issueRows = props.issues.map(issue => (
-    <IssueRow key={issue.id} issue={issue} />
+function ReviewTable(props) {
+  const reviewRows = props.reviewInfo.map(issue => (
+    <ReviewRow key={issue.id} issue={issue} />
   ));
   return (
     <table className="bordered-table">
       <thead>
         <tr>
-          <th>Id</th>
           <th>Name</th>
           <th>Rating</th>
           <th>Comment</th>
         </tr>
       </thead>
-      <tbody>{issueRows}</tbody>
+      <tbody>{reviewRows}</tbody>
     </table>
   );
 }
 
-class IssueAdd extends React.Component {
+class ReviewAdd extends React.Component {
   constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -59,7 +43,7 @@ class IssueAdd extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let form = document.forms.issueAdd;
-    this.props.createIssue({
+    this.props.createReview({
       name: form.name.value,
       rating: form.rating.value,
       comment: form.comment.value
@@ -72,7 +56,7 @@ class IssueAdd extends React.Component {
   }
 
   handleSelectChange(e){
-      this.setState({mealType: e.target.value});
+      this.setState({reviewType: e.target.value});
     }
 
   render() {
@@ -89,12 +73,12 @@ class IssueAdd extends React.Component {
   }
 }
 
-class IssueList extends React.Component {
+class ReviewList extends React.Component {
   constructor() {
     super();
-    this.state = { issues: [] };
+    this.state = { reviewInfo: [] };
 
-    this.createIssue = this.createIssue.bind(this);
+    this.add = this.add.bind(this);
   }
 
   componentDidMount() {
@@ -102,33 +86,71 @@ class IssueList extends React.Component {
   }
 
   loadData() {
-    setTimeout(() => {
-      this.setState({
-        issues: issues
-      });
-    }, 500);
+    // setTimeout(() => {
+    //   this.setState({
+    //     issues: issues
+    //   });
+    // }, 500);
+    fetch('/api/reviews').then(response => {
+      if (response.ok) {      
+        response.json().then(data => { 
+          this.setState({ reviewInfo: data.records }); 
+        });
+      } else {
+        response.json().then(error => {
+          alert("Failed to fetch issues:" + error.message)
+        });
+      }
+    }).catch(err => {
+      alert("Error in fetching data from server:", err);
+    });
   }
 
-  createIssue(newIssue) {
-    const newIssues = this.state.issues.slice();
-    newIssue.id = this.state.issues.length + 1;
-    newIssues.push(newIssue);
-    this.setState({ issues: newIssues });
-  }
+  add(newReview) {
+    fetch('/api/reviews', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newReview),
+    })
+      .then(res => {
+        if (res.ok) {
+          res.json()
+            .then(fixedReview => {
+              const newReviews = this.state.reviewInfo.concat(fixedReview);
+              newReviews.id = 1;
+              this.setState({ reviewInfo: newReviews });
+              //this.setState({ totalCalories: Number(this.state.totalCalories) + Number(newReview.calories)});
+            });
+        }
+        else {
+          res.json()
+            .then(error => {
+              alert('Failed to add issue: ' + error.message);
+            });
+        }
+      });
+    }
+
+  // createIssue(newIssue) {
+  //   const newIssues = this.state.issues.slice();
+  //   newIssue.id = this.state.issues.length + 1;
+  //   newIssues.push(newIssue);
+  //   this.setState({ issues: newIssues });
+  // }
 
   render() {
     return (
       <div>
         <h1>Review</h1>
-        <IssueFilter />
+        <ReviewMessage />
         <hr />
-        <IssueTable issues={this.state.issues} />
+        <ReviewTable reviewInfo={this.state.reviewInfo} />
         <hr />
-        <IssueAdd createIssue={this.createIssue} />
+        <ReviewAdd createReview={this.add} />
       </div>
     );
   }
 }
 
 // This renders the JSX component inside the content node:
-ReactDOM.render(<IssueList />, contentNode);
+ReactDOM.render(<ReviewList />, contentNode);
