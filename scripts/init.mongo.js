@@ -33,3 +33,12 @@ db.meals.insert([
       }
   ]);
 
+db.reviews.remove({});
+  db.reviews.insert([
+    {
+      name: "Tim R",
+      rating: 5,
+      comment: "This has revolutionized my life!"
+    }
+  ]);
+
