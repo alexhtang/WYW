@@ -14,7 +14,7 @@ function BodyStats(props) {
     <BodyRow key={index} userData={userData} />
   ));
   return (
-    <table className="bordered-table" style={{fontFamily: 'courier'}}>
+    <table className="bordered-table" style={{fontFamily: 'courier', borderColor: 'white'}}>
       <thead>
         <tr>
           <th>Height</th>
@@ -57,13 +57,13 @@ class AddBodyInfo extends React.Component {
     
       render() {
         return (
-          <div className = "form-group">
+          <div>
             <form style={{fontFamily: 'courier'}} name="updateBodyStat" onSubmit={this.handleSubmit}>
               <input type="text" name="height" placeholder="Height (ft'inches)" />
               <input type="text" name="weight" placeholder="Weight (lbs)" />
               <input type="text" name="age" placeholder="Age" /><hr></hr>
-              <label for="gender">Biological Gender:</label>
-              <select class="form-control" name = "gender">
+              <label name="gender">Biological Gender:</label>
+              <select name = "gender">
                 <option>Male</option>
                 <option>Female</option>
               </select>
@@ -131,7 +131,7 @@ class FitnessTracker extends React.Component {
     
     return (
       <div>
-        <h1 style={{fontFamily: 'courier', textAlign: 'center'}}>Fitness Tracker</h1>
+        <h1 style={{fontStyle: 'bold', fontFamily: 'courier', textAlign: 'center'}}>Fitness Tracker</h1>
         <BodyStats bodystats = {this.state.bodystats} />
         <hr />
         <AddBodyInfo update = {this.update} />

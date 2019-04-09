@@ -43,7 +43,7 @@ function BodyStats(props) {
   });
   return React.createElement(
     'table',
-    { className: 'bordered-table', style: { fontFamily: 'courier' } },
+    { className: 'bordered-table', style: { fontFamily: 'courier', borderColor: 'white' } },
     React.createElement(
       'thead',
       null,
@@ -134,7 +134,7 @@ var AddBodyInfo = function (_React$Component2) {
     value: function render() {
       return React.createElement(
         'div',
-        { className: 'form-group' },
+        null,
         React.createElement(
           'form',
           { style: { fontFamily: 'courier' }, name: 'updateBodyStat', onSubmit: this.handleSubmit },
@@ -144,12 +144,12 @@ var AddBodyInfo = function (_React$Component2) {
           React.createElement('hr', null),
           React.createElement(
             'label',
-            { 'for': 'gender' },
+            { name: 'gender' },
             'Biological Gender:'
           ),
           React.createElement(
             'select',
-            { 'class': 'form-control', name: 'gender' },
+            { name: 'gender' },
             React.createElement(
               'option',
               null,
@@ -252,7 +252,7 @@ var FitnessTracker = function (_React$Component3) {
         null,
         React.createElement(
           'h1',
-          { style: { fontFamily: 'courier', textAlign: 'center' } },
+          { style: { fontStyle: 'bold', fontFamily: 'courier', textAlign: 'center' } },
           'Fitness Tracker'
         ),
         React.createElement(BodyStats, { bodystats: this.state.bodystats }),
