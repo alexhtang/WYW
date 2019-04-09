@@ -65,7 +65,8 @@ class ReviewAdd extends React.Component {
         <form name="issueAdd" onSubmit={this.handleSubmit}>
           <input type="text" name="name" placeholder="Name" />
           <input type="text" name="rating" placeholder="Rating" />
-          <input type="text" name="comment" placeholder="Comment" />
+          <hr></hr>
+          <textarea rows={5} cols= {50} name="comment" margin-bottom="0" placeholder="Comment" />
           <button>Add</button>
         </form>
       </div>
