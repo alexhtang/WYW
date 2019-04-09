@@ -6,17 +6,19 @@
     render() {
       return (<div>
         <h4>Enter food name and information</h4>
-        <h4>Total Calories: {this.props.totalCalories}</h4>
         </div>
 
       );
     }
   }
   
+  /*
+        <h4>Total Calories: {this.props.totalCalories}</h4>
+
+  */
   
   const FoodTableRow = (props) => (
     <tr>
-      <td>{props.food.id}</td>
       <td>{props.food.foodName}</td>
       <td>{props.food.numberOfServings}</td>
       <td>{props.food.mealType}</td>
@@ -35,7 +37,6 @@
       <table className="bordered-table">
         <thead>
           <tr>
-            <th>Id</th>
             <th>Food Name</th>
             <th>Servings</th>
             <th>Meal Type</th>
@@ -66,7 +67,9 @@
         foodName: form.foodName.value,
         calories: form.calories.value,
         mealType: this.state.mealType,
-        servings: 0,
+        fat: form.fat.value,
+        carbohydrates: form.carbohydrates.value,
+        numberOfServings: form.numberOfServings.value,
       });
  
       // Clear the form for the next input.
@@ -84,6 +87,10 @@
           <form name="addMeal" onSubmit={this.handleSubmit}>
             <input type="text" name="foodName" placeholder="Food Name" />
             <input type="text" name="calories" placeholder="Calories" />
+            <input type="text" name="fat" placeholder="Fat" />
+            <input type="text" name="carbohydrates" placeholder="Carbohydrates"/>
+            <input type="number" name="numberOfServings" placeholder="Number of Servings"/>
+
             <select 
                                 defaultValue= 'Breakfast'
                                 value={this.state.mealType} 
@@ -108,7 +115,6 @@
       totalCalories: 0 };
     
       this.addMeal = this.addMeal.bind(this);
-      this.calculateCalories = this.calculateCalories.bind(this);
     }
   
     componentDidMount() {
@@ -126,6 +132,7 @@
                 meal.completionDate = new Date(meal.completionDate);
             });
             this.setState({ foods: data.records });
+            this.setState({totalCalories: 0});
           });
         } else {
           response.json().then(error => {
@@ -144,10 +151,7 @@
         });
         this.calculateCalories();
 */
-  calculateCalories(){
-    const cal = foods.reduce((total, amount) => total.calories + amount.calories); 
-    this.setState({totalCalories: cal});
-  } 
+
   
     addMeal(newMeal) {
       fetch('/api/meals', {
@@ -161,7 +165,7 @@
               .then(updatedMeal => {
                 const newMeals = this.state.foods.concat(updatedMeal);
                 this.setState({ foods: newMeals });
-                this.setState({ totalCalories: Number(this.state.totalCalories) + Number(newMeal.calories)});
+                  this.setState({totalCalories: newMeals.reduce((total, amount) => total.calories + amount.calories)});
               });
           }
           else {

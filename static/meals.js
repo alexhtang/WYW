@@ -29,12 +29,6 @@ var MealSummary = function (_React$Component) {
           "h4",
           null,
           "Enter food name and information"
-        ),
-        React.createElement(
-          "h4",
-          null,
-          "Total Calories: ",
-          this.props.totalCalories
         )
       );
     }
@@ -43,15 +37,14 @@ var MealSummary = function (_React$Component) {
   return MealSummary;
 }(React.Component);
 
+/*
+      <h4>Total Calories: {this.props.totalCalories}</h4>
+ */
+
 var FoodTableRow = function FoodTableRow(props) {
   return React.createElement(
     "tr",
     null,
-    React.createElement(
-      "td",
-      null,
-      props.food.id
-    ),
     React.createElement(
       "td",
       null,
@@ -98,11 +91,6 @@ function MealTable(props) {
       React.createElement(
         "tr",
         null,
-        React.createElement(
-          "th",
-          null,
-          "Id"
-        ),
         React.createElement(
           "th",
           null,
@@ -168,7 +156,9 @@ var AddMeal = function (_React$Component2) {
         foodName: form.foodName.value,
         calories: form.calories.value,
         mealType: this.state.mealType,
-        servings: 0
+        fat: form.fat.value,
+        carbohydrates: form.carbohydrates.value,
+        numberOfServings: form.numberOfServings.value
       });
 
       // Clear the form for the next input.
@@ -191,6 +181,9 @@ var AddMeal = function (_React$Component2) {
           { name: "addMeal", onSubmit: this.handleSubmit },
           React.createElement("input", { type: "text", name: "foodName", placeholder: "Food Name" }),
           React.createElement("input", { type: "text", name: "calories", placeholder: "Calories" }),
+          React.createElement("input", { type: "text", name: "fat", placeholder: "Fat" }),
+          React.createElement("input", { type: "text", name: "carbohydrates", placeholder: "Carbohydrates" }),
+          React.createElement("input", { type: "number", name: "numberOfServings", placeholder: "Number of Servings" }),
           React.createElement(
             "select",
             {
@@ -244,7 +237,6 @@ var MealList = function (_React$Component3) {
       totalCalories: 0 };
 
     _this3.addMeal = _this3.addMeal.bind(_this3);
-    _this3.calculateCalories = _this3.calculateCalories.bind(_this3);
     return _this3;
   }
 
@@ -266,6 +258,7 @@ var MealList = function (_React$Component3) {
               if (meal.completionDate) meal.completionDate = new Date(meal.completionDate);
             });
             _this4.setState({ foods: data.records });
+            _this4.setState({ totalCalories: 0 });
           });
         } else {
           response.json().then(function (error) {
@@ -285,14 +278,6 @@ var MealList = function (_React$Component3) {
     */
 
   }, {
-    key: "calculateCalories",
-    value: function calculateCalories() {
-      var cal = foods.reduce(function (total, amount) {
-        return total.calories + amount.calories;
-      });
-      this.setState({ totalCalories: cal });
-    }
-  }, {
     key: "addMeal",
     value: function addMeal(newMeal) {
       var _this5 = this;
@@ -306,7 +291,9 @@ var MealList = function (_React$Component3) {
           res.json().then(function (updatedMeal) {
             var newMeals = _this5.state.foods.concat(updatedMeal);
             _this5.setState({ foods: newMeals });
-            _this5.setState({ totalCalories: Number(_this5.state.totalCalories) + Number(newMeal.calories) });
+            _this5.setState({ totalCalories: newMeals.reduce(function (total, amount) {
+                return total.calories + amount.calories;
+              }) });
           });
         } else {
           res.json().then(function (error) {
