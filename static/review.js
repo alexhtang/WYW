@@ -8,30 +8,18 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var issues = [{
-  id: 1,
-  name: "Brian",
-  rating: "5",
-  comment: "Amazing!"
-}, {
-  id: 2,
-  name: "Alex",
-  rating: "5",
-  comment: "Finally I can get my six-pack!"
-}];
-
 var contentNode = document.getElementById("reviewcontent");
 
-var IssueFilter = function (_React$Component) {
-  _inherits(IssueFilter, _React$Component);
+var ReviewMessage = function (_React$Component) {
+  _inherits(ReviewMessage, _React$Component);
 
-  function IssueFilter() {
-    _classCallCheck(this, IssueFilter);
+  function ReviewMessage() {
+    _classCallCheck(this, ReviewMessage);
 
-    return _possibleConstructorReturn(this, (IssueFilter.__proto__ || Object.getPrototypeOf(IssueFilter)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ReviewMessage.__proto__ || Object.getPrototypeOf(ReviewMessage)).apply(this, arguments));
   }
 
-  _createClass(IssueFilter, [{
+  _createClass(ReviewMessage, [{
     key: "render",
     value: function render() {
       return React.createElement(
@@ -42,18 +30,13 @@ var IssueFilter = function (_React$Component) {
     }
   }]);
 
-  return IssueFilter;
+  return ReviewMessage;
 }(React.Component);
 
-var IssueRow = function IssueRow(props) {
+var ReviewRow = function ReviewRow(props) {
   return React.createElement(
     "tr",
     null,
-    React.createElement(
-      "td",
-      null,
-      props.issue.id
-    ),
     React.createElement(
       "td",
       null,
@@ -72,9 +55,9 @@ var IssueRow = function IssueRow(props) {
   );
 };
 
-function IssueTable(props) {
-  var issueRows = props.issues.map(function (issue) {
-    return React.createElement(IssueRow, { key: issue.id, issue: issue });
+function ReviewTable(props) {
+  var reviewRows = props.reviewInfo.map(function (issue) {
+    return React.createElement(ReviewRow, { key: issue.id, issue: issue });
   });
   return React.createElement(
     "table",
@@ -85,11 +68,6 @@ function IssueTable(props) {
       React.createElement(
         "tr",
         null,
-        React.createElement(
-          "th",
-          null,
-          "Id"
-        ),
         React.createElement(
           "th",
           null,
@@ -110,30 +88,30 @@ function IssueTable(props) {
     React.createElement(
       "tbody",
       null,
-      issueRows
+      reviewRows
     )
   );
 }
 
-var IssueAdd = function (_React$Component2) {
-  _inherits(IssueAdd, _React$Component2);
+var ReviewAdd = function (_React$Component2) {
+  _inherits(ReviewAdd, _React$Component2);
 
-  function IssueAdd() {
-    _classCallCheck(this, IssueAdd);
+  function ReviewAdd() {
+    _classCallCheck(this, ReviewAdd);
 
-    var _this2 = _possibleConstructorReturn(this, (IssueAdd.__proto__ || Object.getPrototypeOf(IssueAdd)).call(this));
+    var _this2 = _possibleConstructorReturn(this, (ReviewAdd.__proto__ || Object.getPrototypeOf(ReviewAdd)).call(this));
 
     _this2.handleSubmit = _this2.handleSubmit.bind(_this2);
     _this2.handleSelectChange = _this2.handleSelectChange.bind(_this2);
     return _this2;
   }
 
-  _createClass(IssueAdd, [{
+  _createClass(ReviewAdd, [{
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
       var form = document.forms.issueAdd;
-      this.props.createIssue({
+      this.props.createReview({
         name: form.name.value,
         rating: form.rating.value,
         comment: form.comment.value
@@ -147,7 +125,7 @@ var IssueAdd = function (_React$Component2) {
   }, {
     key: "handleSelectChange",
     value: function handleSelectChange(e) {
-      this.setState({ mealType: e.target.value });
+      this.setState({ reviewType: e.target.value });
     }
   }, {
     key: "render",
@@ -171,24 +149,24 @@ var IssueAdd = function (_React$Component2) {
     }
   }]);
 
-  return IssueAdd;
+  return ReviewAdd;
 }(React.Component);
 
-var IssueList = function (_React$Component3) {
-  _inherits(IssueList, _React$Component3);
+var ReviewList = function (_React$Component3) {
+  _inherits(ReviewList, _React$Component3);
 
-  function IssueList() {
-    _classCallCheck(this, IssueList);
+  function ReviewList() {
+    _classCallCheck(this, ReviewList);
 
-    var _this3 = _possibleConstructorReturn(this, (IssueList.__proto__ || Object.getPrototypeOf(IssueList)).call(this));
+    var _this3 = _possibleConstructorReturn(this, (ReviewList.__proto__ || Object.getPrototypeOf(ReviewList)).call(this));
 
-    _this3.state = { issues: [] };
+    _this3.state = { reviewInfo: [] };
 
-    _this3.createIssue = _this3.createIssue.bind(_this3);
+    _this3.add = _this3.add.bind(_this3);
     return _this3;
   }
 
-  _createClass(IssueList, [{
+  _createClass(ReviewList, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       this.loadData();
@@ -198,20 +176,57 @@ var IssueList = function (_React$Component3) {
     value: function loadData() {
       var _this4 = this;
 
-      setTimeout(function () {
-        _this4.setState({
-          issues: issues
-        });
-      }, 500);
+      // setTimeout(() => {
+      //   this.setState({
+      //     issues: issues
+      //   });
+      // }, 500);
+      fetch('/api/reviews').then(function (response) {
+        if (response.ok) {
+          response.json().then(function (data) {
+            _this4.setState({ reviewInfo: data.records });
+          });
+        } else {
+          response.json().then(function (error) {
+            alert("Failed to fetch issues:" + error.message);
+          });
+        }
+      }).catch(function (err) {
+        alert("Error in fetching data from server:", err);
+      });
     }
   }, {
-    key: "createIssue",
-    value: function createIssue(newIssue) {
-      var newIssues = this.state.issues.slice();
-      newIssue.id = this.state.issues.length + 1;
-      newIssues.push(newIssue);
-      this.setState({ issues: newIssues });
+    key: "add",
+    value: function add(newReview) {
+      var _this5 = this;
+
+      fetch('/api/reviews', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newReview)
+      }).then(function (res) {
+        if (res.ok) {
+          res.json().then(function (fixedReview) {
+            var newReviews = _this5.state.reviewInfo.concat(fixedReview);
+            newReviews.id = 1;
+            _this5.setState({ reviewInfo: newReviews });
+            //this.setState({ totalCalories: Number(this.state.totalCalories) + Number(newReview.calories)});
+          });
+        } else {
+          res.json().then(function (error) {
+            alert('Failed to add issue: ' + error.message);
+          });
+        }
+      });
     }
+
+    // createIssue(newIssue) {
+    //   const newIssues = this.state.issues.slice();
+    //   newIssue.id = this.state.issues.length + 1;
+    //   newIssues.push(newIssue);
+    //   this.setState({ issues: newIssues });
+    // }
+
   }, {
     key: "render",
     value: function render() {
@@ -223,19 +238,19 @@ var IssueList = function (_React$Component3) {
           null,
           "Review"
         ),
-        React.createElement(IssueFilter, null),
+        React.createElement(ReviewMessage, null),
         React.createElement("hr", null),
-        React.createElement(IssueTable, { issues: this.state.issues }),
+        React.createElement(ReviewTable, { reviewInfo: this.state.reviewInfo }),
         React.createElement("hr", null),
-        React.createElement(IssueAdd, { createIssue: this.createIssue })
+        React.createElement(ReviewAdd, { createReview: this.add })
       );
     }
   }]);
 
-  return IssueList;
+  return ReviewList;
 }(React.Component);
 
 // This renders the JSX component inside the content node:
 
 
-ReactDOM.render(React.createElement(IssueList, null), contentNode);
+ReactDOM.render(React.createElement(ReviewList, null), contentNode);
