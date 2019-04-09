@@ -71,6 +71,29 @@ app.post('/api/meals', (req, res) => {
     });
   });
 
+  app.get('/api/reviews', (req, res) => {
+    db.collection('reviews').find().toArray().then(reviews => {
+      const metadata = { total_count: reviews.length };
+      res.json({ records: reviews })
+    }).catch(error => {
+      console.log(error);
+      res.status(500).json({ message: `Internal Server Error: ${error}` });
+    });
+  });
+  
+  
+  app.post('/api/reviews', (req, res) => {
+    const newReview = req.body;
+    db.collection('reviews').insertOne(newReview).then(result =>
+    db.collection('reviews').find({ _id: result.insertedId }).limit(1).next()
+    ).then(newReview => {
+      res.json(newReview);
+    }).catch(error => {
+      console.log(error);
+      res.status(500).json({ message: `Internal Server Error: ${error}` });
+    });
+  });
+
 let db;
 MongoClient.connect('mongodb://localhost', { useNewUrlParser: true }).then(connection => {
   db = connection.db('fitnesstracker');
