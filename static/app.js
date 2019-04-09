@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -12,25 +12,25 @@ var contentNode = document.getElementById('contents');
 
 var BodyRow = function BodyRow(props) {
   return React.createElement(
-    "tr",
+    'tr',
     null,
     React.createElement(
-      "td",
+      'td',
       null,
       props.userData.height
     ),
     React.createElement(
-      "td",
+      'td',
       null,
       props.userData.weight
     ),
     React.createElement(
-      "td",
+      'td',
       null,
       props.userData.age
     ),
     React.createElement(
-      "td",
+      'td',
       null,
       props.userData.gender
     )
@@ -42,38 +42,38 @@ function BodyStats(props) {
     return React.createElement(BodyRow, { key: index, userData: userData });
   });
   return React.createElement(
-    "table",
-    { className: "bordered-table" },
+    'table',
+    { className: 'bordered-table', style: { fontFamily: 'courier' } },
     React.createElement(
-      "thead",
+      'thead',
       null,
       React.createElement(
-        "tr",
+        'tr',
         null,
         React.createElement(
-          "th",
+          'th',
           null,
-          "Height"
+          'Height'
         ),
         React.createElement(
-          "th",
+          'th',
           null,
-          "Weight"
+          'Weight'
         ),
         React.createElement(
-          "th",
+          'th',
           null,
-          "Age"
+          'Age'
         ),
         React.createElement(
-          "th",
+          'th',
           null,
-          "Gender"
+          'Gender'
         )
       )
     ),
     React.createElement(
-      "tbody",
+      'tbody',
       null,
       bodyData
     )
@@ -90,12 +90,12 @@ var NutritionStats = function (_React$Component) {
   }
 
   _createClass(NutritionStats, [{
-    key: "render",
+    key: 'render',
     value: function render() {
       return React.createElement(
-        "div",
+        'div',
         null,
-        "This is a placeholder for ingested calories and meals."
+        'This is a placeholder for ingested calories and meals.'
       );
     }
   }]);
@@ -116,7 +116,7 @@ var AddBodyInfo = function (_React$Component2) {
   }
 
   _createClass(AddBodyInfo, [{
-    key: "handleSubmit",
+    key: 'handleSubmit',
     value: function handleSubmit(e) {
       e.preventDefault();
       var form = document.forms.updateBodyStat;
@@ -130,41 +130,41 @@ var AddBodyInfo = function (_React$Component2) {
       form.height.value = "";form.weight.value = "";form.age.value = "";form.gender.value = "";
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       return React.createElement(
-        "div",
-        { className: "form-group" },
+        'div',
+        { className: 'form-group' },
         React.createElement(
-          "form",
-          { name: "updateBodyStat", onSubmit: this.handleSubmit },
-          React.createElement("input", { type: "text", name: "height", placeholder: "Height (ft'inches)" }),
-          React.createElement("input", { type: "text", name: "weight", placeholder: "Weight (lbs)" }),
-          React.createElement("input", { type: "text", name: "age", placeholder: "Age" }),
-          React.createElement("hr", null),
+          'form',
+          { style: { fontFamily: 'courier' }, name: 'updateBodyStat', onSubmit: this.handleSubmit },
+          React.createElement('input', { type: 'text', name: 'height', placeholder: 'Height (ft\'inches)' }),
+          React.createElement('input', { type: 'text', name: 'weight', placeholder: 'Weight (lbs)' }),
+          React.createElement('input', { type: 'text', name: 'age', placeholder: 'Age' }),
+          React.createElement('hr', null),
           React.createElement(
-            "label",
-            { "for": "gender" },
-            "Biological Gender:"
+            'label',
+            { 'for': 'gender' },
+            'Biological Gender:'
           ),
           React.createElement(
-            "select",
-            { "class": "form-control", name: "gender" },
+            'select',
+            { 'class': 'form-control', name: 'gender' },
             React.createElement(
-              "option",
+              'option',
               null,
-              "Male"
+              'Male'
             ),
             React.createElement(
-              "option",
+              'option',
               null,
-              "Female"
+              'Female'
             )
           ),
           React.createElement(
-            "button",
+            'button',
             null,
-            "Update"
+            'Update'
           )
         )
       );
@@ -189,7 +189,7 @@ var FitnessTracker = function (_React$Component3) {
   }
 
   _createClass(FitnessTracker, [{
-    key: "componentDidMount",
+    key: 'componentDidMount',
     value: function componentDidMount() {
       this.loadData();
     }
@@ -197,7 +197,7 @@ var FitnessTracker = function (_React$Component3) {
     //Grabs data from server
 
   }, {
-    key: "loadData",
+    key: 'loadData',
     value: function loadData() {
       var _this4 = this;
 
@@ -222,7 +222,7 @@ var FitnessTracker = function (_React$Component3) {
     //Updates User Body Stats
 
   }, {
-    key: "update",
+    key: 'update',
     value: function update(userInput) {
       var _this5 = this;
 
@@ -243,28 +243,22 @@ var FitnessTracker = function (_React$Component3) {
         }
       });
     }
-
-    //No longer necessary after fetch
-    // update(userInput) {
-    //   bodystats[0] = (userInput);
-    //   this.setState({ bodystats: bodystats });
-    // }
-
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
+
       return React.createElement(
-        "div",
+        'div',
         null,
         React.createElement(
-          "h1",
-          null,
-          "Fitness Tracker"
+          'h1',
+          { style: { fontFamily: 'courier', textAlign: 'center' } },
+          'Fitness Tracker'
         ),
         React.createElement(BodyStats, { bodystats: this.state.bodystats }),
-        React.createElement("hr", null),
+        React.createElement('hr', null),
         React.createElement(AddBodyInfo, { update: this.update }),
-        React.createElement("hr", null),
+        React.createElement('hr', null),
         React.createElement(NutritionStats, null)
       );
     }
