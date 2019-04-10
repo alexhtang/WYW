@@ -88,7 +88,10 @@ class TitleTest extends React.Component {
     render() {
         const textStyle = {textAlign: "center"};
         return(
-            <h1 style={{padding: 40, textAlign: "center"}}>Welcome to WYW (Watch Your Weight)</h1>
+          <div style = {{justifyContent: 'center', alignItems: 'center', textAlign: "center"}}>
+            <img src = "/Ftracker_asset.png" height = "200px" width = "500px" style={{paddingTop: "20"}}/>
+            <h1 style={{padding: 20, textAlign: "center"}}>Welcome to WYW (Watch Your Weight)</h1>
+          </div>
         )
     }
 }

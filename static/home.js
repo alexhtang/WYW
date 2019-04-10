@@ -133,9 +133,14 @@ var TitleTest = function (_React$Component3) {
     value: function render() {
       var textStyle = { textAlign: "center" };
       return React.createElement(
-        "h1",
-        { style: { padding: 40, textAlign: "center" } },
-        "Welcome to WYW (Watch Your Weight)"
+        "div",
+        { style: { justifyContent: 'center', alignItems: 'center', textAlign: "center" } },
+        React.createElement("img", { src: "/Ftracker_asset.png", height: "200px", width: "500px", style: { paddingTop: "20" } }),
+        React.createElement(
+          "h1",
+          { style: { padding: 20, textAlign: "center" } },
+          "Welcome to WYW (Watch Your Weight)"
+        )
       );
     }
   }]);
