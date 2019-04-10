@@ -1,3 +1,5 @@
+
+
 const contentNode = document.getElementById('contents');
 
 class BodyStats extends React.Component {

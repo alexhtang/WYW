@@ -1,4 +1,5 @@
 
+
 var contentNode = document.getElementById("reviewcontent");
 
 class ReviewMessage extends React.Component {

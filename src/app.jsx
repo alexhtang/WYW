@@ -1,3 +1,5 @@
+
+
 const contentNode = document.getElementById('contents');
 
 const BodyRow = (props) => (
@@ -15,7 +17,8 @@ function BodyStats(props) {
     <BodyRow key={index} userData={userData} />
   ));
   return (
-    <table className="bordered-table" style={{fontFamily: 'courier', borderColor: 'white'}}>
+    <div style={{textAlign: 'center'}}>
+    <table style={{fontFamily: 'Bookman Old Style', marginLeft: '37%'}}>
       <thead>
         <tr>
           <th>Height</th>
@@ -27,6 +30,7 @@ function BodyStats(props) {
       </thead>
       <tbody>{bodyData}</tbody>
     </table>
+    </div>
   );
 }
 
@@ -34,9 +38,9 @@ class NutritionStats extends React.Component {
 
   render() {
     return (
-      <div style = {{fontFamily: 'courier', fontStyle: 'bold', fontSize: '25px', textAlign: 'center'}}>
+      <div style = {{fontFamily: 'Bookman Old Style', fontStyle: 'bold', fontSize: '25px', textAlign: 'center'}}>
         <h1 >Suggested Caloric Intake: </h1>
-        <h1 style= {{color: 'red'}}>{this.props.calories}</h1>
+        <h1 style= {{color: 'green'}}>{this.props.calories}</h1>
       </div>
       )
   }
@@ -65,10 +69,10 @@ class AddBodyInfo extends React.Component {
       render() {
         return (
           <div>
-            <form style={{fontFamily: 'courier'}} name="updateBodyStat" onSubmit={this.handleSubmit}>
-              <input type="text" name="height" maxLength = "4" placeholder="Height (ft'inches)" />
-              <input type="text" name="weight" maxLength = "3" placeholder="Weight (lbs)" />
-              <input type="text" name="age" maxLength = "2" placeholder="Age" /><hr></hr>
+            <form style={{fontFamily: 'Bookman Old Style'}} name="updateBodyStat" onSubmit={this.handleSubmit}>
+              <input type="text" name="height" maxLength = "4" placeholder="Height (ft'inches)" style = {{borderRadius: '5px'}} />
+              <input type="text" name="weight" maxLength = "3" placeholder="Weight (lbs)" style = {{borderRadius: '5px'}}/>
+              <input type="text" name="age" maxLength = "2" placeholder="Age" style = {{borderRadius: '5px'}}/><hr></hr>
               <label name="activity">Activity Level:</label>
               <select style={{marginRight:'20px'}} name = "activity">
                 <option>Light</option>
@@ -80,7 +84,7 @@ class AddBodyInfo extends React.Component {
                 <option>Male</option>
                 <option>Female</option>
               </select>
-              <button>Update</button>
+              <button style={{borderRadius: '5px'}}>Update</button>
             </form>
           </div>
         )
@@ -124,7 +128,6 @@ class FitnessTracker extends React.Component {
   constructor() {
     super();
     this.state = { bodystats: [], calories: 0 };
-
     this.update = this.update.bind(this);
     //this.calculate = this.calculate.bind(this);
   }
@@ -139,7 +142,7 @@ class FitnessTracker extends React.Component {
       if (response.ok) {                        //Returns whether there was a successful response
         response.json().then(data => {          //Parses the body of the response as a JSON
           this.setState({ bodystats: data.records });     //Adds the saved data to the state on the load
-          this.state.calories = calculate(this.state.bodystats[0].height, this.state.bodystats[0].weight, this.state.bodystats[0].age, this.state.bodystats[0].activity);
+          this.state.calories = calculate(this.state.bodystats[0].height, this.state.bodystats[0].weight, this.state.bodystats[0].age, this.state.bodystats[0].gender, this.state.bodystats[0].activity);
           this.setState({calories: this.state.calories});
         });
       } else {
@@ -184,8 +187,8 @@ class FitnessTracker extends React.Component {
   render() {
     
     return (
-      <div>
-        <h1 style={{fontStyle: 'bold', fontFamily: 'courier', textAlign: 'center'}}>Fitness Tracker</h1>
+      <div style = {{textAlign: "center"}}>
+        <h1 style={{fontStyle: 'bold', fontSize: '100', fontFamily: 'Bookman Old Style', paddingBottom: '50px'}}>Calorie Calculator</h1>
         <BodyStats bodystats = {this.state.bodystats} />
         <hr />
         <AddBodyInfo update = {this.update} />
