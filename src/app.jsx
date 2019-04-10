@@ -1,7 +1,6 @@
 
-
 const contentNode = document.getElementById('contents');
-
+ 
 const BodyRow = (props) => (
   <tr>
     <td>{props.userData.height}</td>

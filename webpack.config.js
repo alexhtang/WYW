@@ -3,7 +3,7 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    app: './src/App.jsx',
+    app: ['./src/App.jsx', './src/home.jsx','./src/meals.jsx', './src/review.jsx'],
     vendor: ['react', 'react-dom', 'isomorphic-fetch', 'react-router'],
   },
   output: {
@@ -21,6 +21,7 @@ module.exports = {
         query: {
           presets: ['react', 'es2015']
         }
-      },]
+      },
+    ]
   }
 };
