@@ -4,9 +4,8 @@
   "description": "Basic Fitness Tracker",
   "main": "server.js",
   "scripts": {
-    "dev": "webpack --mode development",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "webpack --watch",
+    "compile": "babel src --presets react,es2015 --out-dir static",
+    "watch": "babel src --presets react,es2015 --out-dir static --watch",
     "start": "nodemon -w server.js server.js",
     "init-db": "mongo scripts/init.mongo.js"
   },

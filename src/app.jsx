@@ -1,6 +1,4 @@
-
 const contentNode = document.getElementById('contents');
- 
 const BodyRow = (props) => (
   <tr>
     <td>{props.userData.height}</td>
@@ -17,7 +15,7 @@ function BodyStats(props) {
   ));
   return (
     <div style={{textAlign: 'center'}}>
-    <table style={{fontFamily: 'Bookman Old Style', marginLeft: '37%'}}>
+    <table className="bordered-table" style={{fontFamily: 'Bookman Old Style', marginLeft: '37%'}}>
       <thead>
         <tr>
           <th>Height</th>

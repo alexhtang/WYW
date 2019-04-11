@@ -2,14 +2,6 @@
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-require('./button.css');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -17,32 +9,31 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var contentNode = document.getElementById('contents');
-
 var BodyRow = function BodyRow(props) {
-  return _react2.default.createElement(
+  return React.createElement(
     'tr',
     null,
-    _react2.default.createElement(
+    React.createElement(
       'td',
       null,
       props.userData.height
     ),
-    _react2.default.createElement(
+    React.createElement(
       'td',
       null,
       props.userData.weight
     ),
-    _react2.default.createElement(
+    React.createElement(
       'td',
       null,
       props.userData.age
     ),
-    _react2.default.createElement(
+    React.createElement(
       'td',
       null,
       props.userData.activity
     ),
-    _react2.default.createElement(
+    React.createElement(
       'td',
       null,
       props.userData.gender
@@ -52,48 +43,48 @@ var BodyRow = function BodyRow(props) {
 
 function BodyStats(props) {
   var bodyData = props.bodystats.map(function (userData, index) {
-    return _react2.default.createElement(BodyRow, { key: index, userData: userData });
+    return React.createElement(BodyRow, { key: index, userData: userData });
   });
-  return _react2.default.createElement(
+  return React.createElement(
     'div',
     { style: { textAlign: 'center' } },
-    _react2.default.createElement(
+    React.createElement(
       'table',
-      { style: { fontFamily: 'Bookman Old Style', marginLeft: '37%' } },
-      _react2.default.createElement(
+      { className: 'bordered-table', style: { fontFamily: 'Bookman Old Style', marginLeft: '37%' } },
+      React.createElement(
         'thead',
         null,
-        _react2.default.createElement(
+        React.createElement(
           'tr',
           null,
-          _react2.default.createElement(
+          React.createElement(
             'th',
             null,
             'Height'
           ),
-          _react2.default.createElement(
+          React.createElement(
             'th',
             null,
             'Weight'
           ),
-          _react2.default.createElement(
+          React.createElement(
             'th',
             null,
             'Age'
           ),
-          _react2.default.createElement(
+          React.createElement(
             'th',
             null,
             'Activity'
           ),
-          _react2.default.createElement(
+          React.createElement(
             'th',
             null,
             'Gender'
           )
         )
       ),
-      _react2.default.createElement(
+      React.createElement(
         'tbody',
         null,
         bodyData
@@ -114,15 +105,15 @@ var NutritionStats = function (_React$Component) {
   _createClass(NutritionStats, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(
+      return React.createElement(
         'div',
         { style: { fontFamily: 'Bookman Old Style', fontStyle: 'bold', fontSize: '25px', textAlign: 'center' } },
-        _react2.default.createElement(
+        React.createElement(
           'h1',
           null,
           'Suggested Caloric Intake: '
         ),
-        _react2.default.createElement(
+        React.createElement(
           'h1',
           { style: { color: 'green' } },
           this.props.calories
@@ -132,7 +123,7 @@ var NutritionStats = function (_React$Component) {
   }]);
 
   return NutritionStats;
-}(_react2.default.Component);
+}(React.Component);
 
 var AddBodyInfo = function (_React$Component2) {
   _inherits(AddBodyInfo, _React$Component2);
@@ -164,60 +155,60 @@ var AddBodyInfo = function (_React$Component2) {
   }, {
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(
+      return React.createElement(
         'div',
         null,
-        _react2.default.createElement(
+        React.createElement(
           'form',
           { style: { fontFamily: 'Bookman Old Style' }, name: 'updateBodyStat', onSubmit: this.handleSubmit },
-          _react2.default.createElement('input', { type: 'text', name: 'height', maxLength: '4', placeholder: 'Height (ft\'inches)', style: { borderRadius: '5px' } }),
-          _react2.default.createElement('input', { type: 'text', name: 'weight', maxLength: '3', placeholder: 'Weight (lbs)', style: { borderRadius: '5px' } }),
-          _react2.default.createElement('input', { type: 'text', name: 'age', maxLength: '2', placeholder: 'Age', style: { borderRadius: '5px' } }),
-          _react2.default.createElement('hr', null),
-          _react2.default.createElement(
+          React.createElement('input', { type: 'text', name: 'height', maxLength: '4', placeholder: 'Height (ft\'inches)', style: { borderRadius: '5px' } }),
+          React.createElement('input', { type: 'text', name: 'weight', maxLength: '3', placeholder: 'Weight (lbs)', style: { borderRadius: '5px' } }),
+          React.createElement('input', { type: 'text', name: 'age', maxLength: '2', placeholder: 'Age', style: { borderRadius: '5px' } }),
+          React.createElement('hr', null),
+          React.createElement(
             'label',
             { name: 'activity' },
             'Activity Level:'
           ),
-          _react2.default.createElement(
+          React.createElement(
             'select',
             { style: { marginRight: '20px' }, name: 'activity' },
-            _react2.default.createElement(
+            React.createElement(
               'option',
               null,
               'Light'
             ),
-            _react2.default.createElement(
+            React.createElement(
               'option',
               null,
               'Moderate'
             ),
-            _react2.default.createElement(
+            React.createElement(
               'option',
               null,
               'Vigorous'
             )
           ),
-          _react2.default.createElement(
+          React.createElement(
             'label',
             { name: 'gender' },
             'Biological Gender:'
           ),
-          _react2.default.createElement(
+          React.createElement(
             'select',
             { name: 'gender' },
-            _react2.default.createElement(
+            React.createElement(
               'option',
               null,
               'Male'
             ),
-            _react2.default.createElement(
+            React.createElement(
               'option',
               null,
               'Female'
             )
           ),
-          _react2.default.createElement(
+          React.createElement(
             'button',
             { style: { borderRadius: '5px' } },
             'Update'
@@ -228,7 +219,7 @@ var AddBodyInfo = function (_React$Component2) {
   }]);
 
   return AddBodyInfo;
-}(_react2.default.Component);
+}(React.Component);
 
 function calculate(h, w, age, g, activity) {
   var suggested = 0;
@@ -339,24 +330,24 @@ var FitnessTracker = function (_React$Component3) {
     key: 'render',
     value: function render() {
 
-      return _react2.default.createElement(
+      return React.createElement(
         'div',
         { style: { textAlign: "center" } },
-        _react2.default.createElement(
+        React.createElement(
           'h1',
           { style: { fontStyle: 'bold', fontSize: '100', fontFamily: 'Bookman Old Style', paddingBottom: '50px' } },
           'Calorie Calculator'
         ),
-        _react2.default.createElement(BodyStats, { bodystats: this.state.bodystats }),
-        _react2.default.createElement('hr', null),
-        _react2.default.createElement(AddBodyInfo, { update: this.update }),
-        _react2.default.createElement('hr', null),
-        _react2.default.createElement(NutritionStats, { calories: this.state.calories })
+        React.createElement(BodyStats, { bodystats: this.state.bodystats }),
+        React.createElement('hr', null),
+        React.createElement(AddBodyInfo, { update: this.update }),
+        React.createElement('hr', null),
+        React.createElement(NutritionStats, { calories: this.state.calories })
       );
     }
   }]);
 
   return FitnessTracker;
-}(_react2.default.Component);
+}(React.Component);
 
-ReactDOM.render(_react2.default.createElement(FitnessTracker, null), contentNode); // Render the component inside the content Node
+ReactDOM.render(React.createElement(FitnessTracker, null), contentNode); // Render the component inside the content Node

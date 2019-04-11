@@ -26,7 +26,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var contentNode = document.getElementById('contents');
-
 var BodyRow = function BodyRow(props) {
   return React.createElement(
     'tr',
@@ -68,7 +67,7 @@ function BodyStats(props) {
     { style: { textAlign: 'center' } },
     React.createElement(
       'table',
-      { style: { fontFamily: 'Bookman Old Style', marginLeft: '37%' } },
+      { className: 'bordered-table', style: { fontFamily: 'Bookman Old Style', marginLeft: '37%' } },
       React.createElement(
         'thead',
         null,
