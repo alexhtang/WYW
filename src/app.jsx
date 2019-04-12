@@ -15,7 +15,7 @@ function BodyStats(props) {
   ));
   return (
     <div style={{textAlign: 'center'}}>
-    <table className="bordered-table" style={{fontFamily: 'Bookman Old Style', marginLeft: '37%'}}>
+    <table className="bordered-table" style={{fontFamily: 'Bookman Old Style', marginLeft: 'auto', marginRight:'auto'}}>
       <thead>
         <tr>
           <th>Height</th>

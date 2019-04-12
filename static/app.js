@@ -50,7 +50,7 @@ function BodyStats(props) {
     { style: { textAlign: 'center' } },
     React.createElement(
       'table',
-      { className: 'bordered-table', style: { fontFamily: 'Bookman Old Style', marginLeft: '37%' } },
+      { className: 'bordered-table', style: { fontFamily: 'Bookman Old Style', marginLeft: 'auto', marginRight: 'auto' } },
       React.createElement(
         'thead',
         null,
