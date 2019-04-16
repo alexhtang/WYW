@@ -3,9 +3,76 @@
   var contentNode = document.getElementById("mealcontent");
   
   class MealSummary extends React.Component {
+    constructor() {
+      super();
+      this.state = {
+        selectValue: '',
+        showFoodFormPopup: false,
+        showExerciseFormPopup: false
+
+
+    }
+      this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleSelectChange = this.handleSelectChange.bind(this);
+    }
+
+    handleSelectChange(e){
+      this.setState({selectValue: e.target.value});
+    }
+
+    handleSubmit(e) {
+      e.preventDefault();
+      if(this.state.selectValue === 'addFood'){
+      this.toggleFoodFormPopup();
+      } else if(this.state.selectValue === 'addExercise'){
+      this.toggleExerciseFormPopup();
+      }
+    }
+
+    toggleFoodFormPopup() {
+      this.setState({
+        showFoodFormPopup: !this.state.showFoodFormPopup
+      });
+    }
+    
+    toggleExerciseFormPopup() {
+      this.setState({
+        showExerciseFormPopup: !this.state.showExerciseFormPopup
+      });
+    }
+
     render() {
       return (<div>
-        <h4>Enter food name and information</h4>
+         <h4>Your Daily Summary</h4>
+         <h5>Total Calories: {this.props.totalCalories}</h5>
+
+        <h4>Enter Food or Exercise</h4>
+        
+        <select 
+                                value={this.state.selectValue} 
+                                onChange={this.handleSelectChange}>
+    <option value="">Select Option</option>
+    <option value="addFood">Add Food</option>
+    <option value="addExercise">Add Exercise</option>
+        </select>
+            <button onClick = {this.handleSubmit}>Add</button>
+
+            {this.state.showFoodFormPopup ? 
+          <AddMeal
+            text='Close Me'
+            closeFoodFormPopup={this.toggleFoodFormPopup.bind(this)}
+            createFood = {this.props.createFood}
+          />
+          : null
+        }
+                    {this.state.showExerciseFormPopup ? 
+          <AddExercise
+            text='Close Me'
+            closeExerciseFormPopup={this.toggleExerciseFormPopup.bind(this)}
+            createFood= {this.props.createFood}
+          />
+          : null
+        }
         </div>
 
       );
@@ -50,6 +117,42 @@
     );
   }
   
+  class AddExercise extends React.Component {
+    constructor() {
+      super();
+      this.state = {
+    }
+      this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(e) {
+      e.preventDefault();
+      /*let form = document.forms.addExercise;
+      this.props.createFood({
+        ExerciseName: form.exerciseName.value,
+        calories: form.calories.value,
+      });
+ 
+      // Clear the form for the next input.
+      form.ExerciseName.value = '';
+      form.calories.value = '';*/
+      this.props.closeExerciseFormPopup();
+    }
+
+    render() {
+      return (
+        <div>
+          <form name="addExercise" onSubmit={this.handleSubmit}>
+            <input type="text" name="ExerciseName" placeholder="Exercise Name" />
+            <input type="text" name="calories" placeholder="Calories" />
+            <button>Add</button>
+          </form>
+        </div>
+      );
+    }
+
+  }
+
   class AddMeal extends React.Component {
     constructor() {
       super();
@@ -75,6 +178,7 @@
       // Clear the form for the next input.
       form.foodName.value = '';
       form.calories.value = '';
+      this.props.closeFoodFormPopup();
     }
 
     handleSelectChange(e){
@@ -92,7 +196,6 @@
             <input type="number" name="numberOfServings" placeholder="Number of Servings"/>
 
             <select 
-                                defaultValue= 'Breakfast'
                                 value={this.state.mealType} 
                                 onChange={this.handleSelectChange}
    >
@@ -128,11 +231,14 @@
           response.json().then(data => {
             data.records.forEach(meal => {
               meal.created = new Date(meal.created);
+              //this.setState({totalCalories: Number(this.state.totalCalories)+meal.calories});
+
               if (meal.completionDate)
                 meal.completionDate = new Date(meal.completionDate);
             });
             this.setState({ foods: data.records });
-            this.setState({totalCalories: 0});
+            this.setState({totalCalories: data.totalCalories});
+
           });
         } else {
           response.json().then(error => {
@@ -165,7 +271,7 @@
               .then(updatedMeal => {
                 const newMeals = this.state.foods.concat(updatedMeal);
                 this.setState({ foods: newMeals });
-                  this.setState({totalCalories: newMeals.reduce((total, amount) => total.calories + amount.calories)});
+                this.setState({totalCalories: parseInt(this.state.totalCalories) + parseInt(updatedMeal.calories)});
               });
           }
           else {
@@ -178,6 +284,7 @@
       
       
   }
+  
 
   /*
 const newMeals = this.state.foods.slice();
@@ -192,11 +299,11 @@ const newMeals = this.state.foods.slice();
       return (
         <div>
           <h1>Meal Tracker</h1>
-          <MealSummary totalCalories = {this.state.totalCalories} />
+          <MealSummary totalCalories={this.totalCalories} createFood = {this.addMeal}  totalCalories = {this.state.totalCalories} />
+
           <hr />
           <MealTable foods={this.state.foods} />
           <hr />
-          <AddMeal createFood={this.addMeal} />
         </div>
       );
     }
@@ -204,3 +311,5 @@ const newMeals = this.state.foods.slice();
   
   // This renders the JSX component inside the content node:
   ReactDOM.render(<MealList />, contentNode);
+
+  //          <AddMeal createFood={this.addMeal} />

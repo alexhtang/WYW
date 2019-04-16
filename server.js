@@ -12,7 +12,7 @@ app.use(express.static('static'));
 app.get('/api/meals', (req, res) => {
   db.collection('meals').find().toArray().then(meals => {
     const metadata = { total_count: meals.length };
-    res.json({ records: meals })
+    res.json({ records: meals, totalCalories: Number(meals.reduce((accumulator, currentValue)=> accumulator+parseInt(currentValue.calories),0) )})
   }).catch(error => {
     console.log(error);
     res.status(500).json({ message: `Internal Server Error: ${error}` });
