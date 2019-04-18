@@ -1,6 +1,5 @@
-
-
-var contentNode = document.getElementById("reviewcontent");
+// NEW: added the import for react.
+import React from 'react';
 
 class ReviewMessage extends React.Component {
   render() {
@@ -67,7 +66,7 @@ class ReviewAdd extends React.Component {
           <input type="text" name="name" placeholder="Name" />
           <input type="text" name="rating" placeholder="Rating" />
           <hr></hr>
-          <textarea rows={5} cols= {50} name="comment" margin-bottom="0" placeholder="Comment" />
+          <textarea rows={5} cols= {50} name="comment" placeholder="Comment" />
           <button>Add</button>
         </form>
       </div>
@@ -75,7 +74,7 @@ class ReviewAdd extends React.Component {
   }
 }
 
-class ReviewList extends React.Component {
+export default class Review extends React.Component {
   constructor() {
     super();
     this.state = { reviewInfo: [] };
@@ -153,6 +152,3 @@ class ReviewList extends React.Component {
     );
   }
 }
-
-// This renders the JSX component inside the content node:
-ReactDOM.render(<ReviewList />, contentNode);

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>WYW: Watch Your Weight</title>
+    <title>Pro MERN Stack</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -14,9 +14,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react-dom.js">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js">
-    </script>
+</script>
+
+
 
     <link rel="shortcut icon" href="#">
+  
+
+    
     <style>
         table.bordered-table th,
         td {
@@ -27,33 +32,50 @@
         table.bordered-table {
             border-collapse: collapse
         }
+
+        .header {
+            border-bottom: 1px solid silver;
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            border-top: 1px solid silver;
+            padding-top: 5px;
+            margin-top: 20px;
+            font-family: Helvetica;
+            font-size: 10px;
+            color: grey;
+        }
+
+        a:link {
+            color: green;
+        }
+
+        /* visited link */
+        a:visited {
+            color: green;
+        }
+
+        /* mouse over link */
+        a:hover {
+            color: red;
+        }
+
+        /* selected link */
+        a:active {
+            color: yellow;
+        }
     </style>
 </head>
 
-<body style="background-color: #FFDAB9">
+<body>
     <!-- this is where our component will appear -->
-    <nav class="navbar navbar-expand-lg navbar-light border-dark border-bottom rounded-bottom">
-            <a class="navbar-brand" href="home.html">WYW</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="index.html">Calculator <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href="/meal.html">Meals</a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href="review.html">Review</a>
-                </li>
-              </ul>
-            </div>
-          </nav>
+    
+
     <div id="contents"></div>
-    <script src="/App.js"></script>
+    <!-- NEW: We add the vendor compiled JS code here. -->
+    <script src="/vendor.bundle.js"></script>
+    <script src="/app.bundle.js"></script>
 </body>
 
 </html>
