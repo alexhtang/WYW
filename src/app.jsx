@@ -19,9 +19,10 @@ const NoMatch = () => <p>Page Not Found</p>;
 const App = (props) => (
   <div>
       <div className="header">
-<nav className=" header navbar navbar-expand-lg navbar-light border-dark border-bottom rounded-bottom">
+<nav className=" header navbar navbar-expand-lg navbar-dark border-dark border-bottom rounded-bottom">
         <Link to ="/">
        <a className="navbar-brand" >WYW</a> </Link>
+        
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -46,9 +47,7 @@ const App = (props) => (
     <div className="contents">
       {props.children}
     </div>
-    <div className="footer">
-      COMPSCI 326
-    </div>
+
    
   </div >
 );

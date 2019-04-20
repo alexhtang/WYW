@@ -28,7 +28,7 @@ var _Meals = __webpack_require__(237);
 
 var _Meals2 = _interopRequireDefault(_Meals);
 
-var _Review = __webpack_require__(241);
+var _Review = __webpack_require__(238);
 
 var _Review2 = _interopRequireDefault(_Review);
 
@@ -57,7 +57,7 @@ var App = function App(props) {
       { className: 'header' },
       _react2.default.createElement(
         'nav',
-        { className: ' header navbar navbar-expand-lg navbar-light border-dark border-bottom rounded-bottom' },
+        { className: ' header navbar navbar-expand-lg navbar-dark border-dark border-bottom rounded-bottom' },
         _react2.default.createElement(
           _reactRouter.Link,
           { to: '/' },
@@ -125,11 +125,6 @@ var App = function App(props) {
       'div',
       { className: 'contents' },
       props.children
-    ),
-    _react2.default.createElement(
-      'div',
-      { className: 'footer' },
-      'COMPSCI 326'
     )
   );
 };
@@ -1346,7 +1341,7 @@ exports.default = Meals;
 
 /***/ }),
 
-/***/ 241:
+/***/ 238:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
