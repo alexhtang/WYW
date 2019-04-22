@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory, withRouter, IndexRoute, Link } from 'react-router';
-import {Navbar} from 'react-bootstrap';
 import Dashboard from './Dashboard.jsx';
 import FitnessTracker from './FitnessTracker.jsx';
 import Meals from './Meals.jsx';

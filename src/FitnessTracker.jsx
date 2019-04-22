@@ -1,6 +1,6 @@
 // NEW: added the import for react.
 import React from 'react';
-import {Table, Form, Button} from 'react-bootstrap';
+import {Table, Form, Button, Carousel} from 'react-bootstrap';
 
 const BodyRow = (props) => (
   <tr>
