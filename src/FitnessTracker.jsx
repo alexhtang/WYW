@@ -1,5 +1,6 @@
 // NEW: added the import for react.
 import React from 'react';
+import {Table, Form, Button} from 'react-bootstrap';
 
 const BodyRow = (props) => (
   <tr>
@@ -18,8 +19,8 @@ function BodyStats(props) {
     <BodyRow key={index} userData={userData} />
   ));
   return (
-    <div style={{textAlign: 'center'}}>
-    <table className="bordered-table" style={{fontFamily: 'Bookman Old Style', marginLeft: 'auto', marginRight:'auto'}}>
+    <div style={{fontFamily: 'Bookman Old Style', marginLeft: 'auto', marginRight:'auto', width: '50%'}}>
+    <Table striped bordered hover size = "lg">
       <thead>
         <tr>
           <th>Height</th>
@@ -30,7 +31,7 @@ function BodyStats(props) {
         </tr>
       </thead>
       <tbody>{bodyData}</tbody>
-    </table>
+    </Table>
     </div>
   );
 }
@@ -85,8 +86,17 @@ class AddBodyInfo extends React.Component {
                 <option>Male</option>
                 <option>Female</option>
               </select>
-              <button style={{borderRadius: '5px'}}>Update</button>
+              <Button
+              bsStyle = "secondary"
+              bsSize = "small"
+              onClick = {this.handleSubmit}>Update</Button>
             </form>
+
+          <Form>
+            
+          </Form>
+
+
           </div>
         )
       }

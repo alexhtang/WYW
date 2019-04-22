@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory, withRouter, IndexRoute, Link } from 'react-router';
-
+import {Navbar} from 'react-bootstrap';
 import Dashboard from './Dashboard.jsx';
 import FitnessTracker from './FitnessTracker.jsx';
 import Meals from './Meals.jsx';
@@ -18,8 +18,8 @@ const NoMatch = () => <p>Page Not Found</p>;
 // by the parent route. See the route definitions below.
 const App = (props) => (
   <div>
-      <div className="header">
-<nav className=" header navbar navbar-expand-lg navbar-dark border-dark border-bottom rounded-bottom">
+     
+     <nav className=" header navbar navbar-expand-lg navbar-dark border-dark border-bottom rounded-bottom">
         <Link to ="/">
        <a className="navbar-brand" >WYW</a> </Link>
         
@@ -41,9 +41,7 @@ const App = (props) => (
         </div>
       </nav>
 
-      <p><Link to="/">Logout</Link></p>
-
-    </div>
+    
     <div className="contents">
       {props.children}
     </div>
