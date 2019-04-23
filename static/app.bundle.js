@@ -7907,44 +7907,52 @@ var App = function App(props) {
     'div',
     null,
     _react2.default.createElement(
-      'div',
+      _reactBootstrap.Navbar,
       null,
       _react2.default.createElement(
-        _reactBootstrap.Nav,
+        _reactBootstrap.Navbar.Header,
         null,
         _react2.default.createElement(
-          _reactBootstrap.Navbar,
+          _reactBootstrap.NavbarBrand,
           null,
           _react2.default.createElement(
-            _reactBootstrap.NavbarBrand,
-            null,
-            _react2.default.createElement(
-              _reactRouter.Link,
-              { to: '/' },
-              'WYW'
-            )
-          ),
+            _reactRouter.Link,
+            { to: '/' },
+            'WYW'
+          )
+        ),
+        _react2.default.createElement(
+          _reactBootstrap.Nav,
+          null,
           _react2.default.createElement(
             _reactBootstrap.NavItem,
-            { style: { paddingRight: '10px' } },
+            null,
             _react2.default.createElement(
               _reactRouter.Link,
               { to: '/FitnessTracker' },
               'Fitness Tracker'
             )
-          ),
+          )
+        ),
+        _react2.default.createElement(
+          _reactBootstrap.Nav,
+          null,
           _react2.default.createElement(
             _reactBootstrap.NavItem,
-            { style: { paddingRight: '10px' } },
+            null,
             _react2.default.createElement(
               _reactRouter.Link,
               { to: '/Meals' },
               'Meals'
             )
-          ),
+          )
+        ),
+        _react2.default.createElement(
+          _reactBootstrap.Nav,
+          null,
           _react2.default.createElement(
             _reactBootstrap.NavItem,
-            { style: { paddingRight: '10px' } },
+            null,
             _react2.default.createElement(
               _reactRouter.Link,
               { to: '/Review' },

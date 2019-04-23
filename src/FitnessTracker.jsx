@@ -22,7 +22,7 @@ function BodyStats(props) {
     <div style={{fontFamily: 'Bookman Old Style', marginLeft: 'auto', marginRight:'auto', width: '50%'}}>
     <Table striped bordered hover>
       <thead>
-        <tr>
+        <tr >
           <th>Height</th>
           <th>Weight</th>
           <th>Age</th>

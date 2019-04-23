@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory, withRouter, IndexRoute, Link } from 'react-router';
-import {Navbar, Nav, NavbarBrand, NavItem} from 'react-bootstrap';
+import {Navbar, Nav, NavbarBrand, NavItem, NavbarCollapse} from 'react-bootstrap';
 import Dashboard from './Dashboard.jsx';
 import FitnessTracker from './FitnessTracker.jsx';
 import Meals from './Meals.jsx';
 import Review from './Review.jsx';
+
+
 
 
 var contentNode = document.getElementById("contents");
@@ -41,25 +43,34 @@ const App = (props) => (
         </div>
       </nav> */}
 
-      <div>
-      <Nav>
+      
         <Navbar>
-          <NavbarBrand>
-            <Link to = '/'>WYW</Link>
-          </NavbarBrand>
-        
-          <NavItem style = {{paddingRight: '10px'}}>
-            <Link to = '/FitnessTracker'>Fitness Tracker</Link>
-          </NavItem>
-          <NavItem style = {{paddingRight: '10px'}}>
+          <Navbar.Header>
+            <NavbarBrand>
+              <Link to = '/'>WYW</Link>
+            </NavbarBrand>
+
+        <Nav>
+            <NavItem>
+              <Link to = '/FitnessTracker'>Fitness Tracker</Link>
+            </NavItem>
+        </Nav>
+
+        <Nav>
+          <NavItem>
             <Link to = '/Meals'>Meals</Link>
           </NavItem>
-          <NavItem style = {{paddingRight: '10px'}}>
+        </Nav>
+
+        <Nav>
+          <NavItem>
             <Link to = '/Review'>Reviews</Link>
           </NavItem>
+        </Nav>
+
+          </Navbar.Header>
         </Navbar>
-      </Nav>
-      </div>
+     
 
     
     <div className="contents">
