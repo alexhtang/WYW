@@ -18800,7 +18800,7 @@ function BodyStats(props) {
     { style: { fontFamily: 'Bookman Old Style', marginLeft: 'auto', marginRight: 'auto', width: '50%' } },
     _react2.default.createElement(
       _reactBootstrap.Table,
-      { striped: true, bordered: true, hover: true, size: 'lg' },
+      { striped: true, bordered: true, hover: true },
       _react2.default.createElement(
         'thead',
         null,
@@ -18966,13 +18966,96 @@ var AddBodyInfo = function (_React$Component2) {
               onClick: this.handleSubmit },
             'Update'
           )
-        ),
-        _react2.default.createElement(_reactBootstrap.Form, null)
+        )
       );
     }
   }]);
 
   return AddBodyInfo;
+}(_react2.default.Component);
+
+var AddCarousel = function (_React$Component3) {
+  _inherits(AddCarousel, _React$Component3);
+
+  function AddCarousel() {
+    _classCallCheck(this, AddCarousel);
+
+    return _possibleConstructorReturn(this, (AddCarousel.__proto__ || Object.getPrototypeOf(AddCarousel)).apply(this, arguments));
+  }
+
+  _createClass(AddCarousel, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          _reactBootstrap.Carousel,
+          null,
+          _react2.default.createElement(
+            _reactBootstrap.Carousel.Item,
+            null,
+            _react2.default.createElement('img', { width: 900, height: 500, alt: '900x500', src: '/fitness1.jpg' }),
+            _react2.default.createElement(
+              _reactBootstrap.Carousel.Caption,
+              null,
+              _react2.default.createElement(
+                'h3',
+                null,
+                'First slide label'
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                'Nulla vitae elit libero, a pharetra augue mollis interdum.'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.Carousel.Item,
+            null,
+            _react2.default.createElement('img', { width: 900, height: 500, alt: '900x500', src: '/fitness1.jpg' }),
+            _react2.default.createElement(
+              _reactBootstrap.Carousel.Caption,
+              null,
+              _react2.default.createElement(
+                'h3',
+                null,
+                'Second slide label'
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.Carousel.Item,
+            null,
+            _react2.default.createElement('img', { width: 900, height: 500, alt: '900x500', src: '/fitness1.jpg' }),
+            _react2.default.createElement(
+              _reactBootstrap.Carousel.Caption,
+              null,
+              _react2.default.createElement(
+                'h3',
+                null,
+                'Third slide label'
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                'Praesent commodo cursus magna, vel scelerisque nisl consectetur.'
+              )
+            )
+          )
+        ),
+        ';'
+      );
+    }
+  }]);
+
+  return AddCarousel;
 }(_react2.default.Component);
 
 function calculate(h, w, age, g, activity) {
@@ -19007,18 +19090,18 @@ function calculate(h, w, age, g, activity) {
   return Math.round(suggested);
 }
 
-var FitnessTracker = function (_React$Component3) {
-  _inherits(FitnessTracker, _React$Component3);
+var FitnessTracker = function (_React$Component4) {
+  _inherits(FitnessTracker, _React$Component4);
 
   function FitnessTracker() {
     _classCallCheck(this, FitnessTracker);
 
-    var _this3 = _possibleConstructorReturn(this, (FitnessTracker.__proto__ || Object.getPrototypeOf(FitnessTracker)).call(this));
+    var _this4 = _possibleConstructorReturn(this, (FitnessTracker.__proto__ || Object.getPrototypeOf(FitnessTracker)).call(this));
 
-    _this3.state = { bodystats: [], calories: 0 };
-    _this3.update = _this3.update.bind(_this3);
+    _this4.state = { bodystats: [], calories: 0 };
+    _this4.update = _this4.update.bind(_this4);
     //this.calculate = this.calculate.bind(this);
-    return _this3;
+    return _this4;
   }
 
   _createClass(FitnessTracker, [{
@@ -19032,16 +19115,16 @@ var FitnessTracker = function (_React$Component3) {
   }, {
     key: 'loadData',
     value: function loadData() {
-      var _this4 = this;
+      var _this5 = this;
 
       fetch('/api/data').then(function (response) {
         if (response.ok) {
           //Returns whether there was a successful response
           response.json().then(function (data) {
             //Parses the body of the response as a JSON
-            _this4.setState({ bodystats: data.records }); //Adds the saved data to the state on the load
-            _this4.state.calories = calculate(_this4.state.bodystats[0].height, _this4.state.bodystats[0].weight, _this4.state.bodystats[0].age, _this4.state.bodystats[0].gender, _this4.state.bodystats[0].activity);
-            _this4.setState({ calories: _this4.state.calories });
+            _this5.setState({ bodystats: data.records }); //Adds the saved data to the state on the load
+            _this5.state.calories = calculate(_this5.state.bodystats[0].height, _this5.state.bodystats[0].weight, _this5.state.bodystats[0].age, _this5.state.bodystats[0].gender, _this5.state.bodystats[0].activity);
+            _this5.setState({ calories: _this5.state.calories });
           });
         } else {
           response.json().then(function (error) {
@@ -19059,7 +19142,7 @@ var FitnessTracker = function (_React$Component3) {
   }, {
     key: 'update',
     value: function update(userInput) {
-      var _this5 = this;
+      var _this6 = this;
 
       fetch('/api/data', {
         method: 'POST',
@@ -19068,10 +19151,10 @@ var FitnessTracker = function (_React$Component3) {
       }).then(function (res) {
         if (res.ok) {
           res.json().then(function (updatedStat) {
-            _this5.state.bodystats[0] = updatedStat;
-            _this5.setState({ bodystats: _this5.state.bodystats });
-            _this5.state.calories = calculate(_this5.state.bodystats[0].height, _this5.state.bodystats[0].weight, _this5.state.bodystats[0].age, _this5.state.bodystats[0].gender, _this5.state.bodystats[0].activity);
-            _this5.setState({ calories: _this5.state.calories });
+            _this6.state.bodystats[0] = updatedStat;
+            _this6.setState({ bodystats: _this6.state.bodystats });
+            _this6.state.calories = calculate(_this6.state.bodystats[0].height, _this6.state.bodystats[0].weight, _this6.state.bodystats[0].age, _this6.state.bodystats[0].gender, _this6.state.bodystats[0].activity);
+            _this6.setState({ calories: _this6.state.calories });
           });
         } else {
           res.json().then(function (error) {
@@ -19096,7 +19179,9 @@ var FitnessTracker = function (_React$Component3) {
         _react2.default.createElement('hr', null),
         _react2.default.createElement(AddBodyInfo, { update: this.update }),
         _react2.default.createElement('hr', null),
-        _react2.default.createElement(NutritionStats, { calories: this.state.calories })
+        _react2.default.createElement(NutritionStats, { calories: this.state.calories }),
+        _react2.default.createElement('hr', null),
+        _react2.default.createElement(AddCarousel, null)
       );
     }
   }]);

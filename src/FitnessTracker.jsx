@@ -1,6 +1,6 @@
 // NEW: added the import for react.
 import React from 'react';
-import {Table, Form, Button} from 'react-bootstrap';
+import {Table, Carousel, CarouselItem, Button} from 'react-bootstrap';
 
 const BodyRow = (props) => (
   <tr>
@@ -20,7 +20,7 @@ function BodyStats(props) {
   ));
   return (
     <div style={{fontFamily: 'Bookman Old Style', marginLeft: 'auto', marginRight:'auto', width: '50%'}}>
-    <Table striped bordered hover size = "lg">
+    <Table striped bordered hover>
       <thead>
         <tr>
           <th>Height</th>
@@ -91,15 +91,41 @@ class AddBodyInfo extends React.Component {
               bsSize = "small"
               onClick = {this.handleSubmit}>Update</Button>
             </form>
-
-          <Form>
-            
-          </Form>
-
-
           </div>
         )
       }
+}
+
+class AddCarousel extends React.Component{
+  render() {
+    return (
+      <div>
+        <Carousel>
+  <Carousel.Item>
+    <img width={900} height={500} alt="900x500" src="/fitness1.jpg" />
+    <Carousel.Caption>
+      <h3>First slide label</h3>
+      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+    </Carousel.Caption>
+  </Carousel.Item>
+  <Carousel.Item>
+    <img width={900} height={500} alt="900x500" src="/fitness1.jpg" />
+    <Carousel.Caption>
+      <h3>Second slide label</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </Carousel.Caption>
+  </Carousel.Item>
+  <Carousel.Item>
+    <img width={900} height={500} alt="900x500" src="/fitness1.jpg" />
+    <Carousel.Caption>
+      <h3>Third slide label</h3>
+      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+    </Carousel.Caption>
+  </Carousel.Item>
+</Carousel>;
+      </div>
+    )
+  }
 }
 
 function calculate(h, w, age, g, activity){
@@ -205,6 +231,8 @@ export default class FitnessTracker extends React.Component {
         <AddBodyInfo update = {this.update} />
         <hr />
         <NutritionStats calories = {this.state.calories}/>
+        <hr />
+        <AddCarousel />
       </div>
     );
   }
