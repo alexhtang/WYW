@@ -47,7 +47,7 @@ const App = (props) => (
           <NavbarBrand>
             <Link to = '/'>WYW</Link>
           </NavbarBrand>
-
+        
           <NavItem style = {{paddingRight: '10px'}}>
             <Link to = '/FitnessTracker'>Fitness Tracker</Link>
           </NavItem>
