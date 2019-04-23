@@ -7878,7 +7878,7 @@ var _FitnessTracker = __webpack_require__(509);
 
 var _FitnessTracker2 = _interopRequireDefault(_FitnessTracker);
 
-var _Meals = __webpack_require__(510);
+var _Meals = __webpack_require__(515);
 
 var _Meals2 = _interopRequireDefault(_Meals);
 
@@ -19107,498 +19107,7 @@ var FitnessTracker = function (_React$Component3) {
 exports.default = FitnessTracker;
 
 /***/ }),
-/* 510 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // NEW: added the import for react.
-
-
-var MealSummary = function (_React$Component) {
-  _inherits(MealSummary, _React$Component);
-
-  function MealSummary() {
-    _classCallCheck(this, MealSummary);
-
-    var _this = _possibleConstructorReturn(this, (MealSummary.__proto__ || Object.getPrototypeOf(MealSummary)).call(this));
-
-    _this.state = {
-      selectValue: '',
-      showFoodFormPopup: false,
-      showExerciseFormPopup: false
-
-    };
-    _this.handleSubmit = _this.handleSubmit.bind(_this);
-    _this.handleSelectChange = _this.handleSelectChange.bind(_this);
-    return _this;
-  }
-
-  _createClass(MealSummary, [{
-    key: 'handleSelectChange',
-    value: function handleSelectChange(e) {
-      this.setState({ selectValue: e.target.value });
-    }
-  }, {
-    key: 'handleSubmit',
-    value: function handleSubmit(e) {
-      e.preventDefault();
-      if (this.state.selectValue === 'addFood') {
-        this.toggleFoodFormPopup();
-      } else if (this.state.selectValue === 'addExercise') {
-        this.toggleExerciseFormPopup();
-      }
-    }
-  }, {
-    key: 'toggleFoodFormPopup',
-    value: function toggleFoodFormPopup() {
-      this.setState({
-        showFoodFormPopup: !this.state.showFoodFormPopup
-      });
-    }
-  }, {
-    key: 'toggleExerciseFormPopup',
-    value: function toggleExerciseFormPopup() {
-      this.setState({
-        showExerciseFormPopup: !this.state.showExerciseFormPopup
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'h4',
-          null,
-          'Your Daily Summary'
-        ),
-        _react2.default.createElement(
-          'h5',
-          null,
-          'Total Calories: ',
-          this.props.totalCalories
-        ),
-        _react2.default.createElement(
-          'h4',
-          null,
-          'Enter Food or Exercise'
-        ),
-        _react2.default.createElement(
-          'select',
-          {
-            value: this.state.selectValue,
-            onChange: this.handleSelectChange },
-          _react2.default.createElement(
-            'option',
-            { value: '' },
-            'Select Option'
-          ),
-          _react2.default.createElement(
-            'option',
-            { value: 'addFood' },
-            'Add Food'
-          ),
-          _react2.default.createElement(
-            'option',
-            { value: 'addExercise' },
-            'Add Exercise'
-          )
-        ),
-        _react2.default.createElement(
-          'button',
-          { onClick: this.handleSubmit },
-          'Add'
-        ),
-        this.state.showFoodFormPopup ? _react2.default.createElement(AddMeal, {
-          text: 'Close Me',
-          closeFoodFormPopup: this.toggleFoodFormPopup.bind(this),
-          createFood: this.props.createFood
-        }) : null,
-        this.state.showExerciseFormPopup ? _react2.default.createElement(AddExercise, {
-          text: 'Close Me',
-          closeExerciseFormPopup: this.toggleExerciseFormPopup.bind(this),
-          createFood: this.props.createFood
-        }) : null
-      );
-    }
-  }]);
-
-  return MealSummary;
-}(_react2.default.Component);
-
-/*
-      <h4>Total Calories: {this.props.totalCalories}</h4>
-
-*/
-
-var FoodTableRow = function FoodTableRow(props) {
-  return _react2.default.createElement(
-    'tr',
-    null,
-    _react2.default.createElement(
-      'td',
-      null,
-      props.food.foodName
-    ),
-    _react2.default.createElement(
-      'td',
-      null,
-      props.food.numberOfServings
-    ),
-    _react2.default.createElement(
-      'td',
-      null,
-      props.food.mealType
-    ),
-    _react2.default.createElement(
-      'td',
-      null,
-      props.food.calories
-    ),
-    _react2.default.createElement(
-      'td',
-      null,
-      props.food.fat
-    ),
-    _react2.default.createElement(
-      'td',
-      null,
-      props.food.carbohydrates
-    )
-  );
-};
-
-function MealTable(props) {
-  var FoodTableRows = props.foods.map(function (food) {
-    return _react2.default.createElement(FoodTableRow, { key: food.id, food: food });
-  });
-  return _react2.default.createElement(
-    'table',
-    { className: 'bordered-table' },
-    _react2.default.createElement(
-      'thead',
-      null,
-      _react2.default.createElement(
-        'tr',
-        null,
-        _react2.default.createElement(
-          'th',
-          null,
-          'Food Name'
-        ),
-        _react2.default.createElement(
-          'th',
-          null,
-          'Servings'
-        ),
-        _react2.default.createElement(
-          'th',
-          null,
-          'Meal Type'
-        ),
-        _react2.default.createElement(
-          'th',
-          null,
-          'Calories'
-        ),
-        _react2.default.createElement(
-          'th',
-          null,
-          'Fat'
-        ),
-        _react2.default.createElement(
-          'th',
-          null,
-          'Carbohydrates'
-        )
-      )
-    ),
-    _react2.default.createElement(
-      'tbody',
-      null,
-      FoodTableRows
-    )
-  );
-}
-
-var AddExercise = function (_React$Component2) {
-  _inherits(AddExercise, _React$Component2);
-
-  function AddExercise() {
-    _classCallCheck(this, AddExercise);
-
-    var _this2 = _possibleConstructorReturn(this, (AddExercise.__proto__ || Object.getPrototypeOf(AddExercise)).call(this));
-
-    _this2.state = {};
-    _this2.handleSubmit = _this2.handleSubmit.bind(_this2);
-    return _this2;
-  }
-
-  _createClass(AddExercise, [{
-    key: 'handleSubmit',
-    value: function handleSubmit(e) {
-      e.preventDefault();
-      /*let form = document.forms.addExercise;
-      this.props.createFood({
-        ExerciseName: form.exerciseName.value,
-        calories: form.calories.value,
-      });
-       // Clear the form for the next input.
-      form.ExerciseName.value = '';
-      form.calories.value = '';*/
-      this.props.closeExerciseFormPopup();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'form',
-          { name: 'addExercise', onSubmit: this.handleSubmit },
-          _react2.default.createElement('input', { type: 'text', name: 'ExerciseName', placeholder: 'Exercise Name' }),
-          _react2.default.createElement('input', { type: 'text', name: 'calories', placeholder: 'Calories' }),
-          _react2.default.createElement(
-            'button',
-            null,
-            'Add'
-          )
-        )
-      );
-    }
-  }]);
-
-  return AddExercise;
-}(_react2.default.Component);
-
-var AddMeal = function (_React$Component3) {
-  _inherits(AddMeal, _React$Component3);
-
-  function AddMeal() {
-    _classCallCheck(this, AddMeal);
-
-    var _this3 = _possibleConstructorReturn(this, (AddMeal.__proto__ || Object.getPrototypeOf(AddMeal)).call(this));
-
-    _this3.state = {
-      mealType: 'Breakfast'
-    };
-    _this3.handleSubmit = _this3.handleSubmit.bind(_this3);
-    _this3.handleSelectChange = _this3.handleSelectChange.bind(_this3);
-    return _this3;
-  }
-
-  _createClass(AddMeal, [{
-    key: 'handleSubmit',
-    value: function handleSubmit(e) {
-      e.preventDefault();
-      var form = document.forms.addMeal;
-      this.props.createFood({
-        foodName: form.foodName.value,
-        calories: form.calories.value,
-        mealType: this.state.mealType,
-        fat: form.fat.value,
-        carbohydrates: form.carbohydrates.value,
-        numberOfServings: form.numberOfServings.value
-      });
-
-      // Clear the form for the next input.
-      form.foodName.value = '';
-      form.calories.value = '';
-      this.props.closeFoodFormPopup();
-    }
-  }, {
-    key: 'handleSelectChange',
-    value: function handleSelectChange(e) {
-      this.setState({ mealType: e.target.value });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'form',
-          { name: 'addMeal', onSubmit: this.handleSubmit },
-          _react2.default.createElement('input', { type: 'text', name: 'foodName', placeholder: 'Food Name' }),
-          _react2.default.createElement('input', { type: 'text', name: 'calories', placeholder: 'Calories' }),
-          _react2.default.createElement('input', { type: 'text', name: 'fat', placeholder: 'Fat' }),
-          _react2.default.createElement('input', { type: 'text', name: 'carbohydrates', placeholder: 'Carbohydrates' }),
-          _react2.default.createElement('input', { type: 'number', name: 'numberOfServings', placeholder: 'Number of Servings' }),
-          _react2.default.createElement(
-            'select',
-            {
-              value: this.state.mealType,
-              onChange: this.handleSelectChange
-            },
-            _react2.default.createElement(
-              'option',
-              { value: 'Breakfast' },
-              'Breakfast'
-            ),
-            _react2.default.createElement(
-              'option',
-              { value: 'Lunch' },
-              'Lunch'
-            ),
-            _react2.default.createElement(
-              'option',
-              { value: 'Dinner' },
-              'Dinner'
-            ),
-            _react2.default.createElement(
-              'option',
-              { value: 'Snack' },
-              'Snack'
-            )
-          ),
-          _react2.default.createElement(
-            'button',
-            null,
-            'Add'
-          )
-        )
-      );
-    }
-  }]);
-
-  return AddMeal;
-}(_react2.default.Component);
-
-var Meals = function (_React$Component4) {
-  _inherits(Meals, _React$Component4);
-
-  function Meals() {
-    _classCallCheck(this, Meals);
-
-    var _this4 = _possibleConstructorReturn(this, (Meals.__proto__ || Object.getPrototypeOf(Meals)).call(this));
-
-    _this4.state = { foods: [],
-      totalCalories: 0 };
-
-    _this4.addMeal = _this4.addMeal.bind(_this4);
-    return _this4;
-  }
-
-  _createClass(Meals, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.loadData();
-    }
-  }, {
-    key: 'loadData',
-    value: function loadData() {
-      var _this5 = this;
-
-      fetch('/api/meals').then(function (response) {
-        if (response.ok) {
-          response.json().then(function (data) {
-            data.records.forEach(function (meal) {
-              meal.created = new Date(meal.created);
-              //this.setState({totalCalories: Number(this.state.totalCalories)+meal.calories});
-
-              if (meal.completionDate) meal.completionDate = new Date(meal.completionDate);
-            });
-            _this5.setState({ foods: data.records });
-            _this5.setState({ totalCalories: data.totalCalories });
-          });
-        } else {
-          response.json().then(function (error) {
-            alert("Failed to fetch issues:" + error.message);
-          });
-        }
-      }).catch(function (err) {
-        alert("Error in fetching data from server:", err);
-      });
-    }
-
-    /*
-       this.setState({
-            foods: foods,
-          });
-          this.calculateCalories();
-    */
-
-  }, {
-    key: 'addMeal',
-    value: function addMeal(newMeal) {
-      var _this6 = this;
-
-      fetch('/api/meals', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newMeal)
-      }).then(function (res) {
-        if (res.ok) {
-          res.json().then(function (updatedMeal) {
-            var newMeals = _this6.state.foods.concat(updatedMeal);
-            _this6.setState({ foods: newMeals });
-            _this6.setState({ totalCalories: parseInt(_this6.state.totalCalories) + parseInt(updatedMeal.calories) });
-          });
-        } else {
-          res.json().then(function (error) {
-            alert('Failed to add issue: ' + error.message);
-          });
-        }
-      });
-    }
-
-    /*
-    const newMeals = this.state.foods.slice();
-        newMeal.id = this.state.foods.length + 1;
-        newMeals.push(newMeal);
-        this.setState({ foods: newMeals,
-          totalCalories: Number(this.state.totalCalories) + Number(newMeal.calories)
-      });
-    */
-
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'h1',
-          null,
-          'Meal Tracker'
-        ),
-        _react2.default.createElement(MealSummary, _defineProperty({ totalCalories: this.totalCalories, createFood: this.addMeal }, 'totalCalories', this.state.totalCalories)),
-        _react2.default.createElement('hr', null),
-        _react2.default.createElement(MealTable, { foods: this.state.foods }),
-        _react2.default.createElement('hr', null)
-      );
-    }
-  }]);
-
-  return Meals;
-}(_react2.default.Component);
-
-exports.default = Meals;
-
-/***/ }),
+/* 510 */,
 /* 511 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19866,6 +19375,603 @@ var Review = function (_React$Component3) {
 }(_react2.default.Component);
 
 exports.default = Review;
+
+/***/ }),
+/* 512 */,
+/* 513 */,
+/* 514 */,
+/* 515 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _MealSummary = __webpack_require__(516);
+
+var _MealSummary2 = _interopRequireDefault(_MealSummary);
+
+var _MealTable = __webpack_require__(517);
+
+var _MealTable2 = _interopRequireDefault(_MealTable);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // NEW: added the import for react.
+
+
+var Meals = function (_React$Component) {
+  _inherits(Meals, _React$Component);
+
+  function Meals() {
+    _classCallCheck(this, Meals);
+
+    var _this = _possibleConstructorReturn(this, (Meals.__proto__ || Object.getPrototypeOf(Meals)).call(this));
+
+    _this.state = { foods: [],
+      totalCalories: 0 };
+
+    _this.addMeal = _this.addMeal.bind(_this);
+    return _this;
+  }
+
+  _createClass(Meals, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.loadData();
+    }
+  }, {
+    key: 'loadData',
+    value: function loadData() {
+      var _this2 = this;
+
+      fetch('/api/meals').then(function (response) {
+        if (response.ok) {
+          response.json().then(function (data) {
+            data.records.forEach(function (meal) {
+              meal.created = new Date(meal.created);
+              //this.setState({totalCalories: Number(this.state.totalCalories)+meal.calories});
+
+              if (meal.completionDate) meal.completionDate = new Date(meal.completionDate);
+            });
+            _this2.setState({ foods: data.records });
+            _this2.setState({ totalCalories: data.totalCalories });
+          });
+        } else {
+          response.json().then(function (error) {
+            alert("Failed to fetch issues:" + error.message);
+          });
+        }
+      }).catch(function (err) {
+        alert("Error in fetching data from server:", err);
+      });
+    }
+
+    /*
+       this.setState({
+            foods: foods,
+          });
+          this.calculateCalories();
+    */
+
+  }, {
+    key: 'addMeal',
+    value: function addMeal(newMeal) {
+      var _this3 = this;
+
+      fetch('/api/meals', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newMeal)
+      }).then(function (res) {
+        if (res.ok) {
+          res.json().then(function (updatedMeal) {
+            var newMeals = _this3.state.foods.concat(updatedMeal);
+            _this3.setState({ foods: newMeals });
+            _this3.setState({ totalCalories: parseInt(_this3.state.totalCalories) + parseInt(updatedMeal.calories) });
+          });
+        } else {
+          res.json().then(function (error) {
+            alert('Failed to add issue: ' + error.message);
+          });
+        }
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h1',
+          null,
+          'Meal Tracker'
+        ),
+        _react2.default.createElement(_MealSummary2.default, _defineProperty({ totalCalories: this.totalCalories, createFood: this.addMeal }, 'totalCalories', this.state.totalCalories)),
+        _react2.default.createElement('hr', null),
+        _react2.default.createElement(_MealTable2.default, { foods: this.state.foods }),
+        _react2.default.createElement('hr', null)
+      );
+    }
+  }]);
+
+  return Meals;
+}(_react2.default.Component);
+
+exports.default = Meals;
+
+/***/ }),
+/* 516 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _AddExercise = __webpack_require__(518);
+
+var _AddExercise2 = _interopRequireDefault(_AddExercise);
+
+var _AddMeal = __webpack_require__(519);
+
+var _AddMeal2 = _interopRequireDefault(_AddMeal);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MealSummary = function (_React$Component) {
+  _inherits(MealSummary, _React$Component);
+
+  function MealSummary() {
+    _classCallCheck(this, MealSummary);
+
+    var _this = _possibleConstructorReturn(this, (MealSummary.__proto__ || Object.getPrototypeOf(MealSummary)).call(this));
+
+    _this.state = {
+      selectValue: '',
+      showFoodFormPopup: false,
+      showExerciseFormPopup: false
+
+    };
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.handleSelectChange = _this.handleSelectChange.bind(_this);
+    return _this;
+  }
+
+  _createClass(MealSummary, [{
+    key: 'handleSelectChange',
+    value: function handleSelectChange(e) {
+      this.setState({ selectValue: e.target.value });
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      if (this.state.selectValue === 'addFood') {
+        this.toggleFoodFormPopup();
+      } else if (this.state.selectValue === 'addExercise') {
+        this.toggleExerciseFormPopup();
+      }
+    }
+  }, {
+    key: 'toggleFoodFormPopup',
+    value: function toggleFoodFormPopup() {
+      this.setState({
+        showFoodFormPopup: !this.state.showFoodFormPopup
+      });
+    }
+  }, {
+    key: 'toggleExerciseFormPopup',
+    value: function toggleExerciseFormPopup() {
+      this.setState({
+        showExerciseFormPopup: !this.state.showExerciseFormPopup
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h4',
+          null,
+          'Your Daily Summary'
+        ),
+        _react2.default.createElement(
+          'h5',
+          null,
+          'Total Calories: ',
+          this.props.totalCalories
+        ),
+        _react2.default.createElement(
+          'h4',
+          null,
+          'Enter Food or Exercise'
+        ),
+        _react2.default.createElement(
+          'select',
+          {
+            value: this.state.selectValue,
+            onChange: this.handleSelectChange },
+          _react2.default.createElement(
+            'option',
+            { value: '' },
+            'Select Option'
+          ),
+          _react2.default.createElement(
+            'option',
+            { value: 'addFood' },
+            'Add Food'
+          ),
+          _react2.default.createElement(
+            'option',
+            { value: 'addExercise' },
+            'Add Exercise'
+          )
+        ),
+        _react2.default.createElement(
+          'button',
+          { onClick: this.handleSubmit },
+          'Add'
+        ),
+        this.state.showFoodFormPopup ? _react2.default.createElement(_AddMeal2.default, {
+          text: 'Close Me',
+          closeFoodFormPopup: this.toggleFoodFormPopup.bind(this),
+          createFood: this.props.createFood
+        }) : null,
+        this.state.showExerciseFormPopup ? _react2.default.createElement(_AddExercise2.default, {
+          text: 'Close Me',
+          closeExerciseFormPopup: this.toggleExerciseFormPopup.bind(this),
+          createFood: this.props.createFood
+        }) : null
+      );
+    }
+  }]);
+
+  return MealSummary;
+}(_react2.default.Component);
+
+exports.default = MealSummary;
+
+/***/ }),
+/* 517 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.MealTable = MealTable;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var FoodTableRow = function FoodTableRow(props) {
+  return _react2.default.createElement(
+    "tr",
+    null,
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.foodName
+    ),
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.numberOfServings
+    ),
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.mealType
+    ),
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.calories
+    ),
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.fat
+    ),
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.carbohydrates
+    )
+  );
+};
+
+function MealTable(props) {
+  var FoodTableRows = props.foods.map(function (food) {
+    return _react2.default.createElement(FoodTableRow, { key: food.id, food: food });
+  });
+  return _react2.default.createElement(
+    "table",
+    { className: "bordered-table" },
+    _react2.default.createElement(
+      "thead",
+      null,
+      _react2.default.createElement(
+        "tr",
+        null,
+        _react2.default.createElement(
+          "th",
+          null,
+          "Food Name"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Servings"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Meal Type"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Calories"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Fat"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Carbohydrates"
+        )
+      )
+    ),
+    _react2.default.createElement(
+      "tbody",
+      null,
+      FoodTableRows
+    )
+  );
+}
+
+exports.default = MealTable;
+
+/***/ }),
+/* 518 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AddExercise = function (_React$Component) {
+  _inherits(AddExercise, _React$Component);
+
+  function AddExercise() {
+    _classCallCheck(this, AddExercise);
+
+    var _this = _possibleConstructorReturn(this, (AddExercise.__proto__ || Object.getPrototypeOf(AddExercise)).call(this));
+
+    _this.state = {};
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    return _this;
+  }
+
+  _createClass(AddExercise, [{
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      /*let form = document.forms.addExercise;
+      this.props.createFood({
+        ExerciseName: form.exerciseName.value,
+        calories: form.calories.value,
+      });
+         // Clear the form for the next input.
+      form.ExerciseName.value = '';
+      form.calories.value = '';*/
+      this.props.closeExerciseFormPopup();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "div",
+        null,
+        _react2.default.createElement(
+          "form",
+          { name: "addExercise", onSubmit: this.handleSubmit },
+          _react2.default.createElement("input", { type: "text", name: "ExerciseName", placeholder: "Exercise Name" }),
+          _react2.default.createElement("input", { type: "text", name: "calories", placeholder: "Calories" }),
+          _react2.default.createElement(
+            "button",
+            null,
+            "Add"
+          )
+        )
+      );
+    }
+  }]);
+
+  return AddExercise;
+}(_react2.default.Component);
+
+exports.default = AddExercise;
+
+/***/ }),
+/* 519 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AddMeal = function (_React$Component) {
+  _inherits(AddMeal, _React$Component);
+
+  function AddMeal() {
+    _classCallCheck(this, AddMeal);
+
+    var _this = _possibleConstructorReturn(this, (AddMeal.__proto__ || Object.getPrototypeOf(AddMeal)).call(this));
+
+    _this.state = {
+      mealType: 'Breakfast'
+    };
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.handleSelectChange = _this.handleSelectChange.bind(_this);
+    return _this;
+  }
+
+  _createClass(AddMeal, [{
+    key: 'handleSubmit',
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      var form = document.forms.addMeal;
+      this.props.createFood({
+        foodName: form.foodName.value,
+        calories: form.calories.value,
+        mealType: this.state.mealType,
+        fat: form.fat.value,
+        carbohydrates: form.carbohydrates.value,
+        numberOfServings: form.numberOfServings.value
+      });
+
+      // Clear the form for the next input.
+      form.foodName.value = '';
+      form.calories.value = '';
+      this.props.closeFoodFormPopup();
+    }
+  }, {
+    key: 'handleSelectChange',
+    value: function handleSelectChange(e) {
+      this.setState({ mealType: e.target.value });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'form',
+          { name: 'addMeal', onSubmit: this.handleSubmit },
+          _react2.default.createElement('input', { type: 'text', name: 'foodName', placeholder: 'Food Name' }),
+          _react2.default.createElement('input', { type: 'text', name: 'calories', placeholder: 'Calories' }),
+          _react2.default.createElement('input', { type: 'text', name: 'fat', placeholder: 'Fat' }),
+          _react2.default.createElement('input', { type: 'text', name: 'carbohydrates', placeholder: 'Carbohydrates' }),
+          _react2.default.createElement('input', { type: 'number', name: 'numberOfServings', placeholder: 'Number of Servings' }),
+          _react2.default.createElement(
+            'select',
+            {
+              value: this.state.mealType,
+              onChange: this.handleSelectChange
+            },
+            _react2.default.createElement(
+              'option',
+              { value: 'Breakfast' },
+              'Breakfast'
+            ),
+            _react2.default.createElement(
+              'option',
+              { value: 'Lunch' },
+              'Lunch'
+            ),
+            _react2.default.createElement(
+              'option',
+              { value: 'Dinner' },
+              'Dinner'
+            ),
+            _react2.default.createElement(
+              'option',
+              { value: 'Snack' },
+              'Snack'
+            )
+          ),
+          _react2.default.createElement(
+            'button',
+            null,
+            'Add'
+          )
+        )
+      );
+    }
+  }]);
+
+  return AddMeal;
+}(_react2.default.Component);
+
+exports.default = AddMeal;
 
 /***/ })
 ],[228]);
