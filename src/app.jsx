@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory, withRouter, IndexRoute, Link } from 'react-router';
-import {Navbar} from 'react-bootstrap';
+import {Navbar, Nav, NavbarBrand, NavItem} from 'react-bootstrap';
 import Dashboard from './Dashboard.jsx';
 import FitnessTracker from './FitnessTracker.jsx';
 import Meals from './Meals.jsx';
@@ -19,7 +19,7 @@ const NoMatch = () => <p>Page Not Found</p>;
 const App = (props) => (
   <div>
      
-     <nav className=" header navbar navbar-expand-lg navbar-dark border-dark border-bottom rounded-bottom">
+     {/* <nav className=" header navbar navbar-expand-lg navbar-dark border-dark border-bottom rounded-bottom">
         <Link to ="/">
        <a className="navbar-brand" >WYW</a> </Link>
         
@@ -39,7 +39,27 @@ const App = (props) => (
             <Link to = "/Review">Reviews</Link>            </li>
           </ul>
         </div>
-      </nav>
+      </nav> */}
+
+      <div>
+      <Nav>
+        <Navbar>
+          <NavbarBrand>
+            <Link to = '/'>WYW</Link>
+          </NavbarBrand>
+
+          <NavItem style = {{paddingRight: '10px'}}>
+            <Link to = '/FitnessTracker'>Fitness Tracker</Link>
+          </NavItem>
+          <NavItem style = {{paddingRight: '10px'}}>
+            <Link to = '/Meals'>Meals</Link>
+          </NavItem>
+          <NavItem style = {{paddingRight: '10px'}}>
+            <Link to = '/Review'>Reviews</Link>
+          </NavItem>
+        </Navbar>
+      </Nav>
+      </div>
 
     
     <div className="contents">
