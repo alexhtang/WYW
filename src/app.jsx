@@ -4,7 +4,7 @@ import { Router, Route, hashHistory, withRouter, IndexRoute, Link } from 'react-
 import {Navbar, Nav, NavbarBrand, NavItem, NavbarCollapse} from 'react-bootstrap';
 import Dashboard from './Dashboard.jsx';
 import FitnessTracker from './FitnessTracker.jsx';
-import Meals from './Meals.jsx';
+import Meals from './meals/Meals.jsx';
 import Review from './Review.jsx';
 
 
