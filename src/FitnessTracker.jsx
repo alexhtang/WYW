@@ -1,6 +1,7 @@
 // NEW: added the import for react.
 import React from 'react';
-import {Table, Carousel, CarouselItem, Button} from 'react-bootstrap';
+import {Table, Carousel, CarouselItem, Button, Form, FormGroup, FormControl, HelpBlock, ControlLabel, Grid, Row, Col} from 'react-bootstrap';
+import { formatWithOptions } from 'util';
 
 const BodyRow = (props) => (
   <tr>
@@ -52,45 +53,185 @@ class AddBodyInfo extends React.Component {
     constructor() {
         super();
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleHeightChange = this.handleHeightChange.bind(this);
+        this.handleWeightChange = this.handleWeightChange.bind(this);
+        this.handleAgeChange = this.handleAgeChange.bind(this);
+        this.handleActivityChange = this.handleActivityChange.bind(this);
+        this.handleGenderChange = this.handleGenderChange.bind(this);
+        
+        this.state = {
+          height: '',
+          weight: '',
+          age: '',
+          activity: 'Light',
+          gender:'Male',
+        };
+      }
+
+      getValidationStateHeight() {
+        const s = this.state.height;
+        const length = this.state.height.length;
+        if(length == 0) return 'warning';
+        else if(length<3 || length > 4) return 'error';
+        else if(length == 4 && parseInt(s.substring(2,4))>12) return 'error';
+        else if(s.charAt(1) == "'") return 'success';
+        return null;
+      }
+      getValidationStateWeight() {
+        const length = this.state.weight.length;
+        if(length == 0) return 'warning';
+        else if(length>3) return 'error';
+        else if(length>1) return 'success';
+        return null;
+      }
+      getValidationStateAge() {
+        const length = this.state.age.length;
+        if(length == 0) return 'warning';
+        else if(length>2) return 'error';
+        else if(length>0) return 'success';
+        return null;
       }
     
       handleSubmit(e) {
         e.preventDefault();
-        const form = document.forms.updateBodyStat;
-        this.props.update({
-          height: (form.height.value),
-          weight: form.weight.value,
-          age: form.age.value,
-          activity: form.activity.value,
-          gender: form.gender.value
-        });
+
+        if(this.getValidationStateHeight() == 'error' || this.getValidationStateWeight() == 'error' || this.getValidationStateAge() == 'error'){
+          window.alert('Please Fill Out the Form Correctly');
+        }
+        else if(this.getValidationStateHeight() == 'warning' || this.getValidationStateWeight() == 'warning' || this.getValidationStateAge() == 'warning'){
+          window.alert('You are missing required fields!');
+        }
+        else{
+          this.props.update({
+            height: (this.state.height),
+            weight: this.state.weight,
+            age: this.state.age,
+            activity: this.state.activity,
+            gender: this.state.gender
+          });
+        }
         // clear the form for the next input
-        form.height.value = ""; form.weight.value = ""; form.age.value = ""; form.activity.value= ""; form.gender.value = "";
+        // form.height.value = ""; form.weight.value = ""; form.age.value = ""; form.activity.value= ""; form.gender.value = "";
       }
+
+      handleHeightChange(e) {
+        e.preventDefault();
+        this.setState({ height: e.target.value });
+      }
+
+      handleWeightChange(e){
+        e.preventDefault();
+        this.setState({ weight: e.target.value });
+      }
+      handleAgeChange(e){
+        e.preventDefault();
+        this.setState({ age: e.target.value });
+      }
+      handleActivityChange(e){
+        e.preventDefault();
+        this.setState({ activity: e.target.value });
+      }
+      handleGenderChange(e){
+        e.preventDefault();
+        this.setState({ gender: e.target.value });
+      }
+      
     
       render() {
         return (
-          <div>
-            <form style={{fontFamily: 'Bookman Old Style'}} name="updateBodyStat" onSubmit={this.handleSubmit}>
-              <input type="text" name="height" maxLength = "4" placeholder="Height (ft'inches)" style = {{borderRadius: '5px'}} />
-              <input type="text" name="weight" maxLength = "3" placeholder="Weight (lbs)" style = {{borderRadius: '5px'}}/>
-              <input type="text" name="age" maxLength = "2" placeholder="Age" style = {{borderRadius: '5px'}}/><hr></hr>
-              <label name="activity">Activity Level:</label>
-              <select style={{marginRight:'20px'}} name = "activity">
-                <option>Light</option>
-                <option>Moderate</option>
-                <option>Vigorous</option>
-              </select>
-              <label name="gender">Biological Gender:</label>
-              <select name = "gender">
-                <option>Male</option>
-                <option>Female</option>
-              </select>
-              <Button
-              bsStyle = "secondary"
-              bsSize = "small"
-              onClick = {this.handleSubmit}>Update</Button>
-            </form>
+          <div style = {{alignText: 'center'}}>
+            <Grid>
+              <Row>
+                <Col md = {5}>
+                <form > {/*Height*/}
+                  <FormGroup
+                    controlId="formHeight"
+                    validationState={this.getValidationStateHeight()}
+                  >
+                    
+                    <FormControl
+                      type="text"
+                      
+                      value={this.state.value}
+                      placeholder="Height (Ex. 6'4)"
+                      onChange={this.handleHeightChange}
+                    />
+                    <FormControl.Feedback />
+                  </FormGroup>
+                </form>
+                </Col>
+                <Col md = {5}>
+                <form> {/*Weight*/}
+                  <FormGroup
+                    controlId="formWeight"
+                    validationState={this.getValidationStateWeight()}
+                  >
+                    
+                    <FormControl
+                      type="text"
+                      value={this.state.value}
+                      placeholder="Weight (lbs)"
+                      onChange={this.handleWeightChange}
+                    />
+                    <FormControl.Feedback />
+                  </FormGroup>
+                </form>
+                </Col>
+                <Col md = {2}>
+                <form> {/*Age*/}
+                  <FormGroup
+                    controlId="formAge"
+                    validationState={this.getValidationStateAge()}
+                  >
+                    
+                    <FormControl
+                      type="text"
+                      value={this.state.value}
+                      placeholder="Age"
+                      onChange={this.handleAgeChange}
+                    />
+                    <FormControl.Feedback />
+                  </FormGroup>
+                </form>
+                </Col>
+              </Row>
+
+              <Row>
+                <Col md = {5}>
+                  <form>
+                  <FormGroup controlId="formActiviy">
+                    <ControlLabel>Activity Level</ControlLabel>
+                    <FormControl onChange = {this.handleActivityChange} componentClass="select" placeholder="select">
+                      <option value="Light">Light</option>
+                      <option value="Moderate">Moderate</option>
+                      <option value="Vigorous">Vigorous</option>
+                    </FormControl>
+                  </FormGroup>
+                  </form>
+                </Col>
+                <Col md = {5}>
+                  <Form>
+                  <FormGroup controlId="formGender">
+                    <ControlLabel>Biological Gender</ControlLabel>
+                    <FormControl onChange = {this.handleGenderChange} componentClass="select" placeholder="select">
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </FormControl>
+                  </FormGroup>
+                  </Form>
+                </Col>
+
+                <Col md = {2}>
+                  <Button
+                      style = {{marginTop: '20px'}}
+                      bsStyle = "secondary"
+                      bsSize = "small"
+                      onClick = {this.handleSubmit}>Update</Button>
+
+                  
+                </Col>
+              </Row>
+            </Grid>
           </div>
         )
       }
@@ -99,30 +240,32 @@ class AddBodyInfo extends React.Component {
 class AddCarousel extends React.Component{
   render() {
     return (
-      <div>
+      <div style = {{paddingBottom: '15px'}}> 
+        <Grid>
+          <Col>
+          
         <Carousel>
-  <Carousel.Item>
-    <img width={900} height={500} alt="900x500" src="/fitness1.jpg" />
-    <Carousel.Caption>
-      <h3>First slide label</h3>
-      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-    </Carousel.Caption>
-  </Carousel.Item>
-  <Carousel.Item>
-    <img width={900} height={500} alt="900x500" src="/fitness1.jpg" />
-    <Carousel.Caption>
-      <h3>Second slide label</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </Carousel.Caption>
-  </Carousel.Item>
-  <Carousel.Item>
-    <img width={900} height={500} alt="900x500" src="/fitness1.jpg" />
-    <Carousel.Caption>
-      <h3>Third slide label</h3>
-      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-    </Carousel.Caption>
-  </Carousel.Item>
-</Carousel>;
+          <Carousel.Item>
+            <img className='center-block' width = '600px' height = '300px' src="/assets/fitness1.jpg" />
+            <Carousel.Caption>
+              <h3>Fitness</h3>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img className = 'center-block' width = '600px' height='300px'  src="/assets/zen1.jpg" />
+            <Carousel.Caption>
+              <h3>Mind</h3>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img className = 'center-block' width = '600px' height='300px' src="/assets/health1.jpg" />
+            <Carousel.Caption>
+              <h3>Health</h3>
+            </Carousel.Caption>
+          </Carousel.Item>
+        </Carousel>
+        </Col>
+        </Grid>
       </div>
     )
   }
@@ -225,14 +368,15 @@ export default class FitnessTracker extends React.Component {
     
     return (
       <div style = {{textAlign: "center"}}>
-        <h1 style={{fontStyle: 'bold', fontSize: '100', fontFamily: 'Bookman Old Style', paddingBottom: '50px'}}>Calorie Calculator</h1>
+        <div>
+        <AddCarousel />
+        </div>
         <BodyStats bodystats = {this.state.bodystats} />
         <hr />
         <AddBodyInfo update = {this.update} />
         <hr />
         <NutritionStats calories = {this.state.calories}/>
         <hr />
-        <AddCarousel />
       </div>
     );
   }
