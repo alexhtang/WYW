@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import {Table, Form, Row, Col, Carousel, CarouselItem, Card, FormGroup, FormControl, FormRow, ControlLabel, Button, ButtonToolbar, ButtonGroup} from 'react-bootstrap';
 
 export default class Dashboard extends React.Component {
   render() {
@@ -11,38 +12,52 @@ export default class Dashboard extends React.Component {
   }
 }
 
-
-
-class BodyStats extends React.Component {
-  render() {
-      const borderedStyle = {border: "1px solid black", padding: 6};
-      return (
-        <div class = "row">
-        </div>
-      )
-    }
-}
-
-// class BodyRow extends React.Component {
-//     render() {
-//       const borderedStyle = {border: "1px solid black", padding: 4};
-//       return (
-//         <tr>
-//             <td style={borderedStyle}>{this.props.body_height}</td>
-//             <td style={borderedStyle}>{this.props.body_weight}</td>
-//             <td style={borderedStyle}>{this.props.body_age}</td>
-//             <td style={borderedStyle}>{this.props.body_gender}</td>
-//         </tr>
-//       )
-//     }
-//   }
-
 class Description extends React.Component {
-render() {
-  return (
-    <div style={{textAlign: "center"}}>This is a placeholder for a description of the webapp.</div>
-  )
+  render() {
+    return (
+      <div style={{textAlign: "center"}}>This is a placeholder for a description of the webapp.</div>
+    )
+  }
 }
+
+class CarouselTest extends React.Component {
+  render() {
+    return(
+      <div style={{textAlign: "center"}}>
+        <Carousel>
+          <CarouselItem>
+            <div style={{textAlign: "center"}}>
+              <img src = "/fitness.jpg" height = "600px" width = "800px" />
+            </div>
+            <Carousel.Caption>
+              <h3>Fitness Tracker</h3>
+              <p>Calculate how many calories to burn per day!</p>
+            </Carousel.Caption>
+          </CarouselItem>
+
+          <CarouselItem>
+            <div style={{textAlign: "center"}}>
+             <img src = "/meals.jpg" height = "600px" width = "800px" />
+            </div>
+            <Carousel.Caption>
+              <h3>Meal Tracking</h3>
+              <p>See the nutritional value of your daily diet!</p>
+            </Carousel.Caption>
+          </CarouselItem>
+
+          <CarouselItem>
+            <div style={{textAlign: "center"}}>
+             <img src = "/reviews.jpg" height = "600px" width = "800px" />
+            </div>
+            <Carousel.Caption>
+              <h3>Reviews</h3>
+              <p>See what our customers think about WYW!</p>
+            </Carousel.Caption>
+          </CarouselItem>
+        </Carousel>
+      </div>
+    )
+  }
 }
 
 // class AddLogIn extends React.Component {
@@ -113,14 +128,27 @@ class ButtonTable extends React.Component {
   render() {
       const borderedStyle = {padding: 6};
       return (
+        // <div style={{textAlign: "center"}}>
+        //       <button>Meals</button>
+        //       {' '}
+        //       <button>Nutrition Tracker</button>
+        //       {' '}
+        //       <button>My Account</button>
+        //       {' '}
+        //       <button>History</button>
+        // </div>
         <div style={{textAlign: "center"}}>
-              <button>Meals</button>
-              {' '}
-              <button>Nutrition Tracker</button>
-              {' '}
-              <button>My Account</button>
-              {' '}
-              <button>History</button>
+            <ButtonGroup>
+              <Link to='/FitnessTracker'> <Button variant="secondary">Fitness Tracker</Button> </Link>
+            </ButtonGroup>
+            {' '}
+            <ButtonGroup>
+              <Link to='/meals'> <Button variant="secondary">Meals</Button> </Link>
+            </ButtonGroup>
+            {' '}
+            <ButtonGroup>
+              <Link to='/review'> <Button variant="secondary">Reviews</Button> </Link>
+            </ButtonGroup>
         </div>
       )
     }
@@ -152,11 +180,38 @@ render() {
   }
   else{
     logIn = <div style={{textAlign: "center"}}>
-          <form name="updateLogin" onSubmit={this.update}>
+          {/* <form name="updateLogin" onSubmit={this.update}>
             <input type="text" name="username" placeholder="Username" />
             <input type="password" name="password" placeholder="Password" />
             <Link to='/FitnessTracker'><button>Log In</button> </Link>
-          </form>
+          </form> */}
+          <Form>
+            {/* <FormRow>
+              <FormGroup as={Col}>
+                <ControlLabel>Username</ControlLabel>
+                <FormControl type="username" placeholder="Username" />
+              </FormGroup>
+
+              <FormGroup as={Col}>
+                <ControlLabel>Password</ControlLabel>
+                <FormControl type="password" placeholder="Password" />
+              </FormGroup>
+            </FormRow> */}
+
+            <Row className="justify-content-md-center">
+              <Col md="auto">
+                <FormControl type="username" placeholder="Username" />
+              </Col>
+              <Col md="auto">
+                <FormControl type="password" placeholder="Password" />
+              </Col>
+              <Col md="auto">
+              <Link to='/FitnessTracker'> <Button variant="secondary" type="submit">Submit</Button> </Link>
+              </Col>
+            </Row>
+
+            
+          </Form>
     </div>
   }
 
@@ -166,9 +221,12 @@ render() {
       <hr />
       {logIn}
       <hr />
+      <CarouselTest />
+      <hr />
       <Description />
       <hr/>
       <ButtonTable />
+      <hr/>
     </div>
   );
 }
