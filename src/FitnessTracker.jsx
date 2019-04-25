@@ -1,6 +1,6 @@
 // NEW: added the import for react.
 import React from 'react';
-import {Table, Carousel, CarouselItem, Button, Form, FormGroup, FormControl, HelpBlock, ControlLabel, Grid, Row, Col} from 'react-bootstrap';
+import {Table, Carousel, CarouselItem, Button, Form, FormGroup, FormControl, HelpBlock, ControlLabel, Grid, Row, Col, ProgressBar} from 'react-bootstrap';
 import { formatWithOptions } from 'util';
 
 const BodyRow = (props) => (
@@ -76,9 +76,6 @@ class AddBodyInfo extends React.Component {
           activity: 'Light',
           gender:'Male',
         };
-        const hVal = '';
-        const wVal = '';
-
       }
       
 
@@ -109,7 +106,7 @@ class AddBodyInfo extends React.Component {
     
       handleSubmit(e) {
         e.preventDefault();
-
+        
         if(this.getValidationStateHeight() == 'error' || this.getValidationStateWeight() == 'error' || this.getValidationStateAge() == 'error'){
           window.alert('Please Fill Out the Form Correctly');
         }
@@ -124,6 +121,7 @@ class AddBodyInfo extends React.Component {
             activity: this.state.activity,
             gender: this.state.gender
           });
+          
         }
         // clear the form for the next input
         // form.height.value = ""; form.weight.value = ""; form.age.value = ""; form.activity.value= ""; form.gender.value = "";
@@ -155,7 +153,7 @@ class AddBodyInfo extends React.Component {
     
       render() {
         return (
-          <div style = {{alignText: 'center'}}>
+          <div>
             <Grid>
               <Row>
                 <Col md = {5}>

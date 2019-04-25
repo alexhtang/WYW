@@ -18540,6 +18540,17 @@ var CarouselTest = function (_React$Component3) {
                 'p',
                 null,
                 'Calculate how many calories to burn per day!'
+              ),
+              _react2.default.createElement(
+                _reactRouter.Link,
+                { to: '/FitnessTracker' },
+                ' ',
+                _react2.default.createElement(
+                  _reactBootstrap.Button,
+                  { bsStyle: 'primary' },
+                  'Fitness Tracker'
+                ),
+                ' '
               )
             )
           ),
@@ -18563,6 +18574,17 @@ var CarouselTest = function (_React$Component3) {
                 'p',
                 null,
                 'See the nutritional value of your daily diet!'
+              ),
+              _react2.default.createElement(
+                _reactRouter.Link,
+                { to: '/meals' },
+                ' ',
+                _react2.default.createElement(
+                  _reactBootstrap.Button,
+                  { bsStyle: 'primary' },
+                  'Meals'
+                ),
+                ' '
               )
             )
           ),
@@ -18586,6 +18608,17 @@ var CarouselTest = function (_React$Component3) {
                 'p',
                 null,
                 'See what our customers think about WYW!'
+              ),
+              _react2.default.createElement(
+                _reactRouter.Link,
+                { to: '/reviews' },
+                ' ',
+                _react2.default.createElement(
+                  _reactBootstrap.Button,
+                  { bsStyle: 'primary' },
+                  'Reviews'
+                ),
+                ' '
               )
             )
           )
@@ -18665,10 +18698,10 @@ var TitleTest = function (_React$Component4) {
       return _react2.default.createElement(
         'div',
         { style: { justifyContent: 'center', alignItems: 'center', textAlign: "center" } },
-        _react2.default.createElement('img', { src: '/assets/Ftracker_asset.png', height: '200px', width: '500px', style: { paddingTop: "20" } }),
+        _react2.default.createElement('img', { src: '/assets/Ftracker_asset.png', height: '150px', width: '250px', style: { paddingTop: "10" } }),
         _react2.default.createElement(
           'h1',
-          { style: { padding: 20, textAlign: "center" } },
+          { style: { textAlign: "center" } },
           'Welcome to WYW (Watch Your Weight)'
         )
       );
@@ -19053,9 +19086,6 @@ var AddBodyInfo = function (_React$Component2) {
       activity: 'Light',
       gender: 'Male'
     };
-    var hVal = '';
-    var wVal = '';
-
     return _this2;
   }
 
@@ -19138,7 +19168,7 @@ var AddBodyInfo = function (_React$Component2) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { style: { alignText: 'center' } },
+        null,
         _react2.default.createElement(
           _reactBootstrap.Grid,
           null,
@@ -20432,7 +20462,7 @@ var Meals = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { style: { textAlign: 'center' } },
         _react2.default.createElement(
           'h1',
           null,
@@ -20564,7 +20594,7 @@ var MealSummary = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { style: { textAlign: 'center' } },
         _react2.default.createElement(
           'h4',
           null,
@@ -20838,34 +20868,36 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactBootstrap = __webpack_require__(117);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var FoodTableRow = function FoodTableRow(props) {
   return _react2.default.createElement(
-    "tr",
+    'tr',
     null,
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.foodName
     ),
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.mealType
     ),
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.calories
     ),
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.fat
     ),
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.carbohydrates
     )
@@ -20877,45 +20909,49 @@ function MealTable(props) {
     return _react2.default.createElement(FoodTableRow, { key: food.id, food: food });
   });
   return _react2.default.createElement(
-    "table",
-    { className: "bordered-table" },
+    'div',
+    { style: { width: '50%', marginLeft: 'auto', marginRight: 'auto' } },
     _react2.default.createElement(
-      "thead",
-      null,
+      _reactBootstrap.Table,
+      { striped: true, bordered: true, hover: true },
       _react2.default.createElement(
-        "tr",
+        'thead',
         null,
         _react2.default.createElement(
-          "th",
+          'tr',
           null,
-          "Food Name"
-        ),
-        _react2.default.createElement(
-          "th",
-          null,
-          "Meal Type"
-        ),
-        _react2.default.createElement(
-          "th",
-          null,
-          "Calories"
-        ),
-        _react2.default.createElement(
-          "th",
-          null,
-          "Fat"
-        ),
-        _react2.default.createElement(
-          "th",
-          null,
-          "Carbohydrates"
+          _react2.default.createElement(
+            'th',
+            null,
+            'Food Name'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Meal Type'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Calories'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Fat'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Carbohydrates'
+          )
         )
+      ),
+      _react2.default.createElement(
+        'tbody',
+        null,
+        FoodTableRows
       )
-    ),
-    _react2.default.createElement(
-      "tbody",
-      null,
-      FoodTableRows
     )
   );
 }
@@ -20962,7 +20998,7 @@ var ReviewMessage = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { style: { fontFamily: "Work Sans", fontSize: '25' } },
         'Let us know how you feel about Watch Your Weight!'
       );
     }
@@ -20999,10 +21035,10 @@ function ReviewTable(props) {
   });
   return _react2.default.createElement(
     'table',
-    { className: 'bordered-table' },
+    { className: 'table table-light', style: { width: '50%', marginLeft: 'auto', marginRight: 'auto' } },
     _react2.default.createElement(
       'thead',
-      null,
+      { className: 'thead-light' },
       _react2.default.createElement(
         'tr',
         null,
@@ -21073,11 +21109,46 @@ var ReviewAdd = function (_React$Component2) {
         null,
         _react2.default.createElement(
           'form',
-          { name: 'issueAdd', onSubmit: this.handleSubmit },
-          _react2.default.createElement('input', { type: 'text', name: 'name', placeholder: 'Name' }),
-          _react2.default.createElement('input', { type: 'text', name: 'rating', placeholder: 'Rating' }),
-          _react2.default.createElement('hr', null),
+          { style: { fontFamily: 'Bookman Old Style' }, name: 'issueAdd', onSubmit: this.handleSubmit },
+          _react2.default.createElement('input', { type: 'text', name: 'name', placeholder: 'Name', required: true }),
+          _react2.default.createElement(
+            'select',
+            { name: 'rating', placeholder: 'Rating', required: true },
+            _react2.default.createElement(
+              'option',
+              { value: '', selected: true, disabled: true, hidden: true },
+              'Rating'
+            ),
+            _react2.default.createElement(
+              'option',
+              { value: '5' },
+              '5'
+            ),
+            _react2.default.createElement(
+              'option',
+              { value: '4' },
+              '4'
+            ),
+            _react2.default.createElement(
+              'option',
+              { value: '3' },
+              '3'
+            ),
+            _react2.default.createElement(
+              'option',
+              { value: '2' },
+              '2'
+            ),
+            _react2.default.createElement(
+              'option',
+              { value: '1' },
+              '1'
+            )
+          ),
+          _react2.default.createElement('br', null),
           _react2.default.createElement('textarea', { rows: 5, cols: 50, name: 'comment', placeholder: 'Comment' }),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement('br', null),
           _react2.default.createElement(
             'button',
             null,
@@ -21171,17 +21242,17 @@ var Review = function (_React$Component3) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { style: { textAlign: "center" } },
         _react2.default.createElement(
           'h1',
-          null,
+          { style: { fontStyle: 'bold', fontSize: '100', fontFamily: 'Work Sans', paddingBottom: '20px' } },
           'Review'
         ),
         _react2.default.createElement(ReviewMessage, null),
         _react2.default.createElement('hr', null),
-        _react2.default.createElement(ReviewTable, { reviewInfo: this.state.reviewInfo }),
+        _react2.default.createElement(ReviewAdd, { createReview: this.add }),
         _react2.default.createElement('hr', null),
-        _react2.default.createElement(ReviewAdd, { createReview: this.add })
+        _react2.default.createElement(ReviewTable, { reviewInfo: this.state.reviewInfo })
       );
     }
   }]);

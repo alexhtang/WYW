@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Table} from 'react-bootstrap'
 
 const FoodTableRow = (props) => (
     <tr>
@@ -16,18 +16,20 @@ export function MealTable(props) {
       <FoodTableRow key={food.id} food={food} />
     ));
     return (
-      <table className="bordered-table">
-        <thead>
-          <tr>
-            <th>Food Name</th>
-            <th>Meal Type</th>
-            <th>Calories</th>
-            <th>Fat</th>
-            <th>Carbohydrates</th>
-          </tr>
-        </thead>
-        <tbody>{FoodTableRows}</tbody>
-      </table>
+      <div style = {{width: '50%', marginLeft: 'auto', marginRight:'auto'}}>
+        <Table striped bordered hover >
+          <thead>
+            <tr>
+              <th>Food Name</th>
+              <th>Meal Type</th>
+              <th>Calories</th>
+              <th>Fat</th>
+              <th>Carbohydrates</th>
+            </tr>
+          </thead>
+          <tbody>{FoodTableRows}</tbody>
+        </Table>
+      </div>
     );
   }
 

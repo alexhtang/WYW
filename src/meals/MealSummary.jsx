@@ -43,7 +43,7 @@ export default class MealSummary extends React.Component {
     }
   
     render() {
-      return (<div>
+      return (<div style = {{textAlign: 'center'}}>
          <h4>Your Daily Summary</h4>
          <h5>Total Calories: {this.props.totalCalories}</h5>
   

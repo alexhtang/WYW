@@ -20,7 +20,7 @@ export default class Meals extends React.Component {
       snack: [],
       exercise: [],
     totalCalories: 0 };
-  
+
     this.addMeal = this.addMeal.bind(this);
 
   }
@@ -59,7 +59,7 @@ export default class Meals extends React.Component {
     }).catch(err => {
       alert("Error in fetching data from server:", err);
     });
- 
+
 }
 
 /*
@@ -92,7 +92,7 @@ export default class Meals extends React.Component {
               } else if(updatedMeal.mealType ==='Snack') {
                 const newMeals = this.state.snack.concat(updatedMeal);
                 this.setState({ snack: newMeals });
-              } 
+              }
 
               this.setState({totalCalories: parseInt(this.state.totalCalories) + parseInt(updatedMeal.calories)});
             });
@@ -105,13 +105,13 @@ export default class Meals extends React.Component {
         }
       });
     }
-     
+
 
 
 
   render() {
     return (
-      <div>
+      <div style = {{textAlign: 'center'}}>
         <h1>Meal Tracker</h1>
         <MealSummary totalCalories={this.totalCalories} createFood = {this.addMeal}  totalCalories = {this.state.totalCalories} />
         <hr />

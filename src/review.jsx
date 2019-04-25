@@ -3,7 +3,7 @@ import React from 'react';
 
 class ReviewMessage extends React.Component {
   render() {
-    return <div>Let us know how you feel about Watch Your Weight!</div>;
+    return <div style = {{fontFamily: "Work Sans", fontSize: '25'}}>Let us know how you feel about Watch Your Weight!</div>;
   }
 }
 
@@ -20,8 +20,8 @@ function ReviewTable(props) {
     <ReviewRow key={issue.id} issue={issue} />
   ));
   return (
-    <table className="bordered-table">
-      <thead>
+    <table className="table table-light" style={{width: '50%', marginLeft: 'auto', marginRight: 'auto'}}>
+      <thead className="thead-light">
         <tr>
           <th>Name</th>
           <th>Rating</th>
@@ -62,11 +62,20 @@ class ReviewAdd extends React.Component {
   render() {
     return (
       <div>
-        <form name="issueAdd" onSubmit={this.handleSubmit}>
-          <input type="text" name="name" placeholder="Name" />
-          <input type="text" name="rating" placeholder="Rating" />
-          <hr></hr>
-          <textarea rows={5} cols= {50} name="comment" placeholder="Comment" />
+        <form style={{fontFamily: 'Bookman Old Style'}} name="issueAdd" onSubmit={this.handleSubmit}>
+          <input type="text" name="name" placeholder="Name" required/>
+          {/* <input type="text" name="rating" placeholder="Rating (1-5)" /> */}
+          <select name="rating" placeholder="Rating" required>
+            <option value="" selected disabled hidden>Rating</option>
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+          </select>
+          <br></br>
+          <textarea rows={5} cols= {50} name="comment" placeholder="Comment"/>
+          <br></br><br></br>
           <button>Add</button>
         </form>
       </div>
@@ -141,14 +150,15 @@ export default class Review extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Review</h1>
+      <div style = {{textAlign: "center"}}>
+        <h1 style={{fontStyle: 'bold', fontSize: '100', fontFamily: 'Work Sans', paddingBottom: '20px'}}>Review</h1>
         <ReviewMessage />
         <hr />
-        <ReviewTable reviewInfo={this.state.reviewInfo} />
-        <hr />
         <ReviewAdd createReview={this.add} />
+        <hr />
+        <ReviewTable reviewInfo={this.state.reviewInfo} />
       </div>
     );
   }
 }
+
