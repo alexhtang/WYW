@@ -18985,16 +18985,44 @@ var NutritionStats = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { style: { fontFamily: 'Bookman Old Style', fontStyle: 'bold', fontSize: '25px', textAlign: 'center' } },
+        { style: { fontFamily: 'Bookman Old Style', fontStyle: 'bold', fontSize: '25px', textAlign: 'center', marginLeft: 'auto', marginRight: 'auto', width: '50%' } },
         _react2.default.createElement(
-          'h1',
-          null,
-          'Suggested Caloric Intake: '
-        ),
-        _react2.default.createElement(
-          'h1',
-          { style: { color: 'green' } },
-          this.props.calories
+          _reactBootstrap.Table,
+          { striped: true, bordered: true, hover: true },
+          _react2.default.createElement(
+            'thead',
+            null,
+            _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'th',
+                null,
+                _react2.default.createElement(
+                  'h1',
+                  { style: { textAlign: 'center' } },
+                  'Suggested Caloric Intake'
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'tbody',
+            null,
+            _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'td',
+                null,
+                _react2.default.createElement(
+                  'h1',
+                  { style: { color: 'green' } },
+                  this.props.calories
+                )
+              )
+            )
+          )
         )
       );
     }
@@ -19025,6 +19053,9 @@ var AddBodyInfo = function (_React$Component2) {
       activity: 'Light',
       gender: 'Male'
     };
+    var hVal = '';
+    var wVal = '';
+
     return _this2;
   }
 
@@ -19075,6 +19106,7 @@ var AddBodyInfo = function (_React$Component2) {
     key: 'handleHeightChange',
     value: function handleHeightChange(e) {
       e.preventDefault();
+
       this.setState({ height: e.target.value });
     }
   }, {

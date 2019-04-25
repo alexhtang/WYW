@@ -41,9 +41,19 @@ class NutritionStats extends React.Component {
 
   render() {
     return (
-      <div style = {{fontFamily: 'Bookman Old Style', fontStyle: 'bold', fontSize: '25px', textAlign: 'center'}}>
-        <h1 >Suggested Caloric Intake: </h1>
-        <h1 style= {{color: 'green'}}>{this.props.calories}</h1>
+      <div style = {{fontFamily: 'Bookman Old Style', fontStyle: 'bold', fontSize: '25px', textAlign: 'center', marginLeft: 'auto', marginRight:'auto', width: '50%'}}>
+        <Table striped bordered hover>
+      <thead>
+        <tr >
+          <th><h1 style = {{textAlign: 'center'}}>Suggested Caloric Intake</h1></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><h1 style= {{color: 'green'}}>{this.props.calories}</h1></td>
+        </tr>
+      </tbody>
+    </Table>
       </div>
       )
   }
@@ -66,7 +76,12 @@ class AddBodyInfo extends React.Component {
           activity: 'Light',
           gender:'Male',
         };
+        const hVal = '';
+        const wVal = '';
+
       }
+      
+
 
       getValidationStateHeight() {
         const s = this.state.height;
@@ -116,6 +131,7 @@ class AddBodyInfo extends React.Component {
 
       handleHeightChange(e) {
         e.preventDefault();
+        
         this.setState({ height: e.target.value });
       }
 
