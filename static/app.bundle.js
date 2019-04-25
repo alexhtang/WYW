@@ -19051,7 +19051,10 @@ var AddBodyInfo = function (_React$Component2) {
       weight: '',
       age: '',
       activity: 'Light',
-      gender: 'Male'
+      gender: 'Male',
+      hEvent: '',
+      wEvent: '',
+      aEvent: ''
     };
     return _this2;
   }
@@ -19098,24 +19101,27 @@ var AddBodyInfo = function (_React$Component2) {
       }
       // clear the form for the next input
       // form.height.value = ""; form.weight.value = ""; form.age.value = ""; form.activity.value= ""; form.gender.value = "";
+      this.state.hEvent.value = "";this.state.wEvent.value = "";this.state.aEvent.value = "";
     }
   }, {
     key: 'handleHeightChange',
     value: function handleHeightChange(e) {
       e.preventDefault();
-
+      this.setState({ hEvent: e.target });
       this.setState({ height: e.target.value });
     }
   }, {
     key: 'handleWeightChange',
     value: function handleWeightChange(e) {
       e.preventDefault();
+      this.setState({ wEvent: e.target });
       this.setState({ weight: e.target.value });
     }
   }, {
     key: 'handleAgeChange',
     value: function handleAgeChange(e) {
       e.preventDefault();
+      this.setState({ aEvent: e.target });
       this.setState({ age: e.target.value });
     }
   }, {
@@ -20903,12 +20909,12 @@ var ReviewMessage = function (_React$Component) {
   }
 
   _createClass(ReviewMessage, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       return _react2.default.createElement(
-        'div',
+        "div",
         null,
-        'Let us know how you feel about Watch Your Weight!'
+        "Let us know how you feel about Watch Your Weight!"
       );
     }
   }]);
@@ -20918,20 +20924,20 @@ var ReviewMessage = function (_React$Component) {
 
 var ReviewRow = function ReviewRow(props) {
   return _react2.default.createElement(
-    'tr',
+    "tr",
     null,
     _react2.default.createElement(
-      'td',
+      "td",
       null,
       props.issue.name
     ),
     _react2.default.createElement(
-      'td',
+      "td",
       null,
       props.issue.rating
     ),
     _react2.default.createElement(
-      'td',
+      "td",
       null,
       props.issue.comment
     )
@@ -20943,33 +20949,33 @@ function ReviewTable(props) {
     return _react2.default.createElement(ReviewRow, { key: issue.id, issue: issue });
   });
   return _react2.default.createElement(
-    'table',
-    { className: 'bordered-table' },
+    "table",
+    { className: "table table-light" },
     _react2.default.createElement(
-      'thead',
-      null,
+      "thead",
+      { className: "thead-light" },
       _react2.default.createElement(
-        'tr',
+        "tr",
         null,
         _react2.default.createElement(
-          'th',
+          "th",
           null,
-          'Name'
+          "Name"
         ),
         _react2.default.createElement(
-          'th',
+          "th",
           null,
-          'Rating'
+          "Rating"
         ),
         _react2.default.createElement(
-          'th',
+          "th",
           null,
-          'Comment'
+          "Comment"
         )
       )
     ),
     _react2.default.createElement(
-      'tbody',
+      "tbody",
       null,
       reviewRows
     )
@@ -20990,7 +20996,7 @@ var ReviewAdd = function (_React$Component2) {
   }
 
   _createClass(ReviewAdd, [{
-    key: 'handleSubmit',
+    key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
       var form = document.forms.issueAdd;
@@ -21006,27 +21012,29 @@ var ReviewAdd = function (_React$Component2) {
       form.comment.value = '';
     }
   }, {
-    key: 'handleSelectChange',
+    key: "handleSelectChange",
     value: function handleSelectChange(e) {
       this.setState({ reviewType: e.target.value });
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       return _react2.default.createElement(
-        'div',
+        "div",
         null,
         _react2.default.createElement(
-          'form',
-          { name: 'issueAdd', onSubmit: this.handleSubmit },
-          _react2.default.createElement('input', { type: 'text', name: 'name', placeholder: 'Name' }),
-          _react2.default.createElement('input', { type: 'text', name: 'rating', placeholder: 'Rating' }),
-          _react2.default.createElement('hr', null),
-          _react2.default.createElement('textarea', { rows: 5, cols: 50, name: 'comment', placeholder: 'Comment' }),
+          "form",
+          { style: { fontFamily: 'Bookman Old Style' }, name: "issueAdd", onSubmit: this.handleSubmit },
+          _react2.default.createElement("input", { type: "text", name: "name", placeholder: "Name" }),
+          _react2.default.createElement("input", { type: "text", name: "rating", placeholder: "Rating (1-5)" }),
+          _react2.default.createElement("br", null),
+          _react2.default.createElement("textarea", { rows: 5, cols: 50, name: "comment", placeholder: "Comment" }),
+          _react2.default.createElement("br", null),
+          _react2.default.createElement("br", null),
           _react2.default.createElement(
-            'button',
+            "button",
             null,
-            'Add'
+            "Add"
           )
         )
       );
@@ -21051,12 +21059,12 @@ var Review = function (_React$Component3) {
   }
 
   _createClass(Review, [{
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {
       this.loadData();
     }
   }, {
-    key: 'loadData',
+    key: "loadData",
     value: function loadData() {
       var _this4 = this;
 
@@ -21080,7 +21088,7 @@ var Review = function (_React$Component3) {
       });
     }
   }, {
-    key: 'add',
+    key: "add",
     value: function add(newReview) {
       var _this5 = this;
 
@@ -21112,21 +21120,21 @@ var Review = function (_React$Component3) {
     // }
 
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       return _react2.default.createElement(
-        'div',
-        null,
+        "div",
+        { style: { textAlign: "center" } },
         _react2.default.createElement(
-          'h1',
-          null,
-          'Review'
+          "h1",
+          { style: { fontStyle: 'bold', fontSize: '100', fontFamily: 'Bookman Old Style', paddingBottom: '20px' } },
+          "Review"
         ),
         _react2.default.createElement(ReviewMessage, null),
-        _react2.default.createElement('hr', null),
-        _react2.default.createElement(ReviewTable, { reviewInfo: this.state.reviewInfo }),
-        _react2.default.createElement('hr', null),
-        _react2.default.createElement(ReviewAdd, { createReview: this.add })
+        _react2.default.createElement("hr", null),
+        _react2.default.createElement(ReviewAdd, { createReview: this.add }),
+        _react2.default.createElement("hr", null),
+        _react2.default.createElement(ReviewTable, { reviewInfo: this.state.reviewInfo })
       );
     }
   }]);

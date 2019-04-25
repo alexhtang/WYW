@@ -75,6 +75,9 @@ class AddBodyInfo extends React.Component {
           age: '',
           activity: 'Light',
           gender:'Male',
+          hEvent: '',
+          wEvent: '',
+          aEvent: '',
         };
       }
       
@@ -125,20 +128,23 @@ class AddBodyInfo extends React.Component {
         }
         // clear the form for the next input
         // form.height.value = ""; form.weight.value = ""; form.age.value = ""; form.activity.value= ""; form.gender.value = "";
+        (this.state.hEvent).value = ""; (this.state.wEvent).value = ""; (this.state.aEvent).value = "";
       }
 
       handleHeightChange(e) {
         e.preventDefault();
-        
+        this.setState({hEvent:e.target});
         this.setState({ height: e.target.value });
       }
 
       handleWeightChange(e){
         e.preventDefault();
+        this.setState({wEvent:e.target});
         this.setState({ weight: e.target.value });
       }
       handleAgeChange(e){
         e.preventDefault();
+        this.setState({aEvent:e.target});
         this.setState({ age: e.target.value });
       }
       handleActivityChange(e){
