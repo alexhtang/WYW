@@ -20291,6 +20291,22 @@ var _MealTable = __webpack_require__(517);
 
 var _MealTable2 = _interopRequireDefault(_MealTable);
 
+var _BreakfastTable = __webpack_require__(522);
+
+var _BreakfastTable2 = _interopRequireDefault(_BreakfastTable);
+
+var _LunchTable = __webpack_require__(523);
+
+var _LunchTable2 = _interopRequireDefault(_LunchTable);
+
+var _DinnerTable = __webpack_require__(524);
+
+var _DinnerTable2 = _interopRequireDefault(_DinnerTable);
+
+var _SnackTable = __webpack_require__(525);
+
+var _SnackTable2 = _interopRequireDefault(_SnackTable);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -20311,9 +20327,15 @@ var Meals = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Meals.__proto__ || Object.getPrototypeOf(Meals)).call(this));
 
     _this.state = { foods: [],
+      breakfast: [],
+      lunch: [],
+      dinner: [],
+      snack: [],
+      exercise: [],
       totalCalories: 0 };
 
     _this.addMeal = _this.addMeal.bind(_this);
+
     return _this;
   }
 
@@ -20321,6 +20343,7 @@ var Meals = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.loadData();
+      this.loadBreakfastData();
     }
   }, {
     key: 'loadData',
@@ -20337,6 +20360,19 @@ var Meals = function (_React$Component) {
               if (meal.completionDate) meal.completionDate = new Date(meal.completionDate);
             });
             _this2.setState({ foods: data.records });
+            _this2.setState({ breakfast: data.records.filter(function (food) {
+                return food.mealType === 'Breakfast';
+              }) });
+            _this2.setState({ lunch: data.records.filter(function (food) {
+                return food.mealType === 'Lunch';
+              }) });
+            _this2.setState({ dinner: data.records.filter(function (food) {
+                return food.mealType === 'Dinner';
+              }) });
+            _this2.setState({ snack: data.records.filter(function (food) {
+                return food.mealType === 'Snack';
+              }) });
+
             _this2.setState({ totalCalories: data.totalCalories });
           });
         } else {
@@ -20368,8 +20404,20 @@ var Meals = function (_React$Component) {
       }).then(function (res) {
         if (res.ok) {
           res.json().then(function (updatedMeal) {
-            var newMeals = _this3.state.foods.concat(updatedMeal);
-            _this3.setState({ foods: newMeals });
+            if (updatedMeal.mealType === 'Breakfast') {
+              var newMeals = _this3.state.breakfast.concat(updatedMeal);
+              _this3.setState({ breakfast: newMeals });
+            } else if (updatedMeal.mealType === 'Lunch') {
+              var _newMeals = _this3.state.lunch.concat(updatedMeal);
+              _this3.setState({ lunch: _newMeals });
+            } else if (updatedMeal.mealType === 'Dinner') {
+              var _newMeals2 = _this3.state.dinner.concat(updatedMeal);
+              _this3.setState({ dinner: _newMeals2 });
+            } else if (updatedMeal.mealType === 'Snack') {
+              var _newMeals3 = _this3.state.snack.concat(updatedMeal);
+              _this3.setState({ snack: _newMeals3 });
+            }
+
             _this3.setState({ totalCalories: parseInt(_this3.state.totalCalories) + parseInt(updatedMeal.calories) });
           });
         } else {
@@ -20392,7 +20440,34 @@ var Meals = function (_React$Component) {
         ),
         _react2.default.createElement(_MealSummary2.default, _defineProperty({ totalCalories: this.totalCalories, createFood: this.addMeal }, 'totalCalories', this.state.totalCalories)),
         _react2.default.createElement('hr', null),
-        _react2.default.createElement(_MealTable2.default, { foods: this.state.foods }),
+        _react2.default.createElement(
+          'h1',
+          null,
+          'Breakfast'
+        ),
+        _react2.default.createElement(_BreakfastTable2.default, { foods: this.state.breakfast }),
+        _react2.default.createElement('hr', null),
+        _react2.default.createElement(
+          'h1',
+          null,
+          'Lunch'
+        ),
+        _react2.default.createElement(_LunchTable2.default, { foods: this.state.lunch }),
+        _react2.default.createElement('hr', null),
+        _react2.default.createElement(
+          'h1',
+          null,
+          'Dinner'
+        ),
+        _react2.default.createElement('hr', null),
+        _react2.default.createElement(_DinnerTable2.default, { foods: this.state.dinner }),
+        _react2.default.createElement('hr', null),
+        _react2.default.createElement(
+          'h1',
+          null,
+          'Snack'
+        ),
+        _react2.default.createElement(_SnackTable2.default, { foods: this.state.snack }),
         _react2.default.createElement('hr', null)
       );
     }
@@ -20675,18 +20750,16 @@ var AddMeal = function (_React$Component) {
     value: function handleSubmit(e) {
       e.preventDefault();
       var form = document.forms.addMeal;
+
       this.props.createFood({
         foodName: form.foodName.value,
         calories: form.calories.value,
         mealType: this.state.mealType,
         fat: form.fat.value,
-        carbohydrates: form.carbohydrates.value,
-        numberOfServings: form.numberOfServings.value
+        carbohydrates: form.carbohydrates.value
       });
 
       // Clear the form for the next input.
-      form.foodName.value = '';
-      form.calories.value = '';
       this.props.closeFoodFormPopup();
     }
   }, {
@@ -20707,7 +20780,6 @@ var AddMeal = function (_React$Component) {
           _react2.default.createElement('input', { type: 'text', name: 'calories', placeholder: 'Calories' }),
           _react2.default.createElement('input', { type: 'text', name: 'fat', placeholder: 'Fat' }),
           _react2.default.createElement('input', { type: 'text', name: 'carbohydrates', placeholder: 'Carbohydrates' }),
-          _react2.default.createElement('input', { type: 'number', name: 'numberOfServings', placeholder: 'Number of Servings' }),
           _react2.default.createElement(
             'select',
             {
@@ -20780,11 +20852,6 @@ var FoodTableRow = function FoodTableRow(props) {
     _react2.default.createElement(
       "td",
       null,
-      props.food.numberOfServings
-    ),
-    _react2.default.createElement(
-      "td",
-      null,
       props.food.mealType
     ),
     _react2.default.createElement(
@@ -20822,11 +20889,6 @@ function MealTable(props) {
           "th",
           null,
           "Food Name"
-        ),
-        _react2.default.createElement(
-          "th",
-          null,
-          "Servings"
         ),
         _react2.default.createElement(
           "th",
@@ -21128,6 +21190,409 @@ var Review = function (_React$Component3) {
 }(_react2.default.Component);
 
 exports.default = Review;
+
+/***/ }),
+/* 519 */,
+/* 520 */,
+/* 521 */,
+/* 522 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.BreakfastTable = BreakfastTable;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var FoodTableRow = function FoodTableRow(props) {
+  return _react2.default.createElement(
+    "tr",
+    null,
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.foodName
+    ),
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.mealType
+    ),
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.calories
+    ),
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.fat
+    ),
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.carbohydrates
+    )
+  );
+};
+
+function BreakfastTable(props) {
+  var FoodTableRows = props.foods.map(function (food) {
+    return _react2.default.createElement(FoodTableRow, { key: food.id, food: food });
+  });
+  return _react2.default.createElement(
+    "table",
+    { className: "bordered-table" },
+    _react2.default.createElement(
+      "thead",
+      null,
+      _react2.default.createElement(
+        "tr",
+        null,
+        _react2.default.createElement(
+          "th",
+          null,
+          "Food Name"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Meal Type"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Calories"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Fat"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Carbohydrates"
+        )
+      )
+    ),
+    _react2.default.createElement(
+      "tbody",
+      null,
+      FoodTableRows
+    )
+  );
+}
+
+exports.default = BreakfastTable;
+
+/***/ }),
+/* 523 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.BreakfastTable = BreakfastTable;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var FoodTableRow = function FoodTableRow(props) {
+  return _react2.default.createElement(
+    "tr",
+    null,
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.foodName
+    ),
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.mealType
+    ),
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.calories
+    ),
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.fat
+    ),
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.carbohydrates
+    )
+  );
+};
+
+function BreakfastTable(props) {
+  var FoodTableRows = props.foods.map(function (food) {
+    return _react2.default.createElement(FoodTableRow, { key: food.id, food: food });
+  });
+  return _react2.default.createElement(
+    "table",
+    { className: "bordered-table" },
+    _react2.default.createElement(
+      "thead",
+      null,
+      _react2.default.createElement(
+        "tr",
+        null,
+        _react2.default.createElement(
+          "th",
+          null,
+          "Food Name"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Meal Type"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Calories"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Fat"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Carbohydrates"
+        )
+      )
+    ),
+    _react2.default.createElement(
+      "tbody",
+      null,
+      FoodTableRows
+    )
+  );
+}
+
+exports.default = BreakfastTable;
+
+/***/ }),
+/* 524 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.BreakfastTable = BreakfastTable;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var FoodTableRow = function FoodTableRow(props) {
+  return _react2.default.createElement(
+    "tr",
+    null,
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.foodName
+    ),
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.mealType
+    ),
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.calories
+    ),
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.fat
+    ),
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.carbohydrates
+    )
+  );
+};
+
+function BreakfastTable(props) {
+  var FoodTableRows = props.foods.map(function (food) {
+    return _react2.default.createElement(FoodTableRow, { key: food.id, food: food });
+  });
+  return _react2.default.createElement(
+    "table",
+    { className: "bordered-table" },
+    _react2.default.createElement(
+      "thead",
+      null,
+      _react2.default.createElement(
+        "tr",
+        null,
+        _react2.default.createElement(
+          "th",
+          null,
+          "Food Name"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Meal Type"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Calories"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Fat"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Carbohydrates"
+        )
+      )
+    ),
+    _react2.default.createElement(
+      "tbody",
+      null,
+      FoodTableRows
+    )
+  );
+}
+
+exports.default = BreakfastTable;
+
+/***/ }),
+/* 525 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.SnackTable = SnackTable;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var FoodTableRow = function FoodTableRow(props) {
+  return _react2.default.createElement(
+    "tr",
+    null,
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.foodName
+    ),
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.mealType
+    ),
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.calories
+    ),
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.fat
+    ),
+    _react2.default.createElement(
+      "td",
+      null,
+      props.food.carbohydrates
+    )
+  );
+};
+
+function SnackTable(props) {
+  var FoodTableRows = props.foods.map(function (food) {
+    return _react2.default.createElement(FoodTableRow, { key: food.id, food: food });
+  });
+  return _react2.default.createElement(
+    "table",
+    { className: "bordered-table" },
+    _react2.default.createElement(
+      "thead",
+      null,
+      _react2.default.createElement(
+        "tr",
+        null,
+        _react2.default.createElement(
+          "th",
+          null,
+          "Food Name"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Meal Type"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Calories"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Fat"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Carbohydrates"
+        )
+      )
+    ),
+    _react2.default.createElement(
+      "tbody",
+      null,
+      FoodTableRows
+    )
+  );
+}
+
+exports.default = SnackTable;
 
 /***/ })
 ],[228]);

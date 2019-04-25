@@ -34,6 +34,9 @@ db.meals.insert([
       }
   ]);
 
+  db.breakfast.remove({});
+
+
 db.reviews.remove({});
   db.reviews.insert([
     {

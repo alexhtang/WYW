@@ -11,7 +11,7 @@ const FoodTableRow = (props) => (
     </tr>
   );
 
-export function MealTable(props) {
+export function SnackTable(props) {
     const FoodTableRows = props.foods.map(food => (
       <FoodTableRow key={food.id} food={food} />
     ));
@@ -31,4 +31,4 @@ export function MealTable(props) {
     );
   }
 
-  export default MealTable;
+  export default SnackTable;
