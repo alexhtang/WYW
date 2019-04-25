@@ -2,7 +2,10 @@
 import React from 'react';
 import MealSummary from './MealSummary.jsx';
 import MealTable from './MealTable.jsx';
-
+import BreakfastTable from './BreakfastTable.jsx';
+import LunchTable from './LunchTable.jsx';
+import DinnerTable from './DinnerTable.jsx';
+import SnackTable from './SnackTable.jsx';
 
 
 
@@ -11,13 +14,20 @@ export default class Meals extends React.Component {
   constructor() {
     super();
     this.state = { foods: [],
+      breakfast: [],
+      lunch: [],
+      dinner: [],
+      snack: [],
+      exercise: [],
     totalCalories: 0 };
-  
+
     this.addMeal = this.addMeal.bind(this);
+
   }
 
   componentDidMount() {
     this.loadData();
+    this.loadBreakfastData();
   }
 
   loadData() {
@@ -33,6 +43,11 @@ export default class Meals extends React.Component {
               meal.completionDate = new Date(meal.completionDate);
           });
           this.setState({ foods: data.records });
+          this.setState({ breakfast: data.records.filter(food =>food.mealType==='Breakfast') });
+          this.setState({ lunch: data.records.filter(food =>food.mealType==='Lunch') });
+          this.setState({ dinner: data.records.filter(food =>food.mealType==='Dinner') });
+          this.setState({ snack: data.records.filter(food =>food.mealType==='Snack') });
+
           this.setState({totalCalories: data.totalCalories});
 
         });
@@ -44,7 +59,7 @@ export default class Meals extends React.Component {
     }).catch(err => {
       alert("Error in fetching data from server:", err);
     });
- 
+
 }
 
 /*
@@ -65,8 +80,20 @@ export default class Meals extends React.Component {
         if (res.ok) {
           res.json()
             .then(updatedMeal => {
-              const newMeals = this.state.foods.concat(updatedMeal);
-              this.setState({ foods: newMeals });
+              if(updatedMeal.mealType ==='Breakfast'){
+                const newMeals = this.state.breakfast.concat(updatedMeal);
+                this.setState({ breakfast: newMeals });
+              } else if(updatedMeal.mealType ==='Lunch') {
+                const newMeals = this.state.lunch.concat(updatedMeal);
+                this.setState({ lunch: newMeals });
+              } else if(updatedMeal.mealType ==='Dinner') {
+                const newMeals = this.state.dinner.concat(updatedMeal);
+                this.setState({ dinner: newMeals });
+              } else if(updatedMeal.mealType ==='Snack') {
+                const newMeals = this.state.snack.concat(updatedMeal);
+                this.setState({ snack: newMeals });
+              }
+
               this.setState({totalCalories: parseInt(this.state.totalCalories) + parseInt(updatedMeal.calories)});
             });
         }
@@ -77,9 +104,8 @@ export default class Meals extends React.Component {
             });
         }
       });
-    
-    
-}
+    }
+
 
 
 
@@ -88,10 +114,20 @@ export default class Meals extends React.Component {
       <div style = {{textAlign: 'center'}}>
         <h1>Meal Tracker</h1>
         <MealSummary totalCalories={this.totalCalories} createFood = {this.addMeal}  totalCalories = {this.state.totalCalories} />
-
         <hr />
-        
-        <div><MealTable foods={this.state.foods}/></div>
+        <h1>Breakfast</h1>
+        <BreakfastTable foods ={this.state.breakfast}></BreakfastTable>
+        <hr />
+        <h1>Lunch</h1>
+        <LunchTable foods ={this.state.lunch}></LunchTable>
+        <hr />
+        <h1>Dinner</h1>
+        <hr />
+        <DinnerTable foods ={this.state.dinner}></DinnerTable>
+        <hr />
+        <h1>Snack</h1>
+        <SnackTable foods ={this.state.snack}></SnackTable>
+
         <hr />
       </div>
     );

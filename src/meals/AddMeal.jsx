@@ -14,18 +14,17 @@ export default class AddMeal extends React.Component {
     handleSubmit(e) {
       e.preventDefault();
       let form = document.forms.addMeal;
+    
+      
       this.props.createFood({
         foodName: form.foodName.value,
         calories: form.calories.value,
         mealType: this.state.mealType,
         fat: form.fat.value,
         carbohydrates: form.carbohydrates.value,
-        numberOfServings: form.numberOfServings.value,
       });
   
       // Clear the form for the next input.
-      form.foodName.value = '';
-      form.calories.value = '';
       this.props.closeFoodFormPopup();
     }
   
@@ -40,9 +39,7 @@ export default class AddMeal extends React.Component {
             <input type="text" name="foodName" placeholder="Food Name" />
             <input type="text" name="calories" placeholder="Calories" />
             <input type="text" name="fat" placeholder="Fat" />
-            <input type="text" name="carbohydrates" placeholder="Carbohydrates"/>
-            <input type="number" name="numberOfServings" placeholder="Number of Servings"/>
-  
+            <input type="text" name="carbohydrates" placeholder="Carbohydrates"/>  
             <select 
                                 value={this.state.mealType} 
                                 onChange={this.handleSelectChange}

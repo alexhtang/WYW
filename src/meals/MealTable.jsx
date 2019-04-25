@@ -4,7 +4,6 @@ import {Table} from 'react-bootstrap'
 const FoodTableRow = (props) => (
     <tr>
       <td>{props.food.foodName}</td>
-      <td>{props.food.numberOfServings}</td>
       <td>{props.food.mealType}</td>
       <td>{props.food.calories}</td>
       <td>{props.food.fat}</td>
@@ -22,7 +21,6 @@ export function MealTable(props) {
           <thead>
             <tr>
               <th>Food Name</th>
-              <th>Servings</th>
               <th>Meal Type</th>
               <th>Calories</th>
               <th>Fat</th>

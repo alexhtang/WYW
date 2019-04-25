@@ -32,6 +32,7 @@ class CarouselTest extends React.Component {
             <Carousel.Caption>
               <h3>Fitness Tracker</h3>
               <p>Calculate how many calories to burn per day!</p>
+              <Link to='/FitnessTracker'> <Button bsStyle="primary">Fitness Tracker</Button> </Link>
             </Carousel.Caption>
           </CarouselItem>
 
@@ -42,6 +43,7 @@ class CarouselTest extends React.Component {
             <Carousel.Caption>
               <h3>Meal Tracking</h3>
               <p>See the nutritional value of your daily diet!</p>
+              <Link to='/meals'> <Button bsStyle="primary">Meals</Button> </Link>
             </Carousel.Caption>
           </CarouselItem>
 
@@ -52,6 +54,7 @@ class CarouselTest extends React.Component {
             <Carousel.Caption>
               <h3>Reviews</h3>
               <p>See what our customers think about WYW!</p>
+              <Link to='/reviews'> <Button bsStyle="primary">Reviews</Button> </Link>
             </Carousel.Caption>
           </CarouselItem>
         </Carousel>
@@ -117,8 +120,8 @@ class TitleTest extends React.Component {
       const textStyle = {textAlign: "center"};
       return(
         <div style = {{justifyContent: 'center', alignItems: 'center', textAlign: "center"}}>
-          <img src = "/assets/Ftracker_asset.png" height = "200px" width = "500px" style={{paddingTop: "20"}}/>
-          <h1 style={{padding: 20, textAlign: "center"}}>Welcome to WYW (Watch Your Weight)</h1>
+              <img src = "/assets/Ftracker_asset.png" height = "150px" width = "250px" style={{paddingTop: "10"}}/>
+              <h1 style={{ textAlign: "center"}}>Welcome to WYW (Watch Your Weight)</h1>
         </div>
       )
   }
