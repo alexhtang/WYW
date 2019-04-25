@@ -85,12 +85,13 @@ export default class Meals extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style = {{textAlign: 'center'}}>
         <h1>Meal Tracker</h1>
         <MealSummary totalCalories={this.totalCalories} createFood = {this.addMeal}  totalCalories = {this.state.totalCalories} />
 
         <hr />
-        <MealTable foods={this.state.foods} />
+        
+        <div><MealTable foods={this.state.foods}/></div>
         <hr />
       </div>
     );
