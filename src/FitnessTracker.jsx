@@ -1,6 +1,6 @@
 // NEW: added the import for react.
 import React from 'react';
-import {Table, Carousel, CarouselItem, Button, Form, FormGroup, FormControl, HelpBlock, ControlLabel, Grid, Row, Col, ProgressBar} from 'react-bootstrap';
+import {Table, Panel, Carousel, CarouselItem, Button, Form, FormGroup, FormControl, HelpBlock, ControlLabel, Grid, Row, Col, ProgressBar} from 'react-bootstrap';
 import { formatWithOptions } from 'util';
 
 const BodyRow = (props) => (
@@ -21,18 +21,20 @@ function BodyStats(props) {
   ));
   return (
     <div style={{fontFamily: 'Bookman Old Style', marginLeft: 'auto', marginRight:'auto', width: '50%'}}>
-    <Table striped bordered hover>
-      <thead>
-        <tr >
-          <th>Height</th>
-          <th>Weight</th>
-          <th>Age</th>
-          <th>Activity</th>
-          <th>Gender</th>
-        </tr>
-      </thead>
-      <tbody>{bodyData}</tbody>
-    </Table>
+    <Panel>
+      <Table striped bordered hover>
+        <thead>
+          <tr >
+            <th>Height</th>
+            <th>Weight</th>
+            <th>Age</th>
+            <th>Activity</th>
+            <th>Gender</th>
+          </tr>
+        </thead>
+        <tbody>{bodyData}</tbody>
+      </Table>
+      </Panel>  
     </div>
   );
 }

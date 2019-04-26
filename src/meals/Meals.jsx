@@ -6,6 +6,7 @@ import BreakfastTable from './BreakfastTable.jsx';
 import LunchTable from './LunchTable.jsx';
 import DinnerTable from './DinnerTable.jsx';
 import SnackTable from './SnackTable.jsx';
+import {Grid, Col, Row} from 'react-bootstrap';
 
 
 
@@ -115,20 +116,36 @@ export default class Meals extends React.Component {
         <h1>Meal Tracker</h1>
         <MealSummary totalCalories={this.totalCalories} createFood = {this.addMeal}  totalCalories = {this.state.totalCalories} />
         <hr />
-        <h1>Breakfast</h1>
-        <BreakfastTable foods ={this.state.breakfast}></BreakfastTable>
-        <hr />
-        <h1>Lunch</h1>
-        <LunchTable foods ={this.state.lunch}></LunchTable>
-        <hr />
-        <h1>Dinner</h1>
-        <hr />
-        <DinnerTable foods ={this.state.dinner}></DinnerTable>
-        <hr />
-        <h1>Snack</h1>
-        <SnackTable foods ={this.state.snack}></SnackTable>
-
-        <hr />
+        <Grid>
+          <Row>
+            <Col md = {6}>
+              <div>
+                <h1>Breakfast</h1>
+              </div>
+              <BreakfastTable foods ={this.state.breakfast}></BreakfastTable>
+            </Col>
+            <Col md = {6}>
+              <div>
+                <h1>Lunch</h1>
+              </div>
+              <LunchTable foods ={this.state.lunch}></LunchTable>
+            </Col>
+          </Row>
+          <Row>
+            <Col md = {6}>
+                <div>
+                  <h1>Snack</h1>
+                </div>
+                <SnackTable foods ={this.state.snack}></SnackTable>
+            </Col>
+            <Col md = {6}>
+              <div>
+                <h1>Dinner</h1>
+              </div>
+              <DinnerTable foods ={this.state.dinner}></DinnerTable>
+            </Col>
+          </Row>
+        </Grid>
       </div>
     );
   }

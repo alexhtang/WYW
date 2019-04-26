@@ -31,6 +31,24 @@ db.meals.insert([
         calories: 160,
         fat: 5,
         carbohydrates: 0
+      },
+      {
+        id: 3,
+        foodName: "Steak",
+        mealType: "Dinner",
+        numberOfServings: 2,
+        calories: 130,
+        fat: 5,
+        carbohydrates: 0
+      },
+      {
+        id: 2,
+        foodName: "Cheese Its",
+        mealType: "Snack",
+        numberOfServings: 2,
+        calories: 900,
+        fat: 5,
+        carbohydrates: 30
       }
   ]);
 

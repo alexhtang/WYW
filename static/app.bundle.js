@@ -18960,45 +18960,49 @@ function BodyStats(props) {
     'div',
     { style: { fontFamily: 'Bookman Old Style', marginLeft: 'auto', marginRight: 'auto', width: '50%' } },
     _react2.default.createElement(
-      _reactBootstrap.Table,
-      { striped: true, bordered: true, hover: true },
+      _reactBootstrap.Panel,
+      null,
       _react2.default.createElement(
-        'thead',
-        null,
+        _reactBootstrap.Table,
+        { striped: true, bordered: true, hover: true },
         _react2.default.createElement(
-          'tr',
+          'thead',
           null,
           _react2.default.createElement(
-            'th',
+            'tr',
             null,
-            'Height'
-          ),
-          _react2.default.createElement(
-            'th',
-            null,
-            'Weight'
-          ),
-          _react2.default.createElement(
-            'th',
-            null,
-            'Age'
-          ),
-          _react2.default.createElement(
-            'th',
-            null,
-            'Activity'
-          ),
-          _react2.default.createElement(
-            'th',
-            null,
-            'Gender'
+            _react2.default.createElement(
+              'th',
+              null,
+              'Height'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Weight'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Age'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Activity'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Gender'
+            )
           )
+        ),
+        _react2.default.createElement(
+          'tbody',
+          null,
+          bodyData
         )
-      ),
-      _react2.default.createElement(
-        'tbody',
-        null,
-        bodyData
       )
     )
   );
@@ -20343,6 +20347,8 @@ var _SnackTable = __webpack_require__(525);
 
 var _SnackTable2 = _interopRequireDefault(_SnackTable);
 
+var _reactBootstrap = __webpack_require__(117);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -20477,34 +20483,73 @@ var Meals = function (_React$Component) {
         _react2.default.createElement(_MealSummary2.default, _defineProperty({ totalCalories: this.totalCalories, createFood: this.addMeal }, 'totalCalories', this.state.totalCalories)),
         _react2.default.createElement('hr', null),
         _react2.default.createElement(
-          'h1',
+          _reactBootstrap.Grid,
           null,
-          'Breakfast'
-        ),
-        _react2.default.createElement(_BreakfastTable2.default, { foods: this.state.breakfast }),
-        _react2.default.createElement('hr', null),
-        _react2.default.createElement(
-          'h1',
-          null,
-          'Lunch'
-        ),
-        _react2.default.createElement(_LunchTable2.default, { foods: this.state.lunch }),
-        _react2.default.createElement('hr', null),
-        _react2.default.createElement(
-          'h1',
-          null,
-          'Dinner'
-        ),
-        _react2.default.createElement('hr', null),
-        _react2.default.createElement(_DinnerTable2.default, { foods: this.state.dinner }),
-        _react2.default.createElement('hr', null),
-        _react2.default.createElement(
-          'h1',
-          null,
-          'Snack'
-        ),
-        _react2.default.createElement(_SnackTable2.default, { foods: this.state.snack }),
-        _react2.default.createElement('hr', null)
+          _react2.default.createElement(
+            _reactBootstrap.Row,
+            null,
+            _react2.default.createElement(
+              _reactBootstrap.Col,
+              { md: 6 },
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                  'h1',
+                  null,
+                  'Breakfast'
+                )
+              ),
+              _react2.default.createElement(_BreakfastTable2.default, { foods: this.state.breakfast })
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Col,
+              { md: 6 },
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                  'h1',
+                  null,
+                  'Lunch'
+                )
+              ),
+              _react2.default.createElement(_LunchTable2.default, { foods: this.state.lunch })
+            )
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.Row,
+            null,
+            _react2.default.createElement(
+              _reactBootstrap.Col,
+              { md: 6 },
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                  'h1',
+                  null,
+                  'Snack'
+                )
+              ),
+              _react2.default.createElement(_SnackTable2.default, { foods: this.state.snack })
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Col,
+              { md: 6 },
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                  'h1',
+                  null,
+                  'Dinner'
+                )
+              ),
+              _react2.default.createElement(_DinnerTable2.default, { foods: this.state.dinner })
+            )
+          )
+        )
       );
     }
   }]);
@@ -21287,34 +21332,36 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactBootstrap = __webpack_require__(117);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var FoodTableRow = function FoodTableRow(props) {
   return _react2.default.createElement(
-    "tr",
+    'tr',
     null,
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.foodName
     ),
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.mealType
     ),
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.calories
     ),
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.fat
     ),
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.carbohydrates
     )
@@ -21326,45 +21373,49 @@ function BreakfastTable(props) {
     return _react2.default.createElement(FoodTableRow, { key: food.id, food: food });
   });
   return _react2.default.createElement(
-    "table",
-    { className: "bordered-table" },
+    _reactBootstrap.Panel,
+    null,
     _react2.default.createElement(
-      "thead",
-      null,
+      _reactBootstrap.Table,
+      { bordered: true, hover: true, striped: true },
       _react2.default.createElement(
-        "tr",
+        'thead',
         null,
         _react2.default.createElement(
-          "th",
+          'tr',
           null,
-          "Food Name"
-        ),
-        _react2.default.createElement(
-          "th",
-          null,
-          "Meal Type"
-        ),
-        _react2.default.createElement(
-          "th",
-          null,
-          "Calories"
-        ),
-        _react2.default.createElement(
-          "th",
-          null,
-          "Fat"
-        ),
-        _react2.default.createElement(
-          "th",
-          null,
-          "Carbohydrates"
+          _react2.default.createElement(
+            'th',
+            null,
+            'Food Name'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Meal Type'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Calories'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Fat'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Carbohydrates'
+          )
         )
+      ),
+      _react2.default.createElement(
+        'tbody',
+        null,
+        FoodTableRows
       )
-    ),
-    _react2.default.createElement(
-      "tbody",
-      null,
-      FoodTableRows
     )
   );
 }
@@ -21387,34 +21438,36 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactBootstrap = __webpack_require__(117);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var FoodTableRow = function FoodTableRow(props) {
   return _react2.default.createElement(
-    "tr",
+    'tr',
     null,
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.foodName
     ),
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.mealType
     ),
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.calories
     ),
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.fat
     ),
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.carbohydrates
     )
@@ -21426,45 +21479,49 @@ function BreakfastTable(props) {
     return _react2.default.createElement(FoodTableRow, { key: food.id, food: food });
   });
   return _react2.default.createElement(
-    "table",
-    { className: "bordered-table" },
+    _reactBootstrap.Panel,
+    null,
     _react2.default.createElement(
-      "thead",
-      null,
+      _reactBootstrap.Table,
+      { bordered: true, hover: true, striped: true },
       _react2.default.createElement(
-        "tr",
+        'thead',
         null,
         _react2.default.createElement(
-          "th",
+          'tr',
           null,
-          "Food Name"
-        ),
-        _react2.default.createElement(
-          "th",
-          null,
-          "Meal Type"
-        ),
-        _react2.default.createElement(
-          "th",
-          null,
-          "Calories"
-        ),
-        _react2.default.createElement(
-          "th",
-          null,
-          "Fat"
-        ),
-        _react2.default.createElement(
-          "th",
-          null,
-          "Carbohydrates"
+          _react2.default.createElement(
+            'th',
+            null,
+            'Food Name'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Meal Type'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Calories'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Fat'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Carbohydrates'
+          )
         )
+      ),
+      _react2.default.createElement(
+        'tbody',
+        null,
+        FoodTableRows
       )
-    ),
-    _react2.default.createElement(
-      "tbody",
-      null,
-      FoodTableRows
     )
   );
 }
@@ -21487,34 +21544,36 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactBootstrap = __webpack_require__(117);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var FoodTableRow = function FoodTableRow(props) {
   return _react2.default.createElement(
-    "tr",
+    'tr',
     null,
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.foodName
     ),
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.mealType
     ),
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.calories
     ),
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.fat
     ),
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.carbohydrates
     )
@@ -21526,45 +21585,49 @@ function BreakfastTable(props) {
     return _react2.default.createElement(FoodTableRow, { key: food.id, food: food });
   });
   return _react2.default.createElement(
-    "table",
-    { className: "bordered-table" },
+    _reactBootstrap.Panel,
+    null,
     _react2.default.createElement(
-      "thead",
-      null,
+      _reactBootstrap.Table,
+      { bordered: true, hover: true, striped: true },
       _react2.default.createElement(
-        "tr",
+        'thead',
         null,
         _react2.default.createElement(
-          "th",
+          'tr',
           null,
-          "Food Name"
-        ),
-        _react2.default.createElement(
-          "th",
-          null,
-          "Meal Type"
-        ),
-        _react2.default.createElement(
-          "th",
-          null,
-          "Calories"
-        ),
-        _react2.default.createElement(
-          "th",
-          null,
-          "Fat"
-        ),
-        _react2.default.createElement(
-          "th",
-          null,
-          "Carbohydrates"
+          _react2.default.createElement(
+            'th',
+            null,
+            'Food Name'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Meal Type'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Calories'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Fat'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Carbohydrates'
+          )
         )
+      ),
+      _react2.default.createElement(
+        'tbody',
+        null,
+        FoodTableRows
       )
-    ),
-    _react2.default.createElement(
-      "tbody",
-      null,
-      FoodTableRows
     )
   );
 }
@@ -21587,34 +21650,36 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactBootstrap = __webpack_require__(117);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var FoodTableRow = function FoodTableRow(props) {
   return _react2.default.createElement(
-    "tr",
+    'tr',
     null,
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.foodName
     ),
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.mealType
     ),
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.calories
     ),
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.fat
     ),
     _react2.default.createElement(
-      "td",
+      'td',
       null,
       props.food.carbohydrates
     )
@@ -21626,45 +21691,49 @@ function SnackTable(props) {
     return _react2.default.createElement(FoodTableRow, { key: food.id, food: food });
   });
   return _react2.default.createElement(
-    "table",
-    { className: "bordered-table" },
+    _reactBootstrap.Panel,
+    null,
     _react2.default.createElement(
-      "thead",
-      null,
+      _reactBootstrap.Table,
+      { bordered: true, hover: true, striped: true },
       _react2.default.createElement(
-        "tr",
+        'thead',
         null,
         _react2.default.createElement(
-          "th",
+          'tr',
           null,
-          "Food Name"
-        ),
-        _react2.default.createElement(
-          "th",
-          null,
-          "Meal Type"
-        ),
-        _react2.default.createElement(
-          "th",
-          null,
-          "Calories"
-        ),
-        _react2.default.createElement(
-          "th",
-          null,
-          "Fat"
-        ),
-        _react2.default.createElement(
-          "th",
-          null,
-          "Carbohydrates"
+          _react2.default.createElement(
+            'th',
+            null,
+            'Food Name'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Meal Type'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Calories'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Fat'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Carbohydrates'
+          )
         )
+      ),
+      _react2.default.createElement(
+        'tbody',
+        null,
+        FoodTableRows
       )
-    ),
-    _react2.default.createElement(
-      "tbody",
-      null,
-      FoodTableRows
     )
   );
 }
