@@ -845,75 +845,6 @@ SafeAnchor.defaultProps = defaultProps;
 /* 30 */,
 /* 31 */,
 /* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var global = __webpack_require__(50);
-var core = __webpack_require__(26);
-var ctx = __webpack_require__(181);
-var hide = __webpack_require__(74);
-var has = __webpack_require__(78);
-var PROTOTYPE = 'prototype';
-
-var $export = function (type, name, source) {
-  var IS_FORCED = type & $export.F;
-  var IS_GLOBAL = type & $export.G;
-  var IS_STATIC = type & $export.S;
-  var IS_PROTO = type & $export.P;
-  var IS_BIND = type & $export.B;
-  var IS_WRAP = type & $export.W;
-  var exports = IS_GLOBAL ? core : core[name] || (core[name] = {});
-  var expProto = exports[PROTOTYPE];
-  var target = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE];
-  var key, own, out;
-  if (IS_GLOBAL) source = name;
-  for (key in source) {
-    // contains in native
-    own = !IS_FORCED && target && target[key] !== undefined;
-    if (own && has(exports, key)) continue;
-    // export native or passed
-    out = own ? target[key] : source[key];
-    // prevent global pollution for namespaces
-    exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key]
-    // bind timers to global for call from export context
-    : IS_BIND && own ? ctx(out, global)
-    // wrap global constructors for prevent change them in library
-    : IS_WRAP && target[key] == out ? (function (C) {
-      var F = function (a, b, c) {
-        if (this instanceof C) {
-          switch (arguments.length) {
-            case 0: return new C();
-            case 1: return new C(a);
-            case 2: return new C(a, b);
-          } return new C(a, b, c);
-        } return C.apply(this, arguments);
-      };
-      F[PROTOTYPE] = C[PROTOTYPE];
-      return F;
-    // make static versions for prototype methods
-    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
-    // export proto methods to core.%CONSTRUCTOR%.methods.%NAME%
-    if (IS_PROTO) {
-      (exports.virtual || (exports.virtual = {}))[key] = out;
-      // export proto methods to core.%CONSTRUCTOR%.prototype.%NAME%
-      if (type & $export.R && expProto && !expProto[key]) hide(expProto, key, out);
-    }
-  }
-};
-// type bitmap
-$export.F = 1;   // forced
-$export.G = 2;   // global
-$export.S = 4;   // static
-$export.P = 8;   // proto
-$export.B = 16;  // bind
-$export.W = 32;  // wrap
-$export.U = 64;  // safe
-$export.R = 128; // real proto method for `library`
-module.exports = $export;
-
-
-/***/ }),
-/* 33 */,
-/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1204,6 +1135,75 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var global = __webpack_require__(50);
+var core = __webpack_require__(26);
+var ctx = __webpack_require__(181);
+var hide = __webpack_require__(74);
+var has = __webpack_require__(78);
+var PROTOTYPE = 'prototype';
+
+var $export = function (type, name, source) {
+  var IS_FORCED = type & $export.F;
+  var IS_GLOBAL = type & $export.G;
+  var IS_STATIC = type & $export.S;
+  var IS_PROTO = type & $export.P;
+  var IS_BIND = type & $export.B;
+  var IS_WRAP = type & $export.W;
+  var exports = IS_GLOBAL ? core : core[name] || (core[name] = {});
+  var expProto = exports[PROTOTYPE];
+  var target = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE];
+  var key, own, out;
+  if (IS_GLOBAL) source = name;
+  for (key in source) {
+    // contains in native
+    own = !IS_FORCED && target && target[key] !== undefined;
+    if (own && has(exports, key)) continue;
+    // export native or passed
+    out = own ? target[key] : source[key];
+    // prevent global pollution for namespaces
+    exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key]
+    // bind timers to global for call from export context
+    : IS_BIND && own ? ctx(out, global)
+    // wrap global constructors for prevent change them in library
+    : IS_WRAP && target[key] == out ? (function (C) {
+      var F = function (a, b, c) {
+        if (this instanceof C) {
+          switch (arguments.length) {
+            case 0: return new C();
+            case 1: return new C(a);
+            case 2: return new C(a, b);
+          } return new C(a, b, c);
+        } return C.apply(this, arguments);
+      };
+      F[PROTOTYPE] = C[PROTOTYPE];
+      return F;
+    // make static versions for prototype methods
+    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
+    // export proto methods to core.%CONSTRUCTOR%.methods.%NAME%
+    if (IS_PROTO) {
+      (exports.virtual || (exports.virtual = {}))[key] = out;
+      // export proto methods to core.%CONSTRUCTOR%.prototype.%NAME%
+      if (type & $export.R && expProto && !expProto[key]) hide(expProto, key, out);
+    }
+  }
+};
+// type bitmap
+$export.F = 1;   // forced
+$export.G = 2;   // global
+$export.S = 4;   // static
+$export.P = 8;   // proto
+$export.B = 16;  // bind
+$export.W = 32;  // wrap
+$export.U = 64;  // safe
+$export.R = 128; // real proto method for `library`
+module.exports = $export;
+
+
+/***/ }),
+/* 34 */,
 /* 35 */,
 /* 36 */,
 /* 37 */
@@ -7868,7 +7868,7 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouter = __webpack_require__(111);
 
-var _reactBootstrap = __webpack_require__(34);
+var _reactBootstrap = __webpack_require__(32);
 
 var _Dashboard = __webpack_require__(508);
 
@@ -8184,7 +8184,7 @@ module.exports = __webpack_require__(26).Object.assign;
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.3.1 Object.assign(target, source)
-var $export = __webpack_require__(32);
+var $export = __webpack_require__(33);
 
 $export($export.S + $export.F, 'Object', { assign: __webpack_require__(367) });
 
@@ -8360,7 +8360,7 @@ module.exports = function create(P, D) {
 /* 374 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $export = __webpack_require__(32);
+var $export = __webpack_require__(33);
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
 $export($export.S, 'Object', { create: __webpack_require__(190) });
 
@@ -8426,7 +8426,7 @@ __webpack_require__(380)('keys', function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 // most Object methods by ES6 should accept primitives
-var $export = __webpack_require__(32);
+var $export = __webpack_require__(33);
 var core = __webpack_require__(26);
 var fails = __webpack_require__(59);
 module.exports = function (KEY, exec) {
@@ -8587,7 +8587,7 @@ module.exports = __webpack_require__(26).Object.entries;
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-object-values-entries
-var $export = __webpack_require__(32);
+var $export = __webpack_require__(33);
 var $entries = __webpack_require__(193)(true);
 
 $export($export.S, 'Object', {
@@ -8692,7 +8692,7 @@ module.exports = __webpack_require__(26).Object.values;
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-object-values-entries
-var $export = __webpack_require__(32);
+var $export = __webpack_require__(33);
 var $values = __webpack_require__(193)(false);
 
 $export($export.S, 'Object', {
@@ -10204,7 +10204,7 @@ module.exports = __webpack_require__(26).parseInt;
 /* 407 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $export = __webpack_require__(32);
+var $export = __webpack_require__(33);
 var $parseInt = __webpack_require__(408);
 // 18.2.5 parseInt(string, radix)
 $export($export.G + $export.F * (parseInt != $parseInt), { parseInt: $parseInt });
@@ -10229,7 +10229,7 @@ module.exports = $parseInt(ws + '08') !== 8 || $parseInt(ws + '0x16') !== 22 ? f
 /* 409 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $export = __webpack_require__(32);
+var $export = __webpack_require__(33);
 var defined = __webpack_require__(80);
 var fails = __webpack_require__(59);
 var spaces = __webpack_require__(199);
@@ -10718,7 +10718,7 @@ module.exports = function (TO_STRING) {
 "use strict";
 
 var LIBRARY = __webpack_require__(186);
-var $export = __webpack_require__(32);
+var $export = __webpack_require__(33);
 var redefine = __webpack_require__(418);
 var hide = __webpack_require__(74);
 var Iterators = __webpack_require__(130);
@@ -10840,7 +10840,7 @@ module.exports = Object.getPrototypeOf || function (O) {
 "use strict";
 
 var ctx = __webpack_require__(181);
-var $export = __webpack_require__(32);
+var $export = __webpack_require__(33);
 var toObject = __webpack_require__(81);
 var call = __webpack_require__(422);
 var isArrayIter = __webpack_require__(423);
@@ -15971,7 +15971,7 @@ module.exports = __webpack_require__(26).Array.isArray;
 /***/ (function(module, exports, __webpack_require__) {
 
 // 22.1.2.2 / 15.4.3.2 Array.isArray(arg)
-var $export = __webpack_require__(32);
+var $export = __webpack_require__(33);
 
 $export($export.S, 'Array', { isArray: __webpack_require__(480) });
 
@@ -18444,7 +18444,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = __webpack_require__(111);
 
-var _reactBootstrap = __webpack_require__(34);
+var _reactBootstrap = __webpack_require__(32);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18525,7 +18525,7 @@ var CarouselTest = function (_React$Component3) {
             null,
             _react2.default.createElement(
               'div',
-              { style: { textAlign: "center" } },
+              { style: { textAlign: "center", marginLeft: 'auto', marginRight: 'auto', width: '700px', height: '300px' } },
               _react2.default.createElement('img', { src: '/fitness.jpg', height: '600px', width: '800px' })
             ),
             _react2.default.createElement(
@@ -18559,7 +18559,7 @@ var CarouselTest = function (_React$Component3) {
             null,
             _react2.default.createElement(
               'div',
-              { style: { textAlign: "center" } },
+              { style: { textAlign: "center", marginLeft: 'auto', marginRight: 'auto', width: '700px', height: '300px' } },
               _react2.default.createElement('img', { src: '/meals.jpg', height: '600px', width: '800px' })
             ),
             _react2.default.createElement(
@@ -18593,7 +18593,7 @@ var CarouselTest = function (_React$Component3) {
             null,
             _react2.default.createElement(
               'div',
-              { style: { textAlign: "center" } },
+              { style: { textAlign: "center", marginLeft: 'auto', marginRight: 'auto', width: '700px', height: '300px' } },
               _react2.default.createElement('img', { src: '/reviews.jpg', height: '600px', width: '800px' })
             ),
             _react2.default.createElement(
@@ -18874,15 +18874,15 @@ var HomePage = function (_React$Component6) {
         'div',
         null,
         _react2.default.createElement(TitleTest, null),
-        _react2.default.createElement('hr', null),
+        _react2.default.createElement('br', null),
         logIn,
-        _react2.default.createElement('hr', null),
+        _react2.default.createElement('br', null),
         _react2.default.createElement(CarouselTest, null),
-        _react2.default.createElement('hr', null),
+        _react2.default.createElement('br', null),
         _react2.default.createElement(Description, null),
-        _react2.default.createElement('hr', null),
+        _react2.default.createElement('br', null),
         _react2.default.createElement(ButtonTable, null),
-        _react2.default.createElement('hr', null)
+        _react2.default.createElement('br', null)
       );
     }
   }]);
@@ -18907,7 +18907,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(34);
+var _reactBootstrap = __webpack_require__(32);
 
 var _util = __webpack_require__(510);
 
@@ -20350,7 +20350,7 @@ var _SnackTable = __webpack_require__(521);
 
 var _SnackTable2 = _interopRequireDefault(_SnackTable);
 
-var _reactBootstrap = __webpack_require__(34);
+var _reactBootstrap = __webpack_require__(32);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20587,7 +20587,7 @@ var _AddMeal = __webpack_require__(516);
 
 var _AddMeal2 = _interopRequireDefault(_AddMeal);
 
-var _reactBootstrap = __webpack_require__(34);
+var _reactBootstrap = __webpack_require__(32);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20668,11 +20668,6 @@ var MealSummary = function (_React$Component) {
               _react2.default.createElement(
                 _reactBootstrap.FormGroup,
                 { inline: true, controlId: 'formActiviy' },
-                _react2.default.createElement(
-                  _reactBootstrap.ControlLabel,
-                  null,
-                  'Activity Level'
-                ),
                 _react2.default.createElement(
                   _reactBootstrap.FormControl,
                   { onChange: this.handleSelectChange, componentClass: 'select', placeholder: 'select' },
@@ -20981,7 +20976,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(34);
+var _reactBootstrap = __webpack_require__(32);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21087,7 +21082,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(34);
+var _reactBootstrap = __webpack_require__(32);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21193,7 +21188,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(34);
+var _reactBootstrap = __webpack_require__(32);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21299,7 +21294,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(34);
+var _reactBootstrap = __webpack_require__(32);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21405,7 +21400,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(34);
+var _reactBootstrap = __webpack_require__(32);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

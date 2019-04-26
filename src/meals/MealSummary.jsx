@@ -50,7 +50,6 @@ export default class MealSummary extends React.Component {
       <div style ={{width: '300px', marginLeft: 'auto', marginRight: 'auto'}}>
         <Form>
           <FormGroup inline controlId="formActiviy">
-            <ControlLabel>Activity Level</ControlLabel>
             <FormControl onChange = {this.handleSelectChange} componentClass="select" placeholder="select">
               <option value="">Select Option</option>
               <option value="addFood">Add Food</option>

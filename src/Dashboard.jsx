@@ -26,7 +26,7 @@ class CarouselTest extends React.Component {
       <div style={{textAlign: "center"}}>
         <Carousel>
           <CarouselItem>
-            <div style={{textAlign: "center"}}>
+            <div style={{textAlign: "center", marginLeft: 'auto', marginRight:'auto', width: '700px', height: '300px'}}>
               <img src = "/fitness.jpg" height = "600px" width = "800px" />
             </div>
             <Carousel.Caption>
@@ -37,7 +37,7 @@ class CarouselTest extends React.Component {
           </CarouselItem>
 
           <CarouselItem>
-            <div style={{textAlign: "center"}}>
+            <div style={{textAlign: "center", marginLeft: 'auto', marginRight:'auto', width: '700px', height: '300px'}}>
              <img src = "/meals.jpg" height = "600px" width = "800px" />
             </div>
             <Carousel.Caption>
@@ -48,7 +48,7 @@ class CarouselTest extends React.Component {
           </CarouselItem>
 
           <CarouselItem>
-            <div style={{textAlign: "center"}}>
+            <div style={{textAlign: "center", marginLeft: 'auto', marginRight:'auto', width: '700px', height: '300px'}}>
              <img src = "/reviews.jpg" height = "600px" width = "800px" />
             </div>
             <Carousel.Caption>
@@ -221,15 +221,15 @@ render() {
   return (
     <div>
       <TitleTest />
-      <hr />
+      <br />
       {logIn}
-      <hr />
+      <br />
       <CarouselTest />
-      <hr />
+      <br />
       <Description />
-      <hr/>
+      <br/>
       <ButtonTable />
-      <hr/>
+      <br/>
     </div>
   );
 }
