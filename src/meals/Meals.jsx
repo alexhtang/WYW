@@ -10,7 +10,6 @@ import {Grid, Col, Row} from 'react-bootstrap';
 
 
 
-
 export default class Meals extends React.Component {
   constructor() {
     super();
@@ -115,7 +114,7 @@ export default class Meals extends React.Component {
       <div style = {{textAlign: 'center'}}>
         <h1>Meal Tracker</h1>
         <MealSummary totalCalories={this.totalCalories} createFood = {this.addMeal}  totalCalories = {this.state.totalCalories} />
-        <hr />
+        <br />
         <Grid>
           <Row>
             <Col md = {6}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import AddExercise from './AddExercise.jsx';
 import AddMeal from './AddMeal.jsx';
-
+import {Table, Panel, Jumbotron, Form, FormControl, FormGroup, Button, ControlLabel} from 'react-bootstrap';
 
 export default class MealSummary extends React.Component {
     constructor() {
@@ -43,20 +43,33 @@ export default class MealSummary extends React.Component {
     }
   
     render() {
-      return (<div style = {{textAlign: 'center'}}>
-         <h4>Your Daily Summary</h4>
-         <h5>Total Calories: {this.props.totalCalories}</h5>
-  
+      return (
+      <div>
+        <Jumbotron>
         <h4>Enter Food or Exercise</h4>
-        
-        <select 
-                                value={this.state.selectValue} 
-                                onChange={this.handleSelectChange}>
-    <option value="">Select Option</option>
-    <option value="addFood">Add Food</option>
-    <option value="addExercise">Add Exercise</option>
+      <div style ={{width: '300px', marginLeft: 'auto', marginRight: 'auto'}}>
+        <Form>
+          <FormGroup inline controlId="formActiviy">
+            <ControlLabel>Activity Level</ControlLabel>
+            <FormControl onChange = {this.handleSelectChange} componentClass="select" placeholder="select">
+              <option value="">Select Option</option>
+              <option value="addFood">Add Food</option>
+              <option value="addExercise">Add Exercise</option>
+            </FormControl>
+              <Button
+              onClick = {this.handleSubmit}
+              bsStyle = 'primary'>
+                Add
+              </Button>
+          </FormGroup>
+        </Form>
+        </div>
+        {/* <select 
+        value={this.state.selectValue} 
+        onChange={this.handleSelectChange}>
+          
         </select>
-            <button onClick = {this.handleSubmit}>Add</button>
+            <button onClick = {this.handleSubmit}>Add</button> */}
   
             {this.state.showFoodFormPopup ? 
           <AddMeal
@@ -66,7 +79,7 @@ export default class MealSummary extends React.Component {
           />
           : null
         }
-                    {this.state.showExerciseFormPopup ? 
+        {this.state.showExerciseFormPopup ? 
           <AddExercise
             text='Close Me'
             closeExerciseFormPopup={this.toggleExerciseFormPopup.bind(this)}
@@ -74,6 +87,28 @@ export default class MealSummary extends React.Component {
           />
           : null
         }
+        <div style = {{textAlign: 'center', width: '400px', marginLeft: 'auto', marginRight:'auto', marginTop: '30px'}}>
+         <Panel>
+          <Table striped bordered>
+            <thead>
+              <tr>
+                <th style ={{textAlign:'center'}}><h4>Your Daily Summary</h4></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <h5>Total Calories: {this.props.totalCalories}</h5>
+                </td>
+              </tr>
+            </tbody>
+          </Table>
+         </Panel>
+         </div>
+      </Jumbotron>
+
+      
+      
         </div>
   
       );

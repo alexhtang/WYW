@@ -1,6 +1,6 @@
 // NEW: added the import for react.
 import React from 'react';
-import {Table, Panel, Carousel, CarouselItem, Button, Form, FormGroup, FormControl, HelpBlock, ControlLabel, Grid, Row, Col, ProgressBar} from 'react-bootstrap';
+import {Table, Panel, Carousel, Button, Form, FormGroup, FormControl, ControlLabel, Grid, Row, Col} from 'react-bootstrap';
 import { formatWithOptions } from 'util';
 
 const BodyRow = (props) => (
@@ -43,19 +43,21 @@ class NutritionStats extends React.Component {
 
   render() {
     return (
-      <div style = {{fontFamily: 'Bookman Old Style', fontStyle: 'bold', fontSize: '25px', textAlign: 'center', marginLeft: 'auto', marginRight:'auto', width: '50%'}}>
-        <Table striped bordered hover>
-      <thead>
-        <tr >
-          <th><h1 style = {{textAlign: 'center'}}>Suggested Caloric Intake</h1></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><h1 style= {{color: 'green'}}>{this.props.calories}</h1></td>
-        </tr>
-      </tbody>
-    </Table>
+      <div style = {{fontFamily: 'Bookman Old Style', fontStyle: 'bold', textAlign: 'center', marginLeft: 'auto', marginRight:'auto', width: '400px'}}>
+        <Panel>
+          <Table striped bordered hover>
+            <thead>
+              <tr >
+                <th><h3 style = {{textAlign: 'center'}}>Suggested Caloric Intake</h3></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><h3 style= {{color: 'green'}}>{this.props.calories}</h3></td>
+              </tr>
+            </tbody>
+        </Table>
+      </Panel>
       </div>
       )
   }
@@ -128,8 +130,7 @@ class AddBodyInfo extends React.Component {
           });
           
         }
-        // clear the form for the next input
-        // form.height.value = ""; form.weight.value = ""; form.age.value = ""; form.activity.value= ""; form.gender.value = "";
+        
         (this.state.hEvent).value = ""; (this.state.wEvent).value = ""; (this.state.aEvent).value = "";
       }
 
@@ -246,7 +247,7 @@ class AddBodyInfo extends React.Component {
                 <Col md = {2}>
                   <Button
                       style = {{marginTop: '20px'}}
-                      bsStyle = "secondary"
+                      bsStyle = "primary"
                       bsSize = "small"
                       onClick = {this.handleSubmit}>Update</Button>
 
@@ -394,11 +395,11 @@ export default class FitnessTracker extends React.Component {
         <AddCarousel />
         </div>
         <BodyStats bodystats = {this.state.bodystats} />
-        <hr />
+        <br />
         <AddBodyInfo update = {this.update} />
-        <hr />
+        <br />
         <NutritionStats calories = {this.state.calories}/>
-        <hr />
+        <br />
       </div>
     );
   }
