@@ -61,6 +61,21 @@ db.reviews.remove({});
       name: "Tim R",
       rating: 5,
       comment: "This has revolutionized my life!"
+    },
+    {
+      name: "Alex T",
+      rating: 5,
+      comment: "Finally I can get the six-pack I've been dreaming of!"
+    },
+    {
+      name: "Betty W",
+      rating: 5,
+      comment: "I'm so fit, I'll live forever!"
+    },
+    {
+      name: "David F",
+      rating: 5,
+      comment: "Wowzers!"
     }
   ]);
 
