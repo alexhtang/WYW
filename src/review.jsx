@@ -1,6 +1,6 @@
 // NEW: added the import for react.
 import React from 'react';
-import {Panel, Form, FormControl, Button, FormGroup, Table, Jumbotron, Card} from 'react-bootstrap';
+import {Panel, Form, FormControl, Button, FormGroup, Table, Jumbotron, Collapse, Well} from 'react-bootstrap';
 class ReviewMessage extends React.Component {
   render() {
     return <div style = {{fontFamily: "Work Sans", fontSize: '25'}}>Let us know how you feel about Watch Your Weight!</div>;
@@ -42,6 +42,10 @@ class ReviewAdd extends React.Component {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
+
+    this.state = {
+      open: false,
+    }
   }
 
   handleSubmit(e) {
@@ -67,6 +71,11 @@ class ReviewAdd extends React.Component {
   render() {
     return (
       <div style = {{marginLeft: 'auto', marginRight: 'auto', width: '50%'}}> 
+      <Button
+        onClick={() => this.setState({ open: !this.state.open })}>
+        Add Review</Button>
+       <Collapse in = {this.state.open}>
+       <div>
        <Panel>
         <Panel.Heading>
             <Form name = "issueAdd" inline>
@@ -103,17 +112,13 @@ class ReviewAdd extends React.Component {
          componentClass="textarea" 
          placeholder="Leave a comment!">
          </FormControl>
-          
-          
           </FormGroup>
-         
-         
          </Form>
-
         </Panel.Body>
       </Panel>
       
-      
+      </div>
+      </Collapse>
       
           {/* <input type="text" name="name" placeholder="Name" required/>
           
@@ -207,6 +212,7 @@ export default class Review extends React.Component {
         </Jumbotron>
         
         <ReviewTable reviewInfo={this.state.reviewInfo} />
+        
         <br />
         <ReviewAdd createReview={this.add} />
         

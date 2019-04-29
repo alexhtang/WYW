@@ -21672,6 +21672,10 @@ var ReviewAdd = function (_React$Component2) {
 
     _this2.handleSubmit = _this2.handleSubmit.bind(_this2);
     _this2.handleSelectChange = _this2.handleSelectChange.bind(_this2);
+
+    _this2.state = {
+      open: false
+    };
     return _this2;
   }
 
@@ -21700,86 +21704,103 @@ var ReviewAdd = function (_React$Component2) {
   }, {
     key: 'render',
     value: function render() {
-      var _React$createElement;
+      var _this3 = this,
+          _React$createElement;
 
       return _react2.default.createElement(
         'div',
         { style: { marginLeft: 'auto', marginRight: 'auto', width: '50%' } },
         _react2.default.createElement(
-          _reactBootstrap.Panel,
-          null,
+          _reactBootstrap.Button,
+          {
+            onClick: function onClick() {
+              return _this3.setState({ open: !_this3.state.open });
+            } },
+          'Add Review'
+        ),
+        _react2.default.createElement(
+          _reactBootstrap.Collapse,
+          { 'in': this.state.open },
           _react2.default.createElement(
-            _reactBootstrap.Panel.Heading,
+            'div',
             null,
             _react2.default.createElement(
-              _reactBootstrap.Form,
-              { name: 'issueAdd', inline: true },
+              _reactBootstrap.Panel,
+              null,
               _react2.default.createElement(
-                _reactBootstrap.FormGroup,
-                { controlId: 'formActiviy' },
-                _react2.default.createElement(_reactBootstrap.FormControl, {
-                  type: 'text',
-                  name: 'name',
-                  placeholder: 'Name',
-                  style: { marginRight: '5px' }
-                }),
+                _reactBootstrap.Panel.Heading,
+                null,
                 _react2.default.createElement(
-                  _reactBootstrap.FormControl,
-                  { name: 'rating', style: { marginRight: '7px', height: '30px' }, onChange: this.handleSelectChange, componentClass: 'select', placeholder: 'select' },
+                  _reactBootstrap.Form,
+                  { name: 'issueAdd', inline: true },
                   _react2.default.createElement(
-                    'option',
-                    { value: '', selected: true, disabled: true, hidden: true },
-                    'Rating'
+                    _reactBootstrap.FormGroup,
+                    { controlId: 'formActiviy' },
+                    _react2.default.createElement(_reactBootstrap.FormControl, {
+                      type: 'text',
+                      name: 'name',
+                      placeholder: 'Name',
+                      style: { marginRight: '5px' }
+                    }),
+                    _react2.default.createElement(
+                      _reactBootstrap.FormControl,
+                      { name: 'rating', style: { marginRight: '7px', height: '30px' }, onChange: this.handleSelectChange, componentClass: 'select', placeholder: 'select' },
+                      _react2.default.createElement(
+                        'option',
+                        { value: '', selected: true, disabled: true, hidden: true },
+                        'Rating'
+                      ),
+                      _react2.default.createElement(
+                        'option',
+                        { value: '5' },
+                        '5'
+                      ),
+                      _react2.default.createElement(
+                        'option',
+                        { value: '4' },
+                        '4'
+                      ),
+                      _react2.default.createElement(
+                        'option',
+                        { value: '3' },
+                        '3'
+                      ),
+                      _react2.default.createElement(
+                        'option',
+                        { value: '2' },
+                        '2'
+                      ),
+                      _react2.default.createElement(
+                        'option',
+                        { value: '1' },
+                        '1'
+                      )
+                    )
                   ),
                   _react2.default.createElement(
-                    'option',
-                    { value: '5' },
-                    '5'
-                  ),
-                  _react2.default.createElement(
-                    'option',
-                    { value: '4' },
-                    '4'
-                  ),
-                  _react2.default.createElement(
-                    'option',
-                    { value: '3' },
-                    '3'
-                  ),
-                  _react2.default.createElement(
-                    'option',
-                    { value: '2' },
-                    '2'
-                  ),
-                  _react2.default.createElement(
-                    'option',
-                    { value: '1' },
-                    '1'
+                    _reactBootstrap.Button,
+                    {
+                      onClick: this.handleSubmit,
+                      style: { marginLeft: '5px' }
+                    },
+                    'Add'
                   )
                 )
               ),
               _react2.default.createElement(
-                _reactBootstrap.Button,
-                {
-                  onClick: this.handleSubmit,
-                  style: { marginLeft: '5px' }
-                },
-                'Add'
-              )
-            )
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.Panel.Body,
-            null,
-            _react2.default.createElement(
-              _reactBootstrap.Form,
-              { name: 'commentAdd' },
-              _react2.default.createElement(
-                _reactBootstrap.FormGroup,
+                _reactBootstrap.Panel.Body,
                 null,
-                _react2.default.createElement(_reactBootstrap.FormControl, (_React$createElement = { name: 'rating', style: { height: '100' },
-                  onChange: this.handleSelectChange
-                }, _defineProperty(_React$createElement, 'name', 'comment'), _defineProperty(_React$createElement, 'componentClass', 'textarea'), _defineProperty(_React$createElement, 'placeholder', 'Leave a comment!'), _React$createElement))
+                _react2.default.createElement(
+                  _reactBootstrap.Form,
+                  { name: 'commentAdd' },
+                  _react2.default.createElement(
+                    _reactBootstrap.FormGroup,
+                    null,
+                    _react2.default.createElement(_reactBootstrap.FormControl, (_React$createElement = { name: 'rating', style: { height: '100' },
+                      onChange: this.handleSelectChange
+                    }, _defineProperty(_React$createElement, 'name', 'comment'), _defineProperty(_React$createElement, 'componentClass', 'textarea'), _defineProperty(_React$createElement, 'placeholder', 'Leave a comment!'), _React$createElement))
+                  )
+                )
               )
             )
           )
@@ -21797,12 +21818,12 @@ var Review = function (_React$Component3) {
   function Review() {
     _classCallCheck(this, Review);
 
-    var _this3 = _possibleConstructorReturn(this, (Review.__proto__ || Object.getPrototypeOf(Review)).call(this));
+    var _this4 = _possibleConstructorReturn(this, (Review.__proto__ || Object.getPrototypeOf(Review)).call(this));
 
-    _this3.state = { reviewInfo: [] };
+    _this4.state = { reviewInfo: [] };
 
-    _this3.add = _this3.add.bind(_this3);
-    return _this3;
+    _this4.add = _this4.add.bind(_this4);
+    return _this4;
   }
 
   _createClass(Review, [{
@@ -21813,7 +21834,7 @@ var Review = function (_React$Component3) {
   }, {
     key: 'loadData',
     value: function loadData() {
-      var _this4 = this;
+      var _this5 = this;
 
       // setTimeout(() => {
       //   this.setState({
@@ -21823,7 +21844,7 @@ var Review = function (_React$Component3) {
       fetch('/api/reviews').then(function (response) {
         if (response.ok) {
           response.json().then(function (data) {
-            _this4.setState({ reviewInfo: data.records });
+            _this5.setState({ reviewInfo: data.records });
           });
         } else {
           response.json().then(function (error) {
@@ -21837,7 +21858,7 @@ var Review = function (_React$Component3) {
   }, {
     key: 'add',
     value: function add(newReview) {
-      var _this5 = this;
+      var _this6 = this;
 
       fetch('/api/reviews', {
         method: 'POST',
@@ -21846,9 +21867,9 @@ var Review = function (_React$Component3) {
       }).then(function (res) {
         if (res.ok) {
           res.json().then(function (fixedReview) {
-            var newReviews = _this5.state.reviewInfo.concat(fixedReview);
+            var newReviews = _this6.state.reviewInfo.concat(fixedReview);
             newReviews.id = 1;
-            _this5.setState({ reviewInfo: newReviews });
+            _this6.setState({ reviewInfo: newReviews });
             //this.setState({ totalCalories: Number(this.state.totalCalories) + Number(newReview.calories)});
           });
         } else {
