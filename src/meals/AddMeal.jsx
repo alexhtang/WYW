@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Form, FormControl, FormGroup, Button} from 'react-bootstrap';
 
 export default class AddMeal extends React.Component {
     constructor() {
@@ -34,23 +34,55 @@ export default class AddMeal extends React.Component {
   
     render() {
       return (
-        <div>
-          <form name="addMeal" onSubmit={this.handleSubmit}>
-            <input type="text" name="foodName" placeholder="Food Name" />
-            <input type="text" name="calories" placeholder="Calories" />
+        <div style = {{marginLeft: 'auto', marginRight: 'auto', width: '50%', textAlign: 'center'}}>
+          <Form inline name="addMeal" onSubmit={this.handleSubmit}>
+            <FormGroup>
+              <FormControl
+                type="text"
+                name = "foodName"
+                placeholder="Food Name"
+                style = {{marginRight: '5px'}}
+              />
+              <FormControl
+                type="text"
+                name = "calories"
+                placeholder="Calories"
+                style = {{marginRight: '5px'}}
+              />
+              <FormControl
+                type="text"
+                name = "fat"
+                placeholder="Fat"
+                style = {{marginRight: '5px'}}
+              />
+              <FormControl
+                type="text"
+                name = "carbohydrates"
+                placeholder="Carbohydrates"
+                style = {{marginRight: '5px'}}
+              />
+              
+            </FormGroup>
+            <div style = {{marginLeft: 'auto', marginRight: 'auto', width: '50%', textAlign: 'center'}}>
+            <FormControl onChange = {this.handleSelectChange} componentClass="select" placeholder="select">
+                <option value="Breakfast">Breakfast</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Dinner">Dinner</option>
+                <option value="Snack">Snack</option> 
+                   
+              </FormControl>
+              <Button bsStyle = 'primary'>Add</Button>
+              </div>
+
+              
+            {/* <input type="text" name="foodName" placeholder="Food Name" /> */}
+            {/* <input type="text" name="calories" placeholder="Calories" />
             <input type="text" name="fat" placeholder="Fat" />
-            <input type="text" name="carbohydrates" placeholder="Carbohydrates"/>  
-            <select 
-                                value={this.state.mealType} 
-                                onChange={this.handleSelectChange}
-   >
-    <option value="Breakfast">Breakfast</option>
-    <option value="Lunch">Lunch</option>
-    <option value="Dinner">Dinner</option>
-    <option value="Snack">Snack</option>
-        </select>
-            <button>Add</button>
-          </form>
+            <input type="text" name="carbohydrates" placeholder="Carbohydrates"/>   */}
+            
+            
+            
+          </Form>
         </div>
       );
     }

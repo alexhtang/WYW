@@ -20667,7 +20667,7 @@ var MealSummary = function (_React$Component) {
               null,
               _react2.default.createElement(
                 _reactBootstrap.FormGroup,
-                { inline: true, controlId: 'formActiviy' },
+                { controlId: 'formActiviy' },
                 _react2.default.createElement(
                   _reactBootstrap.FormControl,
                   { onChange: this.handleSelectChange, componentClass: 'select', placeholder: 'select' },
@@ -20781,6 +20781,8 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactBootstrap = __webpack_require__(32);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20803,7 +20805,7 @@ var AddExercise = function (_React$Component) {
   }
 
   _createClass(AddExercise, [{
-    key: "handleSubmit",
+    key: 'handleSubmit',
     value: function handleSubmit(e) {
       e.preventDefault();
       /*let form = document.forms.addExercise;
@@ -20817,20 +20819,30 @@ var AddExercise = function (_React$Component) {
       this.props.closeExerciseFormPopup();
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        "div",
-        null,
+        'div',
+        { style: { marginLeft: 'auto', marginRight: 'auto', marginTop: '10px', width: '30%', textAlign: 'center' } },
         _react2.default.createElement(
-          "form",
-          { name: "addExercise", onSubmit: this.handleSubmit },
-          _react2.default.createElement("input", { type: "text", name: "ExerciseName", placeholder: "Exercise Name" }),
-          _react2.default.createElement("input", { type: "text", name: "calories", placeholder: "Calories" }),
+          _reactBootstrap.Form,
+          { inline: true, name: 'addExercise', onSubmit: this.handleSubmit },
+          _react2.default.createElement(_reactBootstrap.FormControl, {
+            type: 'text',
+            name: 'ExerciseName',
+            placeholder: 'Exercise Name',
+            style: { marginRight: '5px' }
+          }),
+          _react2.default.createElement(_reactBootstrap.FormControl, {
+            type: 'text',
+            name: 'calories',
+            placeholder: 'Calories',
+            style: { marginRight: '5px' }
+          }),
           _react2.default.createElement(
-            "button",
-            null,
-            "Add"
+            _reactBootstrap.Button,
+            { bsStyle: 'primary' },
+            'Add'
           )
         )
       );
@@ -20858,6 +20870,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _reactBootstrap = __webpack_require__(32);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20910,45 +20924,70 @@ var AddMeal = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { style: { marginLeft: 'auto', marginRight: 'auto', width: '50%', textAlign: 'center' } },
         _react2.default.createElement(
-          'form',
-          { name: 'addMeal', onSubmit: this.handleSubmit },
-          _react2.default.createElement('input', { type: 'text', name: 'foodName', placeholder: 'Food Name' }),
-          _react2.default.createElement('input', { type: 'text', name: 'calories', placeholder: 'Calories' }),
-          _react2.default.createElement('input', { type: 'text', name: 'fat', placeholder: 'Fat' }),
-          _react2.default.createElement('input', { type: 'text', name: 'carbohydrates', placeholder: 'Carbohydrates' }),
+          _reactBootstrap.Form,
+          { inline: true, name: 'addMeal', onSubmit: this.handleSubmit },
           _react2.default.createElement(
-            'select',
-            {
-              value: this.state.mealType,
-              onChange: this.handleSelectChange
-            },
-            _react2.default.createElement(
-              'option',
-              { value: 'Breakfast' },
-              'Breakfast'
-            ),
-            _react2.default.createElement(
-              'option',
-              { value: 'Lunch' },
-              'Lunch'
-            ),
-            _react2.default.createElement(
-              'option',
-              { value: 'Dinner' },
-              'Dinner'
-            ),
-            _react2.default.createElement(
-              'option',
-              { value: 'Snack' },
-              'Snack'
-            )
+            _reactBootstrap.FormGroup,
+            null,
+            _react2.default.createElement(_reactBootstrap.FormControl, {
+              type: 'text',
+              name: 'foodName',
+              placeholder: 'Food Name',
+              style: { marginRight: '5px' }
+            }),
+            _react2.default.createElement(_reactBootstrap.FormControl, {
+              type: 'text',
+              name: 'calories',
+              placeholder: 'Calories',
+              style: { marginRight: '5px' }
+            }),
+            _react2.default.createElement(_reactBootstrap.FormControl, {
+              type: 'text',
+              name: 'fat',
+              placeholder: 'Fat',
+              style: { marginRight: '5px' }
+            }),
+            _react2.default.createElement(_reactBootstrap.FormControl, {
+              type: 'text',
+              name: 'carbohydrates',
+              placeholder: 'Carbohydrates',
+              style: { marginRight: '5px' }
+            })
           ),
           _react2.default.createElement(
-            'button',
-            null,
-            'Add'
+            'div',
+            { style: { marginLeft: 'auto', marginRight: 'auto', width: '50%', textAlign: 'center' } },
+            _react2.default.createElement(
+              _reactBootstrap.FormControl,
+              { onChange: this.handleSelectChange, componentClass: 'select', placeholder: 'select' },
+              _react2.default.createElement(
+                'option',
+                { value: 'Breakfast' },
+                'Breakfast'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'Lunch' },
+                'Lunch'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'Dinner' },
+                'Dinner'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'Snack' },
+                'Snack'
+              )
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Button,
+              { bsStyle: 'primary' },
+              'Add'
+            )
           )
         )
       );

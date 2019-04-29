@@ -49,7 +49,7 @@ export default class MealSummary extends React.Component {
         <h4>Enter Food or Exercise</h4>
       <div style ={{width: '300px', marginLeft: 'auto', marginRight: 'auto'}}>
         <Form>
-          <FormGroup inline controlId="formActiviy">
+          <FormGroup controlId="formActiviy">
             <FormControl onChange = {this.handleSelectChange} componentClass="select" placeholder="select">
               <option value="">Select Option</option>
               <option value="addFood">Add Food</option>
