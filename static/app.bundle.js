@@ -20388,7 +20388,6 @@ var Meals = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.loadData();
-      this.loadBreakfastData();
     }
   }, {
     key: 'loadData',
@@ -20904,16 +20903,27 @@ var AddMeal = function (_React$Component) {
       e.preventDefault();
       var form = document.forms.addMeal;
 
-      this.props.createFood({
-        foodName: form.foodName.value,
-        calories: form.calories.value,
-        mealType: this.state.mealType,
-        fat: form.fat.value,
-        carbohydrates: form.carbohydrates.value
-      });
+      if (form.foodName.value.length) {}
 
+      if (form.foodName.value.length === 0) {
+        window.alert('Please add a Food Name for this meal');
+      } else if (form.calories.value.length === 0 || form.calories.value < 0) {
+        window.alert('Please add a positive numeric value for calories for this meal');
+      } else if (form.fat.value.length === 0 || form.fat.value < 0) {
+        window.alert('Please add a positive numeric value for fat for this meal');
+      } else if (form.carbohydrates.value.length === 0 || form.carbohydrates.value < 0) {
+        window.alert('Please add a positive numeric value for carbohydrates for this meal');
+      } else {
+        this.props.createFood({
+          foodName: form.foodName.value,
+          calories: form.calories.value,
+          mealType: this.state.mealType,
+          fat: form.fat.value,
+          carbohydrates: form.carbohydrates.value
+        });
+        this.props.closeFoodFormPopup();
+      }
       // Clear the form for the next input.
-      this.props.closeFoodFormPopup();
     }
   }, {
     key: 'handleSelectChange',
@@ -20939,19 +20949,19 @@ var AddMeal = function (_React$Component) {
               style: { marginRight: '5px' }
             }),
             _react2.default.createElement(_reactBootstrap.FormControl, {
-              type: 'text',
+              type: 'number',
               name: 'calories',
               placeholder: 'Calories',
               style: { marginRight: '5px' }
             }),
             _react2.default.createElement(_reactBootstrap.FormControl, {
-              type: 'text',
+              type: 'number',
               name: 'fat',
               placeholder: 'Fat',
               style: { marginRight: '5px' }
             }),
             _react2.default.createElement(_reactBootstrap.FormControl, {
-              type: 'text',
+              type: 'number',
               name: 'carbohydrates',
               placeholder: 'Carbohydrates',
               style: { marginRight: '5px' }
@@ -21160,8 +21170,8 @@ var FoodTableRow = function FoodTableRow(props) {
 };
 
 function BreakfastTable(props) {
-  var FoodTableRows = props.foods.map(function (food) {
-    return _react2.default.createElement(FoodTableRow, { key: food.id, food: food });
+  var FoodTableRows = props.foods.map(function (food, index) {
+    return _react2.default.createElement(FoodTableRow, { key: index, food: food });
   });
   return _react2.default.createElement(
     _reactBootstrap.Panel,
@@ -21372,8 +21382,8 @@ var FoodTableRow = function FoodTableRow(props) {
 };
 
 function BreakfastTable(props) {
-  var FoodTableRows = props.foods.map(function (food) {
-    return _react2.default.createElement(FoodTableRow, { key: food.id, food: food });
+  var FoodTableRows = props.foods.map(function (food, index) {
+    return _react2.default.createElement(FoodTableRow, { key: index, food: food });
   });
   return _react2.default.createElement(
     _reactBootstrap.Panel,
@@ -21478,8 +21488,8 @@ var FoodTableRow = function FoodTableRow(props) {
 };
 
 function SnackTable(props) {
-  var FoodTableRows = props.foods.map(function (food) {
-    return _react2.default.createElement(FoodTableRow, { key: food.id, food: food });
+  var FoodTableRows = props.foods.map(function (food, index) {
+    return _react2.default.createElement(FoodTableRow, { key: index, food: food });
   });
   return _react2.default.createElement(
     _reactBootstrap.Panel,

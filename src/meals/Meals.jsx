@@ -27,7 +27,6 @@ export default class Meals extends React.Component {
 
   componentDidMount() {
     this.loadData();
-    this.loadBreakfastData();
   }
 
   loadData() {

@@ -12,8 +12,8 @@ const FoodTableRow = (props) => (
   );
 
 export function SnackTable(props) {
-    const FoodTableRows = props.foods.map(food => (
-      <FoodTableRow key={food.id} food={food} />
+    const FoodTableRows = props.foods.map((food, index) => (
+      <FoodTableRow key={index} food={food} />
     ));
     return (
       <Panel>

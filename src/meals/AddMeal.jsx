@@ -15,7 +15,15 @@ export default class AddMeal extends React.Component {
       e.preventDefault();
       let form = document.forms.addMeal;
     
-      
+      if(form.foodName.value.length){
+
+      }
+
+      if(form.foodName.value.length ===0){window.alert('Please add a Food Name for this meal');}
+      else if (form.calories.value.length===0 || form.calories.value<0){ window.alert('Please add a positive numeric value for calories for this meal');}
+      else if (form.fat.value.length===0 || form.fat.value<0){ window.alert('Please add a positive numeric value for fat for this meal');}
+      else if (form.carbohydrates.value.length===0 || form.carbohydrates.value<0){ window.alert('Please add a positive numeric value for carbohydrates for this meal');}
+      else{
       this.props.createFood({
         foodName: form.foodName.value,
         calories: form.calories.value,
@@ -23,9 +31,10 @@ export default class AddMeal extends React.Component {
         fat: form.fat.value,
         carbohydrates: form.carbohydrates.value,
       });
-  
-      // Clear the form for the next input.
       this.props.closeFoodFormPopup();
+    }
+      // Clear the form for the next input.
+      
     }
   
     handleSelectChange(e){
@@ -44,19 +53,19 @@ export default class AddMeal extends React.Component {
                 style = {{marginRight: '5px'}}
               />
               <FormControl
-                type="text"
+                type="number"
                 name = "calories"
                 placeholder="Calories"
                 style = {{marginRight: '5px'}}
               />
               <FormControl
-                type="text"
+                type="number"
                 name = "fat"
                 placeholder="Fat"
                 style = {{marginRight: '5px'}}
               />
               <FormControl
-                type="text"
+                type="number"
                 name = "carbohydrates"
                 placeholder="Carbohydrates"
                 style = {{marginRight: '5px'}}
