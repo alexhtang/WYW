@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import {Table, Form, Row, Col, Carousel, CarouselItem, Card, FormGroup, FormControl, FormRow, ControlLabel, Button, ButtonToolbar, ButtonGroup} from 'react-bootstrap';
+import {Table, Panel, Form, Row, Col, Carousel, CarouselItem, Card, FormGroup, FormControl, FormRow, ControlLabel, Button, ButtonToolbar, ButtonGroup} from 'react-bootstrap';
 
 export default class Dashboard extends React.Component {
   render() {
@@ -15,7 +15,7 @@ export default class Dashboard extends React.Component {
 class Description extends React.Component {
   render() {
     return (
-      <div style={{textAlign: "center"}}>This is a placeholder for a description of the webapp.</div>
+      <div style={{textAlign: "center", marginLeft: 'auto', marginRight:'auto', width: '700px',}}>Welcome to Watch Your Weight (WYW), a fitness tracking service that will help you to both calculate your recommended daily caloric intake and track your meals</div>
     )
   }
 }
@@ -183,24 +183,9 @@ render() {
   }
   else{
     logIn = <div style={{textAlign: "center"}}>
-          {/* <form name="updateLogin" onSubmit={this.update}>
-            <input type="text" name="username" placeholder="Username" />
-            <input type="password" name="password" placeholder="Password" />
-            <Link to='/FitnessTracker'><button>Log In</button> </Link>
-          </form> */}
+      <Panel>
+        <Panel.Heading>
           <Form>
-            {/* <FormRow>
-              <FormGroup as={Col}>
-                <ControlLabel>Username</ControlLabel>
-                <FormControl type="username" placeholder="Username" />
-              </FormGroup>
-
-              <FormGroup as={Col}>
-                <ControlLabel>Password</ControlLabel>
-                <FormControl type="password" placeholder="Password" />
-              </FormGroup>
-            </FormRow> */}
-
             <Row className="justify-content-md-center">
               <Col md="auto">
                 <FormControl type="username" placeholder="Username" />
@@ -212,9 +197,9 @@ render() {
               <Link to='/FitnessTracker'> <Button variant="secondary" type="submit">Submit</Button> </Link>
               </Col>
             </Row>
-
-            
           </Form>
+        </Panel.Heading>
+      </Panel>
     </div>
   }
 
@@ -223,13 +208,16 @@ render() {
       <TitleTest />
       <br />
       {logIn}
-      <br />
       <CarouselTest />
       <br />
-      <Description />
-      <br/>
-      <ButtonTable />
-      <br/>
+      <Panel>
+        <Panel.Heading>
+          <Description />
+        </Panel.Heading>
+        <Panel.Body>
+          <ButtonTable />
+          </Panel.Body>
+      </Panel>
     </div>
   );
 }
