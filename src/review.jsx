@@ -68,7 +68,7 @@ class ReviewAdd extends React.Component {
     return (
       <div style = {{marginLeft: 'auto', marginRight: 'auto', width: '50%'}}> 
        <Panel>
-        <Panel.Heading>
+        <Panel.Heading style={{backgroundColor: 'Slategray'}}>
             <Form name = "issueAdd" inline>
           
           <FormGroup controlId="formActiviy">
