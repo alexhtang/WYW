@@ -77,7 +77,7 @@ class ReviewAdd extends React.Component {
        <Collapse in = {this.state.open}>
        <div>
        <Panel>
-        <Panel.Heading>
+        <Panel.Heading style={{backgroundColor: 'Gainsboro'}}>
             <Form name = "issueAdd" inline>
           
           <FormGroup controlId="formActiviy">
@@ -88,7 +88,7 @@ class ReviewAdd extends React.Component {
                   style = {{marginRight: '5px'}}
                 />
               
-              <FormControl name = "rating" style = {{marginRight: '7px', height: '30px'}} onChange = {this.handleSelectChange} componentClass="select" placeholder="select">
+              <FormControl name = "rating" style = {{marginRight: '7px', height: '35px'}} onChange = {this.handleSelectChange} componentClass="select" placeholder="select">
                 <option value="" selected disabled hidden>Rating</option>
                 <option value="5">5</option>
                 <option value="4">4</option>
@@ -206,7 +206,7 @@ export default class Review extends React.Component {
   render() {
     return (
       <div style = {{textAlign: "center"}}>
-        <Jumbotron>
+        <Jumbotron style={{backgroundColor: 'Gainsboro'}}>
         <h1 style={{fontStyle: 'bold', fontSize: '100', fontFamily: 'Work Sans', paddingBottom: '20px'}}>Review</h1>
         <ReviewMessage />
         </Jumbotron>
