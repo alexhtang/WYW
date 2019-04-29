@@ -71,7 +71,8 @@ export default class AddMeal extends React.Component {
                 <option value="Snack">Snack</option> 
                    
               </FormControl>
-              <Button bsStyle = 'primary'>Add</Button>
+              <Button bsStyle = 'primary'
+              onClick = {this.handleSubmit}>Add</Button>
               </div>
 
               

@@ -42,7 +42,8 @@ export default class AddExercise extends React.Component {
 
             {/* <input type="text" name="ExerciseName" placeholder="Exercise Name" />
             <input type="text" name="calories" placeholder="Calories" /> */}
-            <Button bsStyle = 'primary'>Add</Button>
+            <Button bsStyle = 'primary'
+            onClick = {this.handleSubmit}>Add</Button>
           </Form>
         </div>
       );
