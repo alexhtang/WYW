@@ -20661,16 +20661,16 @@ var MealSummary = function (_React$Component) {
           ),
           _react2.default.createElement(
             'div',
-            { style: { width: '300px', marginLeft: 'auto', marginRight: 'auto' } },
+            { style: { width: '12%', marginLeft: 'auto', marginRight: 'auto', marginBottom: '10px' } },
             _react2.default.createElement(
               _reactBootstrap.Form,
-              null,
+              { inline: true },
               _react2.default.createElement(
                 _reactBootstrap.FormGroup,
                 { controlId: 'formActiviy' },
                 _react2.default.createElement(
                   _reactBootstrap.FormControl,
-                  { onChange: this.handleSelectChange, componentClass: 'select', placeholder: 'select' },
+                  { style: { marginRight: '7px' }, onChange: this.handleSelectChange, componentClass: 'select', placeholder: 'select' },
                   _react2.default.createElement(
                     'option',
                     { value: '' },
@@ -20962,7 +20962,7 @@ var AddMeal = function (_React$Component) {
             { style: { marginLeft: 'auto', marginRight: 'auto', width: '50%', textAlign: 'center' } },
             _react2.default.createElement(
               _reactBootstrap.FormControl,
-              { onChange: this.handleSelectChange, componentClass: 'select', placeholder: 'select' },
+              { onChange: this.handleSelectChange, componentClass: 'select', placeholder: 'select', style: { height: '30px' } },
               _react2.default.createElement(
                 'option',
                 { value: 'Breakfast' },

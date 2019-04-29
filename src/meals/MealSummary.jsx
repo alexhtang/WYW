@@ -47,10 +47,10 @@ export default class MealSummary extends React.Component {
       <div>
         <Jumbotron>
         <h4>Enter Food or Exercise</h4>
-      <div style ={{width: '300px', marginLeft: 'auto', marginRight: 'auto'}}>
-        <Form>
+      <div style ={{width: '12%', marginLeft: 'auto', marginRight: 'auto', marginBottom: '10px'}}>
+        <Form inline>
           <FormGroup controlId="formActiviy">
-            <FormControl onChange = {this.handleSelectChange} componentClass="select" placeholder="select">
+            <FormControl style = {{marginRight: '7px'}} onChange = {this.handleSelectChange} componentClass="select" placeholder="select">
               <option value="">Select Option</option>
               <option value="addFood">Add Food</option>
               <option value="addExercise">Add Exercise</option>

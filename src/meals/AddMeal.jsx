@@ -64,7 +64,7 @@ export default class AddMeal extends React.Component {
               
             </FormGroup>
             <div style = {{marginLeft: 'auto', marginRight: 'auto', width: '50%', textAlign: 'center'}}>
-            <FormControl onChange = {this.handleSelectChange} componentClass="select" placeholder="select">
+            <FormControl onChange = {this.handleSelectChange} componentClass="select" placeholder="select" style = {{height: '30px'}}>
                 <option value="Breakfast">Breakfast</option>
                 <option value="Lunch">Lunch</option>
                 <option value="Dinner">Dinner</option>
