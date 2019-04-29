@@ -79,7 +79,7 @@ class ReviewAdd extends React.Component {
                   style = {{marginRight: '5px'}}
                 />
               
-              <FormControl name = "rating" style = {{marginRight: '7px', height: '30px'}} onChange = {this.handleSelectChange} componentClass="select" placeholder="select">
+              <FormControl name = "rating" style = {{marginRight: '7px', height: '35px'}} onChange = {this.handleSelectChange} componentClass="select" placeholder="select">
                 <option value="" selected disabled hidden>Rating</option>
                 <option value="5">5</option>
                 <option value="4">4</option>
