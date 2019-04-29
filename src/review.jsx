@@ -1,6 +1,6 @@
 // NEW: added the import for react.
 import React from 'react';
-import {Panel, Form, FormControl, Button, FormGroup, Table, Jumbotron} from 'react-bootstrap';
+import {Panel, Form, FormControl, Button, FormGroup, Table, Jumbotron, Card} from 'react-bootstrap';
 class ReviewMessage extends React.Component {
   render() {
     return <div style = {{fontFamily: "Work Sans", fontSize: '25'}}>Let us know how you feel about Watch Your Weight!</div>;
@@ -47,16 +47,17 @@ class ReviewAdd extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let form = document.forms.issueAdd;
+    let form2 = document.forms.commentAdd;
     this.props.createReview({
       name: form.name.value,
       rating: form.rating.value,
-      comment: form.comment.value
+      comment: form2.comment.value
     });
 
     // Clear the form for the next input.
     form.name.value = '';
     form.rating.value = '';
-    form.comment.value = '';
+    form2.comment.value = '';
   }
 
   handleSelectChange(e){
@@ -65,41 +66,55 @@ class ReviewAdd extends React.Component {
 
   render() {
     return (
-      <div>
-       
-      
-      <Form name = "issueAdd" inline style={{marginLeft: 'auto', marginRight: 'auto', width: '40%'}}>
-        <FormGroup controlId="formActiviy">
-          <FormControl
-                type="text"
-                name = "name"
-                placeholder="Name"
-                style = {{marginRight: '5px'}}
-              />
-            
-            <FormControl name = "rating" style = {{marginRight: '7px', height: '30px'}} onChange = {this.handleSelectChange} componentClass="select" placeholder="select">
-              <option value="" selected disabled hidden>Rating</option>
-              <option value="5">5</option>
-              <option value="4">4</option>
-              <option value="3">3</option>
-              <option value="2">2</option>
-              <option value="1">1</option>
-          </FormControl>
-        
-
-        
-         <FormControl name = "rating" style = {{width: '300px', height: '100px'}} 
-         onChange = {this.handleSelectChange} 
-         componentClass="textarea" 
-         placeholder="Leave a comment!">
-         </FormControl>
+      <div style = {{marginLeft: 'auto', marginRight: 'auto', width: '50%'}}> 
+       <Panel>
+        <Panel.Heading>
+            <Form name = "issueAdd" inline>
           
+          <FormGroup controlId="formActiviy">
+            <FormControl
+                  type="text"
+                  name = "name"
+                  placeholder="Name"
+                  style = {{marginRight: '5px'}}
+                />
+              
+              <FormControl name = "rating" style = {{marginRight: '7px', height: '30px'}} onChange = {this.handleSelectChange} componentClass="select" placeholder="select">
+                <option value="" selected disabled hidden>Rating</option>
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+            </FormControl>
+          </FormGroup>
           <Button
           onClick = {this.handleSubmit}
           style = {{marginLeft: '5px'}}
           >Add</Button>
+          </Form>
+        </Panel.Heading>
+        <Panel.Body>
+        <Form name = 'commentAdd'>
+        <FormGroup>
+         <FormControl name = "rating" style  = {{height: '100'}} 
+         onChange = {this.handleSelectChange} 
+         name = "comment"
+         componentClass="textarea" 
+         placeholder="Leave a comment!">
+         </FormControl>
+          
+          
           </FormGroup>
+         
+         
          </Form>
+
+        </Panel.Body>
+      </Panel>
+      
+      
+      
           {/* <input type="text" name="name" placeholder="Name" required/>
           
           <select name="rating" placeholder="Rating" required>

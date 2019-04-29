@@ -701,8 +701,7 @@ function _assertThisInitialized(self) {
 
 /***/ }),
 /* 24 */,
-/* 25 */,
-/* 26 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -993,6 +992,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /***/ }),
+/* 26 */,
 /* 27 */
 /***/ (function(module, exports) {
 
@@ -7868,7 +7868,7 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouter = __webpack_require__(111);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 var _Dashboard = __webpack_require__(508);
 
@@ -18444,7 +18444,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = __webpack_require__(111);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18907,7 +18907,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 var _util = __webpack_require__(510);
 
@@ -20350,7 +20350,7 @@ var _SnackTable = __webpack_require__(521);
 
 var _SnackTable2 = _interopRequireDefault(_SnackTable);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20587,7 +20587,7 @@ var _AddMeal = __webpack_require__(516);
 
 var _AddMeal2 = _interopRequireDefault(_AddMeal);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20781,7 +20781,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20872,7 +20872,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21017,7 +21017,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21123,7 +21123,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21229,7 +21229,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21335,7 +21335,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21441,7 +21441,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21548,9 +21548,11 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -21668,16 +21670,17 @@ var ReviewAdd = function (_React$Component2) {
     value: function handleSubmit(e) {
       e.preventDefault();
       var form = document.forms.issueAdd;
+      var form2 = document.forms.commentAdd;
       this.props.createReview({
         name: form.name.value,
         rating: form.rating.value,
-        comment: form.comment.value
+        comment: form2.comment.value
       });
 
       // Clear the form for the next input.
       form.name.value = '';
       form.rating.value = '';
-      form.comment.value = '';
+      form2.comment.value = '';
     }
   }, {
     key: 'handleSelectChange',
@@ -21687,66 +21690,87 @@ var ReviewAdd = function (_React$Component2) {
   }, {
     key: 'render',
     value: function render() {
+      var _React$createElement;
+
       return _react2.default.createElement(
         'div',
-        null,
+        { style: { marginLeft: 'auto', marginRight: 'auto', width: '50%' } },
         _react2.default.createElement(
-          _reactBootstrap.Form,
-          { name: 'issueAdd', inline: true, style: { marginLeft: 'auto', marginRight: 'auto', width: '40%' } },
+          _reactBootstrap.Panel,
+          null,
           _react2.default.createElement(
-            _reactBootstrap.FormGroup,
-            { controlId: 'formActiviy' },
-            _react2.default.createElement(_reactBootstrap.FormControl, {
-              type: 'text',
-              name: 'name',
-              placeholder: 'Name',
-              style: { marginRight: '5px' }
-            }),
+            _reactBootstrap.Panel.Heading,
+            null,
             _react2.default.createElement(
-              _reactBootstrap.FormControl,
-              { name: 'rating', style: { marginRight: '7px', height: '30px' }, onChange: this.handleSelectChange, componentClass: 'select', placeholder: 'select' },
+              _reactBootstrap.Form,
+              { name: 'issueAdd', inline: true },
               _react2.default.createElement(
-                'option',
-                { value: '', selected: true, disabled: true, hidden: true },
-                'Rating'
+                _reactBootstrap.FormGroup,
+                { controlId: 'formActiviy' },
+                _react2.default.createElement(_reactBootstrap.FormControl, {
+                  type: 'text',
+                  name: 'name',
+                  placeholder: 'Name',
+                  style: { marginRight: '5px' }
+                }),
+                _react2.default.createElement(
+                  _reactBootstrap.FormControl,
+                  { name: 'rating', style: { marginRight: '7px', height: '30px' }, onChange: this.handleSelectChange, componentClass: 'select', placeholder: 'select' },
+                  _react2.default.createElement(
+                    'option',
+                    { value: '', selected: true, disabled: true, hidden: true },
+                    'Rating'
+                  ),
+                  _react2.default.createElement(
+                    'option',
+                    { value: '5' },
+                    '5'
+                  ),
+                  _react2.default.createElement(
+                    'option',
+                    { value: '4' },
+                    '4'
+                  ),
+                  _react2.default.createElement(
+                    'option',
+                    { value: '3' },
+                    '3'
+                  ),
+                  _react2.default.createElement(
+                    'option',
+                    { value: '2' },
+                    '2'
+                  ),
+                  _react2.default.createElement(
+                    'option',
+                    { value: '1' },
+                    '1'
+                  )
+                )
               ),
               _react2.default.createElement(
-                'option',
-                { value: '5' },
-                '5'
-              ),
-              _react2.default.createElement(
-                'option',
-                { value: '4' },
-                '4'
-              ),
-              _react2.default.createElement(
-                'option',
-                { value: '3' },
-                '3'
-              ),
-              _react2.default.createElement(
-                'option',
-                { value: '2' },
-                '2'
-              ),
-              _react2.default.createElement(
-                'option',
-                { value: '1' },
-                '1'
+                _reactBootstrap.Button,
+                {
+                  onClick: this.handleSubmit,
+                  style: { marginLeft: '5px' }
+                },
+                'Add'
               )
-            ),
-            _react2.default.createElement(_reactBootstrap.FormControl, { name: 'rating', style: { width: '300px', height: '100px' },
-              onChange: this.handleSelectChange,
-              componentClass: 'textarea',
-              placeholder: 'Leave a comment!' }),
+            )
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.Panel.Body,
+            null,
             _react2.default.createElement(
-              _reactBootstrap.Button,
-              {
-                onClick: this.handleSubmit,
-                style: { marginLeft: '5px' }
-              },
-              'Add'
+              _reactBootstrap.Form,
+              { name: 'commentAdd' },
+              _react2.default.createElement(
+                _reactBootstrap.FormGroup,
+                null,
+                _react2.default.createElement(_reactBootstrap.FormControl, (_React$createElement = { name: 'rating', style: { height: '100' },
+                  onChange: this.handleSelectChange
+                }, _defineProperty(_React$createElement, 'name', 'comment'), _defineProperty(_React$createElement, 'componentClass', 'textarea'), _defineProperty(_React$createElement, 'placeholder', 'Leave a comment!'), _React$createElement))
+              )
             )
           )
         )
