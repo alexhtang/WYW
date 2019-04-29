@@ -701,8 +701,7 @@ function _assertThisInitialized(self) {
 
 /***/ }),
 /* 24 */,
-/* 25 */,
-/* 26 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -993,6 +992,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /***/ }),
+/* 26 */,
 /* 27 */
 /***/ (function(module, exports) {
 
@@ -7868,7 +7868,7 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouter = __webpack_require__(111);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 var _Dashboard = __webpack_require__(508);
 
@@ -18444,7 +18444,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = __webpack_require__(111);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18907,7 +18907,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 var _util = __webpack_require__(510);
 
@@ -20350,7 +20350,7 @@ var _SnackTable = __webpack_require__(521);
 
 var _SnackTable2 = _interopRequireDefault(_SnackTable);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20388,7 +20388,6 @@ var Meals = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.loadData();
-      this.loadBreakfastData();
     }
   }, {
     key: 'loadData',
@@ -20587,7 +20586,7 @@ var _AddMeal = __webpack_require__(516);
 
 var _AddMeal2 = _interopRequireDefault(_AddMeal);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20781,7 +20780,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20872,7 +20871,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20904,16 +20903,27 @@ var AddMeal = function (_React$Component) {
       e.preventDefault();
       var form = document.forms.addMeal;
 
-      this.props.createFood({
-        foodName: form.foodName.value,
-        calories: form.calories.value,
-        mealType: this.state.mealType,
-        fat: form.fat.value,
-        carbohydrates: form.carbohydrates.value
-      });
+      if (form.foodName.value.length) {}
 
+      if (form.foodName.value.length === 0) {
+        window.alert('Please add a Food Name for this meal');
+      } else if (form.calories.value.length === 0 || form.calories.value < 0) {
+        window.alert('Please add a positive numeric value for calories for this meal');
+      } else if (form.fat.value.length === 0 || form.fat.value < 0) {
+        window.alert('Please add a positive numeric value for fat for this meal');
+      } else if (form.carbohydrates.value.length === 0 || form.carbohydrates.value < 0) {
+        window.alert('Please add a positive numeric value for carbohydrates for this meal');
+      } else {
+        this.props.createFood({
+          foodName: form.foodName.value,
+          calories: form.calories.value,
+          mealType: this.state.mealType,
+          fat: form.fat.value,
+          carbohydrates: form.carbohydrates.value
+        });
+        this.props.closeFoodFormPopup();
+      }
       // Clear the form for the next input.
-      this.props.closeFoodFormPopup();
     }
   }, {
     key: 'handleSelectChange',
@@ -20939,19 +20949,19 @@ var AddMeal = function (_React$Component) {
               style: { marginRight: '5px' }
             }),
             _react2.default.createElement(_reactBootstrap.FormControl, {
-              type: 'text',
+              type: 'number',
               name: 'calories',
               placeholder: 'Calories',
               style: { marginRight: '5px' }
             }),
             _react2.default.createElement(_reactBootstrap.FormControl, {
-              type: 'text',
+              type: 'number',
               name: 'fat',
               placeholder: 'Fat',
               style: { marginRight: '5px' }
             }),
             _react2.default.createElement(_reactBootstrap.FormControl, {
-              type: 'text',
+              type: 'number',
               name: 'carbohydrates',
               placeholder: 'Carbohydrates',
               style: { marginRight: '5px' }
@@ -21017,7 +21027,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21123,7 +21133,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21160,8 +21170,8 @@ var FoodTableRow = function FoodTableRow(props) {
 };
 
 function BreakfastTable(props) {
-  var FoodTableRows = props.foods.map(function (food) {
-    return _react2.default.createElement(FoodTableRow, { key: food.id, food: food });
+  var FoodTableRows = props.foods.map(function (food, index) {
+    return _react2.default.createElement(FoodTableRow, { key: index, food: food });
   });
   return _react2.default.createElement(
     _reactBootstrap.Panel,
@@ -21229,7 +21239,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21335,7 +21345,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21372,8 +21382,8 @@ var FoodTableRow = function FoodTableRow(props) {
 };
 
 function BreakfastTable(props) {
-  var FoodTableRows = props.foods.map(function (food) {
-    return _react2.default.createElement(FoodTableRow, { key: food.id, food: food });
+  var FoodTableRows = props.foods.map(function (food, index) {
+    return _react2.default.createElement(FoodTableRow, { key: index, food: food });
   });
   return _react2.default.createElement(
     _reactBootstrap.Panel,
@@ -21441,7 +21451,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21478,8 +21488,8 @@ var FoodTableRow = function FoodTableRow(props) {
 };
 
 function SnackTable(props) {
-  var FoodTableRows = props.foods.map(function (food) {
-    return _react2.default.createElement(FoodTableRow, { key: food.id, food: food });
+  var FoodTableRows = props.foods.map(function (food, index) {
+    return _react2.default.createElement(FoodTableRow, { key: index, food: food });
   });
   return _react2.default.createElement(
     _reactBootstrap.Panel,
@@ -21548,7 +21558,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(26);
+var _reactBootstrap = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
