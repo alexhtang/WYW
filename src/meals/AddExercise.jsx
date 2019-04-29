@@ -27,6 +27,7 @@ export default class AddExercise extends React.Component {
       return (
         <div style = {{marginLeft: 'auto', marginRight: 'auto', marginTop:'10px', width: '30%', textAlign: 'center'}}>
           <Form inline name="addExercise" onSubmit={this.handleSubmit}>
+          
           <FormControl
                 type="text"
                 name = "ExerciseName"

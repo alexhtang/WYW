@@ -21548,6 +21548,8 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactBootstrap = __webpack_require__(26);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21607,35 +21609,43 @@ function ReviewTable(props) {
     return _react2.default.createElement(ReviewRow, { key: issue.id, issue: issue });
   });
   return _react2.default.createElement(
-    'table',
-    { className: 'table table-light', style: { width: '50%', marginLeft: 'auto', marginRight: 'auto' } },
+    'div',
+    { style: { width: '50%', marginLeft: 'auto', marginRight: 'auto' } },
     _react2.default.createElement(
-      'thead',
-      { className: 'thead-light' },
+      _reactBootstrap.Panel,
+      null,
       _react2.default.createElement(
-        'tr',
-        null,
+        _reactBootstrap.Table,
+        { striped: true, bordered: true, hover: true },
         _react2.default.createElement(
-          'th',
+          'thead',
           null,
-          'Name'
+          _react2.default.createElement(
+            'tr',
+            { style: { textAlign: 'center' } },
+            _react2.default.createElement(
+              'th',
+              null,
+              'Name'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Rating'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Comment'
+            )
+          )
         ),
         _react2.default.createElement(
-          'th',
+          'tbody',
           null,
-          'Rating'
-        ),
-        _react2.default.createElement(
-          'th',
-          null,
-          'Comment'
+          reviewRows
         )
       )
-    ),
-    _react2.default.createElement(
-      'tbody',
-      null,
-      reviewRows
     )
   );
 }
@@ -21681,51 +21691,63 @@ var ReviewAdd = function (_React$Component2) {
         'div',
         null,
         _react2.default.createElement(
-          'form',
-          { style: { fontFamily: 'Bookman Old Style' }, name: 'issueAdd', onSubmit: this.handleSubmit },
-          _react2.default.createElement('input', { type: 'text', name: 'name', placeholder: 'Name', required: true }),
+          _reactBootstrap.Form,
+          { name: 'issueAdd', inline: true, style: { marginLeft: 'auto', marginRight: 'auto', width: '40%' } },
           _react2.default.createElement(
-            'select',
-            { name: 'rating', placeholder: 'Rating', required: true },
+            _reactBootstrap.FormGroup,
+            { controlId: 'formActiviy' },
+            _react2.default.createElement(_reactBootstrap.FormControl, {
+              type: 'text',
+              name: 'name',
+              placeholder: 'Name',
+              style: { marginRight: '5px' }
+            }),
             _react2.default.createElement(
-              'option',
-              { value: '', selected: true, disabled: true, hidden: true },
-              'Rating'
+              _reactBootstrap.FormControl,
+              { name: 'rating', style: { marginRight: '7px', height: '30px' }, onChange: this.handleSelectChange, componentClass: 'select', placeholder: 'select' },
+              _react2.default.createElement(
+                'option',
+                { value: '', selected: true, disabled: true, hidden: true },
+                'Rating'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: '5' },
+                '5'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: '4' },
+                '4'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: '3' },
+                '3'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: '2' },
+                '2'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: '1' },
+                '1'
+              )
             ),
+            _react2.default.createElement(_reactBootstrap.FormControl, { name: 'rating', style: { width: '300px', height: '100px' },
+              onChange: this.handleSelectChange,
+              componentClass: 'textarea',
+              placeholder: 'Leave a comment!' }),
             _react2.default.createElement(
-              'option',
-              { value: '5' },
-              '5'
-            ),
-            _react2.default.createElement(
-              'option',
-              { value: '4' },
-              '4'
-            ),
-            _react2.default.createElement(
-              'option',
-              { value: '3' },
-              '3'
-            ),
-            _react2.default.createElement(
-              'option',
-              { value: '2' },
-              '2'
-            ),
-            _react2.default.createElement(
-              'option',
-              { value: '1' },
-              '1'
+              _reactBootstrap.Button,
+              {
+                onClick: this.handleSubmit,
+                style: { marginLeft: '5px' }
+              },
+              'Add'
             )
-          ),
-          _react2.default.createElement('br', null),
-          _react2.default.createElement('textarea', { rows: 5, cols: 50, name: 'comment', placeholder: 'Comment' }),
-          _react2.default.createElement('br', null),
-          _react2.default.createElement('br', null),
-          _react2.default.createElement(
-            'button',
-            null,
-            'Add'
           )
         )
       );
@@ -21817,15 +21839,18 @@ var Review = function (_React$Component3) {
         'div',
         { style: { textAlign: "center" } },
         _react2.default.createElement(
-          'h1',
-          { style: { fontStyle: 'bold', fontSize: '100', fontFamily: 'Work Sans', paddingBottom: '20px' } },
-          'Review'
+          _reactBootstrap.Jumbotron,
+          null,
+          _react2.default.createElement(
+            'h1',
+            { style: { fontStyle: 'bold', fontSize: '100', fontFamily: 'Work Sans', paddingBottom: '20px' } },
+            'Review'
+          ),
+          _react2.default.createElement(ReviewMessage, null)
         ),
-        _react2.default.createElement(ReviewMessage, null),
-        _react2.default.createElement('hr', null),
-        _react2.default.createElement(ReviewAdd, { createReview: this.add }),
-        _react2.default.createElement('hr', null),
-        _react2.default.createElement(ReviewTable, { reviewInfo: this.state.reviewInfo })
+        _react2.default.createElement(ReviewTable, { reviewInfo: this.state.reviewInfo }),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement(ReviewAdd, { createReview: this.add })
       );
     }
   }]);

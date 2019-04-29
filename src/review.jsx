@@ -1,6 +1,6 @@
 // NEW: added the import for react.
 import React from 'react';
-
+import {Panel, Form, FormControl, Button, FormGroup, Table, Jumbotron} from 'react-bootstrap';
 class ReviewMessage extends React.Component {
   render() {
     return <div style = {{fontFamily: "Work Sans", fontSize: '25'}}>Let us know how you feel about Watch Your Weight!</div>;
@@ -20,16 +20,20 @@ function ReviewTable(props) {
     <ReviewRow key={issue.id} issue={issue} />
   ));
   return (
-    <table className="table table-light" style={{width: '50%', marginLeft: 'auto', marginRight: 'auto'}}>
-      <thead className="thead-light">
-        <tr>
+   <div style={{width: '50%', marginLeft: 'auto', marginRight: 'auto'}}>
+   <Panel>
+   <Table striped bordered hover >
+      <thead>
+        <tr style={{textAlign:'center'}}>
           <th>Name</th>
           <th>Rating</th>
           <th>Comment</th>
         </tr>
       </thead>
       <tbody>{reviewRows}</tbody>
-    </table>
+    </Table>
+    </Panel>
+    </div>
   );
 }
 
@@ -62,9 +66,42 @@ class ReviewAdd extends React.Component {
   render() {
     return (
       <div>
-        <form style={{fontFamily: 'Bookman Old Style'}} name="issueAdd" onSubmit={this.handleSubmit}>
-          <input type="text" name="name" placeholder="Name" required/>
-          {/* <input type="text" name="rating" placeholder="Rating (1-5)" /> */}
+       
+      
+      <Form name = "issueAdd" inline style={{marginLeft: 'auto', marginRight: 'auto', width: '40%'}}>
+        <FormGroup controlId="formActiviy">
+          <FormControl
+                type="text"
+                name = "name"
+                placeholder="Name"
+                style = {{marginRight: '5px'}}
+              />
+            
+            <FormControl name = "rating" style = {{marginRight: '7px', height: '30px'}} onChange = {this.handleSelectChange} componentClass="select" placeholder="select">
+              <option value="" selected disabled hidden>Rating</option>
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+          </FormControl>
+        
+
+        
+         <FormControl name = "rating" style = {{width: '300px', height: '100px'}} 
+         onChange = {this.handleSelectChange} 
+         componentClass="textarea" 
+         placeholder="Leave a comment!">
+         </FormControl>
+          
+          <Button
+          onClick = {this.handleSubmit}
+          style = {{marginLeft: '5px'}}
+          >Add</Button>
+          </FormGroup>
+         </Form>
+          {/* <input type="text" name="name" placeholder="Name" required/>
+          
           <select name="rating" placeholder="Rating" required>
             <option value="" selected disabled hidden>Rating</option>
             <option value="5">5</option>
@@ -72,12 +109,10 @@ class ReviewAdd extends React.Component {
             <option value="3">3</option>
             <option value="2">2</option>
             <option value="1">1</option>
-          </select>
-          <br></br>
-          <textarea rows={5} cols= {50} name="comment" placeholder="Comment"/>
-          <br></br><br></br>
-          <button>Add</button>
-        </form>
+          </select> */}
+          
+          
+        
       </div>
     );
   }
@@ -151,12 +186,16 @@ export default class Review extends React.Component {
   render() {
     return (
       <div style = {{textAlign: "center"}}>
+        <Jumbotron>
         <h1 style={{fontStyle: 'bold', fontSize: '100', fontFamily: 'Work Sans', paddingBottom: '20px'}}>Review</h1>
         <ReviewMessage />
-        <hr />
-        <ReviewAdd createReview={this.add} />
-        <hr />
+        </Jumbotron>
+        
         <ReviewTable reviewInfo={this.state.reviewInfo} />
+        <br />
+        <ReviewAdd createReview={this.add} />
+        
+        
       </div>
     );
   }
