@@ -68,7 +68,7 @@ class ReviewAdd extends React.Component {
     return (
       <div style = {{marginLeft: 'auto', marginRight: 'auto', width: '50%'}}> 
        <Panel>
-        <Panel.Heading style={{backgroundColor: 'Slategray'}}>
+        <Panel.Heading style={{backgroundColor: 'Gainsboro'}}>
             <Form name = "issueAdd" inline>
           
           <FormGroup controlId="formActiviy">
@@ -201,7 +201,7 @@ export default class Review extends React.Component {
   render() {
     return (
       <div style = {{textAlign: "center"}}>
-        <Jumbotron>
+        <Jumbotron style={{backgroundColor: 'Gainsboro'}}>
         <h1 style={{fontStyle: 'bold', fontSize: '100', fontFamily: 'Work Sans', paddingBottom: '20px'}}>Review</h1>
         <ReviewMessage />
         </Jumbotron>
