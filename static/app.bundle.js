@@ -20670,7 +20670,7 @@ var MealSummary = function (_React$Component) {
                 { controlId: 'formActiviy' },
                 _react2.default.createElement(
                   _reactBootstrap.FormControl,
-                  { style: { marginRight: '7px' }, onChange: this.handleSelectChange, componentClass: 'select', placeholder: 'select' },
+                  { style: { marginRight: '7px', height: '30px' }, onChange: this.handleSelectChange, componentClass: 'select', placeholder: 'select' },
                   _react2.default.createElement(
                     'option',
                     { value: '' },
