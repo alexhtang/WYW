@@ -23,7 +23,7 @@ function ReviewTable(props) {
   ));
   return (
    <div style={{width: '90%', height: '300px', marginLeft: 'auto', marginRight: 'auto', overflowY: 'scroll'}}>
-    
+    <Panel>
     <Table bordered hover >
         <thead>
           <tr>
@@ -36,7 +36,7 @@ function ReviewTable(props) {
         <tbody >{reviewRows}</tbody>
         
       </Table>
-    
+      </Panel>
     </div>
   );
 }
@@ -221,17 +221,15 @@ export default class Review extends React.Component {
   render() {
     return (
       <div style = {{textAlign: "center"}}>
-        <Jumbotron style={{backgroundColor: 'Gainsboro'}}>
+        
         <h1 style={{fontStyle: 'bold', fontSize: '100', fontFamily: 'Work Sans', paddingBottom: '10px'}}>Review</h1>
         <ReviewMessage />
-        </Jumbotron>
+        
         
         <ReviewTable reviewInfo={this.state.reviewInfo} />
         
         <br />
         <ReviewAdd createReview={this.add} />
-        
-        
       </div>
     );
   }

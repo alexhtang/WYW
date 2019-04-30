@@ -183,9 +183,10 @@ render() {
   }
   else{
     logIn = <div style={{textAlign: "center"}}>
-      <Panel>
+      <Panel style = {{width: '500', marginLeft: 'auto', marginRight: 'auto'}}>
         <Panel.Heading>
           <Form>
+            <label><h3>Login</h3></label>
             <Row className="justify-content-md-center">
               <Col md="auto">
                 <FormControl type="username" placeholder="Username" />
@@ -194,7 +195,7 @@ render() {
                 <FormControl type="password" placeholder="Password" />
               </Col>
               <Col md="auto">
-              <Link to='/FitnessTracker'> <Button variant="secondary" type="submit">Submit</Button> </Link>
+              <Link to='/FitnessTracker'> <Button style = {{marginTop: '8px'}} variant="secondary" type="submit">Submit</Button> </Link>
               </Col>
             </Row>
           </Form>
@@ -210,13 +211,12 @@ render() {
       {logIn}
       <CarouselTest />
       <br />
-      <Panel>
+      <Panel style = {{width: '800', marginLeft: 'auto', marginRight: 'auto'}}>
         <Panel.Heading>
           <Description />
-        </Panel.Heading>
-        <Panel.Body>
           <ButtonTable />
-          </Panel.Body>
+        </Panel.Heading>
+        
       </Panel>
     </div>
   );

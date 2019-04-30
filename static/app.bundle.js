@@ -18836,13 +18836,22 @@ var HomePage = function (_React$Component6) {
           { style: { textAlign: "center" } },
           _react2.default.createElement(
             _reactBootstrap.Panel,
-            null,
+            { style: { width: '500', marginLeft: 'auto', marginRight: 'auto' } },
             _react2.default.createElement(
               _reactBootstrap.Panel.Heading,
               null,
               _react2.default.createElement(
                 _reactBootstrap.Form,
                 null,
+                _react2.default.createElement(
+                  'label',
+                  null,
+                  _react2.default.createElement(
+                    'h3',
+                    null,
+                    'Login'
+                  )
+                ),
                 _react2.default.createElement(
                   _reactBootstrap.Row,
                   { className: 'justify-content-md-center' },
@@ -18865,7 +18874,7 @@ var HomePage = function (_React$Component6) {
                       ' ',
                       _react2.default.createElement(
                         _reactBootstrap.Button,
-                        { variant: 'secondary', type: 'submit' },
+                        { style: { marginTop: '8px' }, variant: 'secondary', type: 'submit' },
                         'Submit'
                       ),
                       ' '
@@ -18888,15 +18897,11 @@ var HomePage = function (_React$Component6) {
         _react2.default.createElement('br', null),
         _react2.default.createElement(
           _reactBootstrap.Panel,
-          null,
+          { style: { width: '800', marginLeft: 'auto', marginRight: 'auto' } },
           _react2.default.createElement(
             _reactBootstrap.Panel.Heading,
             null,
-            _react2.default.createElement(Description, null)
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.Panel.Body,
-            null,
+            _react2.default.createElement(Description, null),
             _react2.default.createElement(ButtonTable, null)
           )
         )
@@ -21644,35 +21649,39 @@ function ReviewTable(props) {
     'div',
     { style: { width: '90%', height: '300px', marginLeft: 'auto', marginRight: 'auto', overflowY: 'scroll' } },
     _react2.default.createElement(
-      _reactBootstrap.Table,
-      { bordered: true, hover: true },
+      _reactBootstrap.Panel,
+      null,
       _react2.default.createElement(
-        'thead',
-        null,
+        _reactBootstrap.Table,
+        { bordered: true, hover: true },
         _react2.default.createElement(
-          'tr',
+          'thead',
           null,
           _react2.default.createElement(
-            'th',
+            'tr',
             null,
-            'Name'
-          ),
-          _react2.default.createElement(
-            'th',
-            null,
-            'Rating'
-          ),
-          _react2.default.createElement(
-            'th',
-            null,
-            'Comment'
+            _react2.default.createElement(
+              'th',
+              null,
+              'Name'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Rating'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Comment'
+            )
           )
+        ),
+        _react2.default.createElement(
+          'tbody',
+          null,
+          reviewRows
         )
-      ),
-      _react2.default.createElement(
-        'tbody',
-        null,
-        reviewRows
       )
     )
   );
@@ -21920,15 +21929,11 @@ var Review = function (_React$Component3) {
         'div',
         { style: { textAlign: "center" } },
         _react2.default.createElement(
-          _reactBootstrap.Jumbotron,
-          { style: { backgroundColor: 'Gainsboro' } },
-          _react2.default.createElement(
-            'h1',
-            { style: { fontStyle: 'bold', fontSize: '100', fontFamily: 'Work Sans', paddingBottom: '10px' } },
-            'Review'
-          ),
-          _react2.default.createElement(ReviewMessage, null)
+          'h1',
+          { style: { fontStyle: 'bold', fontSize: '100', fontFamily: 'Work Sans', paddingBottom: '10px' } },
+          'Review'
         ),
+        _react2.default.createElement(ReviewMessage, null),
         _react2.default.createElement(ReviewTable, { reviewInfo: this.state.reviewInfo }),
         _react2.default.createElement('br', null),
         _react2.default.createElement(ReviewAdd, { createReview: this.add })
