@@ -394,7 +394,7 @@ export default class FitnessTracker extends React.Component {
         <div>
         <AddCarousel />
         </div>
-        <Well style = {{marginLeft: 'auto', marginRight:'auto', width: '85%'}}>
+        <Well style = {{backgroundColor:'white', marginLeft: 'auto', marginRight:'auto', width: '85%'}}>
         <BodyStats bodystats = {this.state.bodystats} />
         <br />
         

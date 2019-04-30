@@ -18494,7 +18494,7 @@ var Description = function (_React$Component2) {
       return _react2.default.createElement(
         'div',
         { style: { textAlign: "center", marginLeft: 'auto', marginRight: 'auto', width: '700px' } },
-        'Welcome to Watch Your Weight (WYW), a fitness tracking service that will help you to both calculate your recommended daily caloric intake and track your meals'
+        'Welcome to Watch Your Weight (WYW), a fitness tracking service that will help you to both calculate your recommended daily caloric intake and track your meals.'
       );
     }
   }]);
@@ -18698,7 +18698,6 @@ var TitleTest = function (_React$Component4) {
       return _react2.default.createElement(
         'div',
         { style: { justifyContent: 'center', alignItems: 'center', textAlign: "center" } },
-        _react2.default.createElement('img', { src: '/assets/Ftracker_asset.png', height: '150px', width: '250px', style: { paddingTop: "10" } }),
         _react2.default.createElement(
           'h1',
           { style: { textAlign: "center" } },
@@ -18839,7 +18838,7 @@ var HomePage = function (_React$Component6) {
             { style: { width: '500', marginLeft: 'auto', marginRight: 'auto' } },
             _react2.default.createElement(
               _reactBootstrap.Panel.Heading,
-              null,
+              { style: { backgroundColor: 'white' } },
               _react2.default.createElement(
                 _reactBootstrap.Form,
                 null,
@@ -18890,17 +18889,17 @@ var HomePage = function (_React$Component6) {
       return _react2.default.createElement(
         'div',
         null,
+        _react2.default.createElement(CarouselTest, null),
         _react2.default.createElement(TitleTest, null),
         _react2.default.createElement('br', null),
         logIn,
-        _react2.default.createElement(CarouselTest, null),
         _react2.default.createElement('br', null),
         _react2.default.createElement(
           _reactBootstrap.Panel,
-          { style: { width: '800', marginLeft: 'auto', marginRight: 'auto' } },
+          { style: { backgroundColor: 'white', width: '800', marginLeft: 'auto', marginRight: 'auto' } },
           _react2.default.createElement(
             _reactBootstrap.Panel.Heading,
-            null,
+            { style: { backgroundColor: 'white' } },
             _react2.default.createElement(Description, null),
             _react2.default.createElement(ButtonTable, null)
           )
@@ -19568,7 +19567,7 @@ var FitnessTracker = function (_React$Component4) {
         ),
         _react2.default.createElement(
           _reactBootstrap.Well,
-          { style: { marginLeft: 'auto', marginRight: 'auto', width: '85%' } },
+          { style: { backgroundColor: 'white', marginLeft: 'auto', marginRight: 'auto', width: '85%' } },
           _react2.default.createElement(BodyStats, { bodystats: this.state.bodystats }),
           _react2.default.createElement('br', null),
           _react2.default.createElement(AddBodyInfo, { update: this.update }),
@@ -20677,7 +20676,7 @@ var MealSummary = function (_React$Component) {
         null,
         _react2.default.createElement(
           _reactBootstrap.Jumbotron,
-          null,
+          { style: { backgroundColor: '#cfd9df', width: '99%', marginLeft: 'auto', marginRight: 'auto' } },
           _react2.default.createElement(
             'h4',
             null,

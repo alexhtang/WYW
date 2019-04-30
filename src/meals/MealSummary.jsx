@@ -45,7 +45,7 @@ export default class MealSummary extends React.Component {
     render() {
       return (
       <div>
-        <Jumbotron>
+        <Jumbotron style = {{backgroundColor: '#cfd9df', width: '99%', marginLeft: 'auto', marginRight: 'auto'}}>
         <h4>Enter Food or Exercise</h4>
       <div style ={{width: '12%', marginLeft: 'auto', marginRight: 'auto', marginBottom: '10px'}}>
         <Form inline>

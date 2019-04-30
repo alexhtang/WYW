@@ -15,7 +15,7 @@ export default class Dashboard extends React.Component {
 class Description extends React.Component {
   render() {
     return (
-      <div style={{textAlign: "center", marginLeft: 'auto', marginRight:'auto', width: '700px',}}>Welcome to Watch Your Weight (WYW), a fitness tracking service that will help you to both calculate your recommended daily caloric intake and track your meals</div>
+      <div style={{textAlign: "center", marginLeft: 'auto', marginRight:'auto', width: '700px',}}>Welcome to Watch Your Weight (WYW), a fitness tracking service that will help you to both calculate your recommended daily caloric intake and track your meals.</div>
     )
   }
 }
@@ -120,7 +120,6 @@ class TitleTest extends React.Component {
       const textStyle = {textAlign: "center"};
       return(
         <div style = {{justifyContent: 'center', alignItems: 'center', textAlign: "center"}}>
-              <img src = "/assets/Ftracker_asset.png" height = "150px" width = "250px" style={{paddingTop: "10"}}/>
               <h1 style={{ textAlign: "center"}}>Welcome to WYW (Watch Your Weight)</h1>
         </div>
       )
@@ -184,7 +183,7 @@ render() {
   else{
     logIn = <div style={{textAlign: "center"}}>
       <Panel style = {{width: '500', marginLeft: 'auto', marginRight: 'auto'}}>
-        <Panel.Heading>
+        <Panel.Heading style = {{backgroundColor:'white', }}>
           <Form>
             <label><h3>Login</h3></label>
             <Row className="justify-content-md-center">
@@ -206,13 +205,14 @@ render() {
 
   return (
     <div>
+      <CarouselTest />
       <TitleTest />
       <br />
       {logIn}
-      <CarouselTest />
+      
       <br />
-      <Panel style = {{width: '800', marginLeft: 'auto', marginRight: 'auto'}}>
-        <Panel.Heading>
+      <Panel style = {{backgroundColor: 'white', width: '800', marginLeft: 'auto', marginRight: 'auto'}}>
+        <Panel.Heading style = {{backgroundColor: 'white'}}>
           <Description />
           <ButtonTable />
         </Panel.Heading>
