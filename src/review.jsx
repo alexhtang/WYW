@@ -91,8 +91,8 @@ class ReviewAdd extends React.Component {
         Add Review</Button>
        <Collapse in = {this.state.open}>
        <div>
-       <Panel>
-        <Panel.Heading style={{backgroundColor: 'Gainsboro'}}>
+       <Panel style={{marginTop: '10px'}}>
+        <Panel.Heading style={{backgroundColor: '#AAA9A7'}}>
             <Form name = "issueAdd" inline>
           
           <FormGroup controlId="formActiviy">
