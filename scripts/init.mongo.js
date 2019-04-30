@@ -81,6 +81,11 @@ db.reviews.remove({});
       name: "Ryan Reynolds",
       rating: 5,
       comment: "This is the best web app Fitness Tracker ever! I have never seen such amazing results. I owe my entire movie career to this React web app! It goes without saying that everyone should be using this."
+    },
+    {
+      name: "Dwayne the Rock Johnson",
+      rating: 5,
+      comment: "I, Dwayne, The Rock, Johnson fully endorse WYW. If it wasn't for this fitness tracker I would just be a bad actor with no muscles. I am now a bad actor with a great physique thanks to WYW."
     }
   ]);
 

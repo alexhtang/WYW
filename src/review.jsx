@@ -222,7 +222,7 @@ export default class Review extends React.Component {
     return (
       <div style = {{textAlign: "center"}}>
         <Jumbotron style={{backgroundColor: 'Gainsboro'}}>
-        <h1 style={{fontStyle: 'bold', fontSize: '100', fontFamily: 'Work Sans', paddingBottom: '20px'}}>Review</h1>
+        <h1 style={{fontStyle: 'bold', fontSize: '100', fontFamily: 'Work Sans', paddingBottom: '10px'}}>Review</h1>
         <ReviewMessage />
         </Jumbotron>
         

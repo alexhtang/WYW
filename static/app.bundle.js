@@ -21924,7 +21924,7 @@ var Review = function (_React$Component3) {
           { style: { backgroundColor: 'Gainsboro' } },
           _react2.default.createElement(
             'h1',
-            { style: { fontStyle: 'bold', fontSize: '100', fontFamily: 'Work Sans', paddingBottom: '20px' } },
+            { style: { fontStyle: 'bold', fontSize: '100', fontFamily: 'Work Sans', paddingBottom: '10px' } },
             'Review'
           ),
           _react2.default.createElement(ReviewMessage, null)
