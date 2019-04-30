@@ -6,6 +6,7 @@ import BreakfastTable from './BreakfastTable.jsx';
 import LunchTable from './LunchTable.jsx';
 import DinnerTable from './DinnerTable.jsx';
 import SnackTable from './SnackTable.jsx';
+import ExerciseTable from './ExerciseTable.jsx';
 import {Grid, Col, Row} from 'react-bootstrap';
 
 
@@ -22,11 +23,13 @@ export default class Meals extends React.Component {
     totalCalories: 0 };
 
     this.addMeal = this.addMeal.bind(this);
+    this.addExercise = this.addExercise.bind(this);
 
   }
 
   componentDidMount() {
     this.loadData();
+    this.loadExercise();
   }
 
   loadData() {
@@ -61,6 +64,29 @@ export default class Meals extends React.Component {
 
 }
 
+  loadExercise() {
+    fetch('/api/exercise').then(response => {
+      if (response.ok) {
+        response.json().then(data => {
+          data.records.forEach(exercise => {
+            exercise.created = new Date(exercise.created);
+            //this.setState({totalCalories: Number(this.state.totalCalories)+meal.calories});
+
+            if (exercise.completionDate)
+              exercise.completionDate = new Date(exercise.completionDate);
+          });
+          this.setState({ exercise: data.records });
+
+        });
+      } else {
+        response.json().then(error => {
+          alert("Failed to fetch issues:" + error.message)
+        });
+      }
+    }).catch(err => {
+      alert("Error in fetching data from server:", err);
+    });
+  }
 /*
    this.setState({
         foods: foods,
@@ -91,7 +117,7 @@ export default class Meals extends React.Component {
               } else if(updatedMeal.mealType ==='Snack') {
                 const newMeals = this.state.snack.concat(updatedMeal);
                 this.setState({ snack: newMeals });
-              }
+              } 
 
               this.setState({totalCalories: parseInt(this.state.totalCalories) + parseInt(updatedMeal.calories)});
             });
@@ -105,14 +131,36 @@ export default class Meals extends React.Component {
       });
     }
 
-
+    addExercise(newExercise) {
+      fetch('/api/exercise', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newExercise),
+      })
+        .then(res => {
+          if (res.ok) {
+            res.json()
+              .then(updatedExercise => {
+                  const newExercises = this.state.exercise.concat(updatedExercise);
+                  this.setState({ exercise: newExercises });
+                this.setState({totalCalories: parseInt(this.state.totalCalories) - parseInt(updatedExercise.calories)});
+              });
+          }
+          else {
+            res.json()
+              .then(error => {
+                alert('Failed to add issue: ' + error.message);
+              });
+          }
+        });
+      }
 
 
   render() {
     return (
       <div style = {{textAlign: 'center'}}>
         <h1>Meal Tracker</h1>
-        <MealSummary totalCalories={this.totalCalories} createFood = {this.addMeal}  totalCalories = {this.state.totalCalories} />
+        <MealSummary totalCalories={this.totalCalories} createFood = {this.addMeal} createExercise = {this.addExercise} totalCalories = {this.state.totalCalories} />
         <br />
         <Grid>
           <Row>
@@ -143,6 +191,14 @@ export default class Meals extends React.Component {
               <DinnerTable foods ={this.state.dinner}></DinnerTable>
             </Col>
           </Row>
+          <Row>
+            <Col md = {6}>
+                <div>
+                  <h1>Exercise</h1>
+                </div>
+                <ExerciseTable exercise={this.state.exercise}></ExerciseTable>
+            </Col>
+            </Row>
         </Grid>
       </div>
     );

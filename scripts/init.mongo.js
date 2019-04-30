@@ -12,6 +12,17 @@ db.userBodyStats.insert([
     },]);
 
 
+
+db.exercise.remove({});
+
+db.exercise.insert([
+
+  {
+    id: 1,
+    exerciseName: "Running",
+    calories: 350
+  }
+]);
 db.meals.remove({});
 db.meals.insert([
     {

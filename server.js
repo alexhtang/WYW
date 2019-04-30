@@ -17,6 +17,8 @@ app.use(express.static('static'));
     });
   });
 
+  
+
   app.post('/api/data', (req, res) => {
     const newIssue = req.body;
     db.collection('userBodyStats').deleteOne();
@@ -90,5 +92,29 @@ app.post('/api/meals', (req, res) => {
   });
 });
 
+
+app.get('/api/exercise', (req, res) => {
+  db.collection('exercise').find().toArray().then(exercises => {
+    const metadata = { total_count: exercises.length };
+    res.json({ records: exercises, totalCalories: Number(exercises.reduce((accumulator, currentValue)=> accumulator+parseInt(currentValue.calories),0) )})
+  }).catch(error => {
+    console.log(error);
+    res.status(500).json({ message: `Internal Server Error: ${error}` });
+  });
+});
+
+app.post('/api/exercise', (req, res) => {
+  const newExercise = req.body;
+
+  db.collection('exercise').insertOne(newExercise).then(result =>
+
+    db.collection('exercise').find({ _id: result.insertedId }).limit(1).next()
+  ).then(newMeal => {
+    res.json(newMeal);
+  }).catch(error => {
+    console.log(error);
+    res.status(500).json({ message: `Internal Server Error: ${error}` });
+  });
+});
 /////////////////////////
 

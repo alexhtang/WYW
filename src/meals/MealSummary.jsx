@@ -1,6 +1,7 @@
 import React from 'react';
 import AddExercise from './AddExercise.jsx';
 import AddMeal from './AddMeal.jsx';
+import FitnessTracker from './AddMeal.jsx'
 import {Table, Panel, Jumbotron, Form, FormControl, FormGroup, Button, ControlLabel} from 'react-bootstrap';
 
 export default class MealSummary extends React.Component {
@@ -9,13 +10,18 @@ export default class MealSummary extends React.Component {
       this.state = {
         selectValue: '',
         showFoodFormPopup: false,
-        showExerciseFormPopup: false
-  
+        showExerciseFormPopup: false,
+        bodystats: [],
+        calories: 0
   
     }
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleSelectChange = this.handleSelectChange.bind(this);
     }
+
+    
+
+
   
     handleSelectChange(e){
       this.setState({selectValue: e.target.value});
@@ -82,7 +88,7 @@ export default class MealSummary extends React.Component {
           <AddExercise
             text='Close Me'
             closeExerciseFormPopup={this.toggleExerciseFormPopup.bind(this)}
-            createFood= {this.props.createFood}
+            createExercise= {this.props.createExercise}
           />
           : null
         }

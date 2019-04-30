@@ -11,11 +11,12 @@ const FoodTableRow = (props) => (
     </tr>
   );
 
-export function BreakfastTable(props) {
-    const FoodTableRows = props.foods.map(food => (
-      <FoodTableRow key={food.id} food={food} />
+export function LunchTable(props) {
+    const FoodTableRows = props.foods.map((food, index) => (
+      <FoodTableRow key={index} food={food} />
     ));
     return (
+      <div>
       <Panel>
         <Table bordered hover striped>
           <thead>
@@ -30,7 +31,9 @@ export function BreakfastTable(props) {
           <tbody>{FoodTableRows}</tbody>
         </Table>
       </Panel>
+      <p>Lunch Calories: {props.foods.reduce((accumulator, currentValue)=> accumulator+parseInt(currentValue.calories),0) }</p>
+</div>
     );
   }
 
-  export default BreakfastTable;
+  export default LunchTable;

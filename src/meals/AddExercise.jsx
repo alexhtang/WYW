@@ -11,15 +11,12 @@ export default class AddExercise extends React.Component {
   
     handleSubmit(e) {
       e.preventDefault();
-      /*let form = document.forms.addExercise;
-      this.props.createFood({
-        ExerciseName: form.exerciseName.value,
+      let form = document.forms.addExercise;
+      this.props.createExercise({
+        exerciseName: form.exerciseName.value,
         calories: form.calories.value,
       });
-  
-      // Clear the form for the next input.
-      form.ExerciseName.value = '';
-      form.calories.value = '';*/
+ 
       this.props.closeExerciseFormPopup();
     }
   
@@ -30,12 +27,12 @@ export default class AddExercise extends React.Component {
           
           <FormControl
                 type="text"
-                name = "ExerciseName"
+                name = "exerciseName"
                 placeholder="Exercise Name"
                 style = {{marginRight: '5px'}}
             />
             <FormControl
-                type="text"
+                type="number"
                 name = "calories"
                 placeholder="Calories"
                 style = {{marginRight: '5px'}}

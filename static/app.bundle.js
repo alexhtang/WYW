@@ -20374,6 +20374,10 @@ var _SnackTable = __webpack_require__(521);
 
 var _SnackTable2 = _interopRequireDefault(_SnackTable);
 
+var _ExerciseTable = __webpack_require__(526);
+
+var _ExerciseTable2 = _interopRequireDefault(_ExerciseTable);
+
 var _reactBootstrap = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -20404,6 +20408,7 @@ var Meals = function (_React$Component) {
       totalCalories: 0 };
 
     _this.addMeal = _this.addMeal.bind(_this);
+    _this.addExercise = _this.addExercise.bind(_this);
 
     return _this;
   }
@@ -20412,6 +20417,7 @@ var Meals = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.loadData();
+      this.loadExercise();
     }
   }, {
     key: 'loadData',
@@ -20452,7 +20458,31 @@ var Meals = function (_React$Component) {
         alert("Error in fetching data from server:", err);
       });
     }
+  }, {
+    key: 'loadExercise',
+    value: function loadExercise() {
+      var _this3 = this;
 
+      fetch('/api/exercise').then(function (response) {
+        if (response.ok) {
+          response.json().then(function (data) {
+            data.records.forEach(function (exercise) {
+              exercise.created = new Date(exercise.created);
+              //this.setState({totalCalories: Number(this.state.totalCalories)+meal.calories});
+
+              if (exercise.completionDate) exercise.completionDate = new Date(exercise.completionDate);
+            });
+            _this3.setState({ exercise: data.records });
+          });
+        } else {
+          response.json().then(function (error) {
+            alert("Failed to fetch issues:" + error.message);
+          });
+        }
+      }).catch(function (err) {
+        alert("Error in fetching data from server:", err);
+      });
+    }
     /*
        this.setState({
             foods: foods,
@@ -20463,7 +20493,7 @@ var Meals = function (_React$Component) {
   }, {
     key: 'addMeal',
     value: function addMeal(newMeal) {
-      var _this3 = this;
+      var _this4 = this;
 
       fetch('/api/meals', {
         method: 'POST',
@@ -20473,20 +20503,43 @@ var Meals = function (_React$Component) {
         if (res.ok) {
           res.json().then(function (updatedMeal) {
             if (updatedMeal.mealType === 'Breakfast') {
-              var newMeals = _this3.state.breakfast.concat(updatedMeal);
-              _this3.setState({ breakfast: newMeals });
+              var newMeals = _this4.state.breakfast.concat(updatedMeal);
+              _this4.setState({ breakfast: newMeals });
             } else if (updatedMeal.mealType === 'Lunch') {
-              var _newMeals = _this3.state.lunch.concat(updatedMeal);
-              _this3.setState({ lunch: _newMeals });
+              var _newMeals = _this4.state.lunch.concat(updatedMeal);
+              _this4.setState({ lunch: _newMeals });
             } else if (updatedMeal.mealType === 'Dinner') {
-              var _newMeals2 = _this3.state.dinner.concat(updatedMeal);
-              _this3.setState({ dinner: _newMeals2 });
+              var _newMeals2 = _this4.state.dinner.concat(updatedMeal);
+              _this4.setState({ dinner: _newMeals2 });
             } else if (updatedMeal.mealType === 'Snack') {
-              var _newMeals3 = _this3.state.snack.concat(updatedMeal);
-              _this3.setState({ snack: _newMeals3 });
+              var _newMeals3 = _this4.state.snack.concat(updatedMeal);
+              _this4.setState({ snack: _newMeals3 });
             }
 
-            _this3.setState({ totalCalories: parseInt(_this3.state.totalCalories) + parseInt(updatedMeal.calories) });
+            _this4.setState({ totalCalories: parseInt(_this4.state.totalCalories) + parseInt(updatedMeal.calories) });
+          });
+        } else {
+          res.json().then(function (error) {
+            alert('Failed to add issue: ' + error.message);
+          });
+        }
+      });
+    }
+  }, {
+    key: 'addExercise',
+    value: function addExercise(newExercise) {
+      var _this5 = this;
+
+      fetch('/api/exercise', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newExercise)
+      }).then(function (res) {
+        if (res.ok) {
+          res.json().then(function (updatedExercise) {
+            var newExercises = _this5.state.exercise.concat(updatedExercise);
+            _this5.setState({ exercise: newExercises });
+            _this5.setState({ totalCalories: parseInt(_this5.state.totalCalories) - parseInt(updatedExercise.calories) });
           });
         } else {
           res.json().then(function (error) {
@@ -20506,7 +20559,7 @@ var Meals = function (_React$Component) {
           null,
           'Meal Tracker'
         ),
-        _react2.default.createElement(_MealSummary2.default, _defineProperty({ totalCalories: this.totalCalories, createFood: this.addMeal }, 'totalCalories', this.state.totalCalories)),
+        _react2.default.createElement(_MealSummary2.default, _defineProperty({ totalCalories: this.totalCalories, createFood: this.addMeal, createExercise: this.addExercise }, 'totalCalories', this.state.totalCalories)),
         _react2.default.createElement('br', null),
         _react2.default.createElement(
           _reactBootstrap.Grid,
@@ -20574,6 +20627,24 @@ var Meals = function (_React$Component) {
               ),
               _react2.default.createElement(_DinnerTable2.default, { foods: this.state.dinner })
             )
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.Row,
+            null,
+            _react2.default.createElement(
+              _reactBootstrap.Col,
+              { md: 6 },
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                  'h1',
+                  null,
+                  'Exercise'
+                )
+              ),
+              _react2.default.createElement(_ExerciseTable2.default, { exercise: this.state.exercise })
+            )
           )
         )
       );
@@ -20631,7 +20702,9 @@ var MealSummary = function (_React$Component) {
     _this.state = {
       selectValue: '',
       showFoodFormPopup: false,
-      showExerciseFormPopup: false
+      showExerciseFormPopup: false,
+      bodystats: [],
+      calories: 0
 
     };
     _this.handleSubmit = _this.handleSubmit.bind(_this);
@@ -20728,7 +20801,7 @@ var MealSummary = function (_React$Component) {
           this.state.showExerciseFormPopup ? _react2.default.createElement(_AddExercise2.default, {
             text: 'Close Me',
             closeExerciseFormPopup: this.toggleExerciseFormPopup.bind(this),
-            createFood: this.props.createFood
+            createExercise: this.props.createExercise
           }) : null,
           _react2.default.createElement(
             'div',
@@ -20831,14 +20904,12 @@ var AddExercise = function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
       e.preventDefault();
-      /*let form = document.forms.addExercise;
-      this.props.createFood({
-        ExerciseName: form.exerciseName.value,
-        calories: form.calories.value,
+      var form = document.forms.addExercise;
+      this.props.createExercise({
+        exerciseName: form.exerciseName.value,
+        calories: form.calories.value
       });
-         // Clear the form for the next input.
-      form.ExerciseName.value = '';
-      form.calories.value = '';*/
+
       this.props.closeExerciseFormPopup();
     }
   }, {
@@ -20852,12 +20923,12 @@ var AddExercise = function (_React$Component) {
           { inline: true, name: 'addExercise', onSubmit: this.handleSubmit },
           _react2.default.createElement(_reactBootstrap.FormControl, {
             type: 'text',
-            name: 'ExerciseName',
+            name: 'exerciseName',
             placeholder: 'Exercise Name',
             style: { marginRight: '5px' }
           }),
           _react2.default.createElement(_reactBootstrap.FormControl, {
-            type: 'text',
+            type: 'number',
             name: 'calories',
             placeholder: 'Calories',
             style: { marginRight: '5px' }
@@ -21198,49 +21269,61 @@ function BreakfastTable(props) {
     return _react2.default.createElement(FoodTableRow, { key: index, food: food });
   });
   return _react2.default.createElement(
-    _reactBootstrap.Panel,
+    'div',
     null,
     _react2.default.createElement(
-      _reactBootstrap.Table,
-      { bordered: true, hover: true, striped: true },
+      _reactBootstrap.Panel,
+      null,
       _react2.default.createElement(
-        'thead',
-        null,
+        _reactBootstrap.Table,
+        { bordered: true, hover: true, striped: true },
         _react2.default.createElement(
-          'tr',
+          'thead',
           null,
           _react2.default.createElement(
-            'th',
+            'tr',
             null,
-            'Food Name'
-          ),
-          _react2.default.createElement(
-            'th',
-            null,
-            'Meal Type'
-          ),
-          _react2.default.createElement(
-            'th',
-            null,
-            'Calories'
-          ),
-          _react2.default.createElement(
-            'th',
-            null,
-            'Fat'
-          ),
-          _react2.default.createElement(
-            'th',
-            null,
-            'Carbohydrates'
+            _react2.default.createElement(
+              'th',
+              null,
+              'Food Name'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Meal Type'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Calories'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Fat'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Carbohydrates'
+            )
           )
+        ),
+        _react2.default.createElement(
+          'tbody',
+          null,
+          FoodTableRows
         )
-      ),
-      _react2.default.createElement(
-        'tbody',
-        null,
-        FoodTableRows
       )
+    ),
+    _react2.default.createElement(
+      'p',
+      null,
+      'Breakfast Calories: ',
+      props.foods.reduce(function (accumulator, currentValue) {
+        return accumulator + parseInt(currentValue.calories);
+      }, 0)
     )
   );
 }
@@ -21257,7 +21340,7 @@ exports.default = BreakfastTable;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.BreakfastTable = BreakfastTable;
+exports.LunchTable = LunchTable;
 
 var _react = __webpack_require__(1);
 
@@ -21299,59 +21382,71 @@ var FoodTableRow = function FoodTableRow(props) {
   );
 };
 
-function BreakfastTable(props) {
-  var FoodTableRows = props.foods.map(function (food) {
-    return _react2.default.createElement(FoodTableRow, { key: food.id, food: food });
+function LunchTable(props) {
+  var FoodTableRows = props.foods.map(function (food, index) {
+    return _react2.default.createElement(FoodTableRow, { key: index, food: food });
   });
   return _react2.default.createElement(
-    _reactBootstrap.Panel,
+    'div',
     null,
     _react2.default.createElement(
-      _reactBootstrap.Table,
-      { bordered: true, hover: true, striped: true },
+      _reactBootstrap.Panel,
+      null,
       _react2.default.createElement(
-        'thead',
-        null,
+        _reactBootstrap.Table,
+        { bordered: true, hover: true, striped: true },
         _react2.default.createElement(
-          'tr',
+          'thead',
           null,
           _react2.default.createElement(
-            'th',
+            'tr',
             null,
-            'Food Name'
-          ),
-          _react2.default.createElement(
-            'th',
-            null,
-            'Meal Type'
-          ),
-          _react2.default.createElement(
-            'th',
-            null,
-            'Calories'
-          ),
-          _react2.default.createElement(
-            'th',
-            null,
-            'Fat'
-          ),
-          _react2.default.createElement(
-            'th',
-            null,
-            'Carbohydrates'
+            _react2.default.createElement(
+              'th',
+              null,
+              'Food Name'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Meal Type'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Calories'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Fat'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Carbohydrates'
+            )
           )
+        ),
+        _react2.default.createElement(
+          'tbody',
+          null,
+          FoodTableRows
         )
-      ),
-      _react2.default.createElement(
-        'tbody',
-        null,
-        FoodTableRows
       )
+    ),
+    _react2.default.createElement(
+      'p',
+      null,
+      'Lunch Calories: ',
+      props.foods.reduce(function (accumulator, currentValue) {
+        return accumulator + parseInt(currentValue.calories);
+      }, 0)
     )
   );
 }
 
-exports.default = BreakfastTable;
+exports.default = LunchTable;
 
 /***/ }),
 /* 520 */
@@ -21410,49 +21505,61 @@ function BreakfastTable(props) {
     return _react2.default.createElement(FoodTableRow, { key: index, food: food });
   });
   return _react2.default.createElement(
-    _reactBootstrap.Panel,
+    'div',
     null,
     _react2.default.createElement(
-      _reactBootstrap.Table,
-      { bordered: true, hover: true, striped: true },
+      _reactBootstrap.Panel,
+      null,
       _react2.default.createElement(
-        'thead',
-        null,
+        _reactBootstrap.Table,
+        { bordered: true, hover: true, striped: true },
         _react2.default.createElement(
-          'tr',
+          'thead',
           null,
           _react2.default.createElement(
-            'th',
+            'tr',
             null,
-            'Food Name'
-          ),
-          _react2.default.createElement(
-            'th',
-            null,
-            'Meal Type'
-          ),
-          _react2.default.createElement(
-            'th',
-            null,
-            'Calories'
-          ),
-          _react2.default.createElement(
-            'th',
-            null,
-            'Fat'
-          ),
-          _react2.default.createElement(
-            'th',
-            null,
-            'Carbohydrates'
+            _react2.default.createElement(
+              'th',
+              null,
+              'Food Name'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Meal Type'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Calories'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Fat'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Carbohydrates'
+            )
           )
+        ),
+        _react2.default.createElement(
+          'tbody',
+          null,
+          FoodTableRows
         )
-      ),
-      _react2.default.createElement(
-        'tbody',
-        null,
-        FoodTableRows
       )
+    ),
+    _react2.default.createElement(
+      'p',
+      null,
+      'Dinner Calories: ',
+      props.foods.reduce(function (accumulator, currentValue) {
+        return accumulator + parseInt(currentValue.calories);
+      }, 0)
     )
   );
 }
@@ -21516,49 +21623,61 @@ function SnackTable(props) {
     return _react2.default.createElement(FoodTableRow, { key: index, food: food });
   });
   return _react2.default.createElement(
-    _reactBootstrap.Panel,
+    'div',
     null,
     _react2.default.createElement(
-      _reactBootstrap.Table,
-      { bordered: true, hover: true, striped: true },
+      _reactBootstrap.Panel,
+      null,
       _react2.default.createElement(
-        'thead',
-        null,
+        _reactBootstrap.Table,
+        { bordered: true, hover: true, striped: true },
         _react2.default.createElement(
-          'tr',
+          'thead',
           null,
           _react2.default.createElement(
-            'th',
+            'tr',
             null,
-            'Food Name'
-          ),
-          _react2.default.createElement(
-            'th',
-            null,
-            'Meal Type'
-          ),
-          _react2.default.createElement(
-            'th',
-            null,
-            'Calories'
-          ),
-          _react2.default.createElement(
-            'th',
-            null,
-            'Fat'
-          ),
-          _react2.default.createElement(
-            'th',
-            null,
-            'Carbohydrates'
+            _react2.default.createElement(
+              'th',
+              null,
+              'Food Name'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Meal Type'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Calories'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Fat'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Carbohydrates'
+            )
           )
+        ),
+        _react2.default.createElement(
+          'tbody',
+          null,
+          FoodTableRows
         )
-      ),
-      _react2.default.createElement(
-        'tbody',
-        null,
-        FoodTableRows
       )
+    ),
+    _react2.default.createElement(
+      'p',
+      null,
+      'Snack Calories: ',
+      props.foods.reduce(function (accumulator, currentValue) {
+        return accumulator + parseInt(currentValue.calories);
+      }, 0)
     )
   );
 }
@@ -21760,10 +21879,10 @@ var ReviewAdd = function (_React$Component2) {
             null,
             _react2.default.createElement(
               _reactBootstrap.Panel,
-              null,
+              { style: { marginTop: '10px' } },
               _react2.default.createElement(
                 _reactBootstrap.Panel.Heading,
-                { style: { backgroundColor: 'Gainsboro' } },
+                { style: { backgroundColor: '#AAA9A7' } },
                 _react2.default.createElement(
                   _reactBootstrap.Form,
                   { name: 'issueAdd', inline: true },
@@ -21944,6 +22063,97 @@ var Review = function (_React$Component3) {
 }(_react2.default.Component);
 
 exports.default = Review;
+
+/***/ }),
+/* 523 */,
+/* 524 */,
+/* 525 */,
+/* 526 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ExerciseTable = ExerciseTable;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactBootstrap = __webpack_require__(25);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ExerciseTableRow = function ExerciseTableRow(props) {
+  return _react2.default.createElement(
+    'tr',
+    null,
+    _react2.default.createElement(
+      'td',
+      null,
+      props.exercise.exerciseName
+    ),
+    _react2.default.createElement(
+      'td',
+      null,
+      props.exercise.calories
+    )
+  );
+};
+
+function ExerciseTable(props) {
+  var ExerciseTableRows = props.exercise.map(function (exercise, index) {
+    return _react2.default.createElement(ExerciseTableRow, { key: index, exercise: exercise });
+  });
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+      _reactBootstrap.Panel,
+      null,
+      _react2.default.createElement(
+        _reactBootstrap.Table,
+        { bordered: true, hover: true, striped: true },
+        _react2.default.createElement(
+          'thead',
+          null,
+          _react2.default.createElement(
+            'tr',
+            null,
+            _react2.default.createElement(
+              'th',
+              null,
+              'Exercise Name'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Calories'
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'tbody',
+          null,
+          ExerciseTableRows
+        )
+      )
+    ),
+    _react2.default.createElement(
+      'p',
+      null,
+      'Exercise Calories: ',
+      props.exercise.reduce(function (accumulator, currentValue) {
+        return accumulator + parseInt(currentValue.calories);
+      }, 0)
+    )
+  );
+}
+
+exports.default = ExerciseTable;
 
 /***/ })
 ],[228]);

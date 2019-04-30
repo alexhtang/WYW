@@ -16,6 +16,7 @@ export function SnackTable(props) {
       <FoodTableRow key={index} food={food} />
     ));
     return (
+      <div>
       <Panel>
         <Table bordered hover striped>
           <thead>
@@ -30,6 +31,8 @@ export function SnackTable(props) {
           <tbody>{FoodTableRows}</tbody>
         </Table>
       </Panel>
+      <p>Snack Calories: {props.foods.reduce((accumulator, currentValue)=> accumulator+parseInt(currentValue.calories),0) }</p>
+</div>
     );
   }
 
