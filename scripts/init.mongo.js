@@ -76,6 +76,11 @@ db.reviews.remove({});
       name: "David F",
       rating: 5,
       comment: "Wowzers!"
+    },
+    {
+      name: "Ryan Reynolds",
+      rating: 5,
+      comment: "This is the best web app Fitness Tracker ever! I have never seen such amazing results. I owe my entire movie career to this React web app! It goes without saying that everyone should be using this."
     }
   ]);
 

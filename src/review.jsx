@@ -1,6 +1,8 @@
 // NEW: added the import for react.
 import React from 'react';
 import {Panel, Form, FormControl, Button, FormGroup, Table, Jumbotron, Collapse, Well} from 'react-bootstrap';
+
+
 class ReviewMessage extends React.Component {
   render() {
     return <div style = {{fontFamily: "Work Sans", fontSize: '25'}}>Let us know how you feel about Watch Your Weight!</div>;
@@ -11,7 +13,7 @@ const ReviewRow = (props) => (
   <tr>
     <td>{props.issue.name}</td>
     <td>{props.issue.rating}</td>
-    <td>{props.issue.comment}</td>
+    <td style = {{ wordWrap:'break-word', maxWidth: '500px', overflowX: 'auto'}}>{props.issue.comment}</td>
   </tr>
 );
 
@@ -20,19 +22,21 @@ function ReviewTable(props) {
     <ReviewRow key={issue.id} issue={issue} />
   ));
   return (
-   <div style={{width: '50%', marginLeft: 'auto', marginRight: 'auto'}}>
-   <Panel>
-   <Table striped bordered hover >
-      <thead>
-        <tr style={{textAlign:'center'}}>
-          <th>Name</th>
-          <th>Rating</th>
-          <th>Comment</th>
-        </tr>
-      </thead>
-      <tbody>{reviewRows}</tbody>
-    </Table>
-    </Panel>
+   <div style={{width: '90%', height: '300px', marginLeft: 'auto', marginRight: 'auto', overflowY: 'scroll'}}>
+    
+    <Table bordered hover >
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Rating</th>
+            <th>Comment</th>
+          </tr>
+        </thead>
+        
+        <tbody >{reviewRows}</tbody>
+        
+      </Table>
+    
     </div>
   );
 }
@@ -50,8 +54,17 @@ class ReviewAdd extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
     let form = document.forms.issueAdd;
     let form2 = document.forms.commentAdd;
+
+    if((form.name.value).length==0){
+      window.alert("Please fill in your name");
+    }
+    else if((form2.comment.value).length == 0){
+      window.alert("Please leave a comment")
+    }
+
     this.props.createReview({
       name: form.name.value,
       rating: form.rating.value,
@@ -62,6 +75,8 @@ class ReviewAdd extends React.Component {
     form.name.value = '';
     form.rating.value = '';
     form2.comment.value = '';
+    
+    this.setState({open: false})
   }
 
   handleSelectChange(e){

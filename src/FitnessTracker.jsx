@@ -1,6 +1,6 @@
 // NEW: added the import for react.
 import React from 'react';
-import {Table, Panel, Carousel, Button, Form, FormGroup, FormControl, ControlLabel, Grid, Row, Col} from 'react-bootstrap';
+import {Table, Panel, Carousel, Button, Form, FormGroup, FormControl, ControlLabel, Grid, Row, Col, Well, Jumbotron} from 'react-bootstrap';
 import { formatWithOptions } from 'util';
 
 const BodyRow = (props) => (
@@ -394,12 +394,14 @@ export default class FitnessTracker extends React.Component {
         <div>
         <AddCarousel />
         </div>
+        <Well style = {{marginLeft: 'auto', marginRight:'auto', width: '85%'}}>
         <BodyStats bodystats = {this.state.bodystats} />
         <br />
+        
         <AddBodyInfo update = {this.update} />
         <br />
         <NutritionStats calories = {this.state.calories}/>
-        <br />
+        </Well>
       </div>
     );
   }

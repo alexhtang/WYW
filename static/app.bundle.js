@@ -18493,8 +18493,8 @@ var Description = function (_React$Component2) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { style: { textAlign: "center" } },
-        'This is a placeholder for a description of the webapp.'
+        { style: { textAlign: "center", marginLeft: 'auto', marginRight: 'auto', width: '700px' } },
+        'Welcome to Watch Your Weight (WYW), a fitness tracking service that will help you to both calculate your recommended daily caloric intake and track your meals'
       );
     }
   }]);
@@ -18835,34 +18835,42 @@ var HomePage = function (_React$Component6) {
           'div',
           { style: { textAlign: "center" } },
           _react2.default.createElement(
-            _reactBootstrap.Form,
+            _reactBootstrap.Panel,
             null,
             _react2.default.createElement(
-              _reactBootstrap.Row,
-              { className: 'justify-content-md-center' },
+              _reactBootstrap.Panel.Heading,
+              null,
               _react2.default.createElement(
-                _reactBootstrap.Col,
-                { md: 'auto' },
-                _react2.default.createElement(_reactBootstrap.FormControl, { type: 'username', placeholder: 'Username' })
-              ),
-              _react2.default.createElement(
-                _reactBootstrap.Col,
-                { md: 'auto' },
-                _react2.default.createElement(_reactBootstrap.FormControl, { type: 'password', placeholder: 'Password' })
-              ),
-              _react2.default.createElement(
-                _reactBootstrap.Col,
-                { md: 'auto' },
+                _reactBootstrap.Form,
+                null,
                 _react2.default.createElement(
-                  _reactRouter.Link,
-                  { to: '/FitnessTracker' },
-                  ' ',
+                  _reactBootstrap.Row,
+                  { className: 'justify-content-md-center' },
                   _react2.default.createElement(
-                    _reactBootstrap.Button,
-                    { variant: 'secondary', type: 'submit' },
-                    'Submit'
+                    _reactBootstrap.Col,
+                    { md: 'auto' },
+                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'username', placeholder: 'Username' })
                   ),
-                  ' '
+                  _react2.default.createElement(
+                    _reactBootstrap.Col,
+                    { md: 'auto' },
+                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'password', placeholder: 'Password' })
+                  ),
+                  _react2.default.createElement(
+                    _reactBootstrap.Col,
+                    { md: 'auto' },
+                    _react2.default.createElement(
+                      _reactRouter.Link,
+                      { to: '/FitnessTracker' },
+                      ' ',
+                      _react2.default.createElement(
+                        _reactBootstrap.Button,
+                        { variant: 'secondary', type: 'submit' },
+                        'Submit'
+                      ),
+                      ' '
+                    )
+                  )
                 )
               )
             )
@@ -18876,13 +18884,22 @@ var HomePage = function (_React$Component6) {
         _react2.default.createElement(TitleTest, null),
         _react2.default.createElement('br', null),
         logIn,
-        _react2.default.createElement('br', null),
         _react2.default.createElement(CarouselTest, null),
         _react2.default.createElement('br', null),
-        _react2.default.createElement(Description, null),
-        _react2.default.createElement('br', null),
-        _react2.default.createElement(ButtonTable, null),
-        _react2.default.createElement('br', null)
+        _react2.default.createElement(
+          _reactBootstrap.Panel,
+          null,
+          _react2.default.createElement(
+            _reactBootstrap.Panel.Heading,
+            null,
+            _react2.default.createElement(Description, null)
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.Panel.Body,
+            null,
+            _react2.default.createElement(ButtonTable, null)
+          )
+        )
       );
     }
   }]);
@@ -19544,12 +19561,15 @@ var FitnessTracker = function (_React$Component4) {
           null,
           _react2.default.createElement(AddCarousel, null)
         ),
-        _react2.default.createElement(BodyStats, { bodystats: this.state.bodystats }),
-        _react2.default.createElement('br', null),
-        _react2.default.createElement(AddBodyInfo, { update: this.update }),
-        _react2.default.createElement('br', null),
-        _react2.default.createElement(NutritionStats, { calories: this.state.calories }),
-        _react2.default.createElement('br', null)
+        _react2.default.createElement(
+          _reactBootstrap.Well,
+          { style: { marginLeft: 'auto', marginRight: 'auto', width: '85%' } },
+          _react2.default.createElement(BodyStats, { bodystats: this.state.bodystats }),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(AddBodyInfo, { update: this.update }),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(NutritionStats, { calories: this.state.calories })
+        )
       );
     }
   }]);
@@ -21610,7 +21630,7 @@ var ReviewRow = function ReviewRow(props) {
     ),
     _react2.default.createElement(
       'td',
-      null,
+      { style: { wordWrap: 'break-word', maxWidth: '500px', overflowX: 'auto' } },
       props.issue.comment
     )
   );
@@ -21622,41 +21642,37 @@ function ReviewTable(props) {
   });
   return _react2.default.createElement(
     'div',
-    { style: { width: '50%', marginLeft: 'auto', marginRight: 'auto' } },
+    { style: { width: '90%', height: '300px', marginLeft: 'auto', marginRight: 'auto', overflowY: 'scroll' } },
     _react2.default.createElement(
-      _reactBootstrap.Panel,
-      null,
+      _reactBootstrap.Table,
+      { bordered: true, hover: true },
       _react2.default.createElement(
-        _reactBootstrap.Table,
-        { striped: true, bordered: true, hover: true },
+        'thead',
+        null,
         _react2.default.createElement(
-          'thead',
+          'tr',
           null,
           _react2.default.createElement(
-            'tr',
-            { style: { textAlign: 'center' } },
-            _react2.default.createElement(
-              'th',
-              null,
-              'Name'
-            ),
-            _react2.default.createElement(
-              'th',
-              null,
-              'Rating'
-            ),
-            _react2.default.createElement(
-              'th',
-              null,
-              'Comment'
-            )
+            'th',
+            null,
+            'Name'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Rating'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Comment'
           )
-        ),
-        _react2.default.createElement(
-          'tbody',
-          null,
-          reviewRows
         )
+      ),
+      _react2.default.createElement(
+        'tbody',
+        null,
+        reviewRows
       )
     )
   );
@@ -21683,8 +21699,16 @@ var ReviewAdd = function (_React$Component2) {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
       e.preventDefault();
+
       var form = document.forms.issueAdd;
       var form2 = document.forms.commentAdd;
+
+      if (form.name.value.length == 0) {
+        window.alert("Please fill in your name");
+      } else if (form2.comment.value.length == 0) {
+        window.alert("Please leave a comment");
+      }
+
       this.props.createReview({
         name: form.name.value,
         rating: form.rating.value,
@@ -21695,6 +21719,8 @@ var ReviewAdd = function (_React$Component2) {
       form.name.value = '';
       form.rating.value = '';
       form2.comment.value = '';
+
+      this.setState({ open: false });
     }
   }, {
     key: 'handleSelectChange',
@@ -21729,7 +21755,7 @@ var ReviewAdd = function (_React$Component2) {
               null,
               _react2.default.createElement(
                 _reactBootstrap.Panel.Heading,
-                null,
+                { style: { backgroundColor: 'Gainsboro' } },
                 _react2.default.createElement(
                   _reactBootstrap.Form,
                   { name: 'issueAdd', inline: true },
@@ -21744,7 +21770,7 @@ var ReviewAdd = function (_React$Component2) {
                     }),
                     _react2.default.createElement(
                       _reactBootstrap.FormControl,
-                      { name: 'rating', style: { marginRight: '7px', height: '30px' }, onChange: this.handleSelectChange, componentClass: 'select', placeholder: 'select' },
+                      { name: 'rating', style: { marginRight: '7px', height: '35px' }, onChange: this.handleSelectChange, componentClass: 'select', placeholder: 'select' },
                       _react2.default.createElement(
                         'option',
                         { value: '', selected: true, disabled: true, hidden: true },
@@ -21895,7 +21921,7 @@ var Review = function (_React$Component3) {
         { style: { textAlign: "center" } },
         _react2.default.createElement(
           _reactBootstrap.Jumbotron,
-          null,
+          { style: { backgroundColor: 'Gainsboro' } },
           _react2.default.createElement(
             'h1',
             { style: { fontStyle: 'bold', fontSize: '100', fontFamily: 'Work Sans', paddingBottom: '20px' } },
